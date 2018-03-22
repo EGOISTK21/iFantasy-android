@@ -2,8 +2,6 @@ package xyz.egoistk21.iFantasy.main;
 
 import android.content.Intent;
 import android.graphics.Point;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
@@ -20,8 +18,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     private MainContract.Presenter mPresenter;
 
-    @BindView(R.id.btn_login)
-    Button btnLogin;
+    @BindView(R.id.btn_start)
+    Button btnStart;
 
     @Override
     protected void initData() {
@@ -35,13 +33,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Override
     protected void initView() {
-        UIUtil.hideNavi(this);
         Point point = new Point();
         getWindowManager().getDefaultDisplay().getSize(point);
         int bottomMargin = UIUtil.px2dip(this, point.y / 3);
-        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) btnLogin.getLayoutParams();
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) btnStart.getLayoutParams();
         layoutParams.bottomMargin = bottomMargin;
-        btnLogin.setLayoutParams(layoutParams);
+        btnStart.setLayoutParams(layoutParams);
     }
 
     @Override
@@ -49,12 +46,18 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     }
 
-    @OnClick(R.id.btn_login)
-    void login() {
+    @OnClick(R.id.btn_start)
+    void start() {
         if (!mPresenter.isLogined()) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivityForResult(intent, LOGIN_SUCCESS);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UIUtil.hideNavi(this);
     }
 
     @Override
