@@ -26,7 +26,12 @@ class LoginPresenter implements LoginContract.Presenter {
     }
 
     @Override
-    public void login(String phone, String code) {
+    public void getCode() {
+
+    }
+
+    @Override
+    public void login(String phone, String zone, String code) {
 
     }
 }

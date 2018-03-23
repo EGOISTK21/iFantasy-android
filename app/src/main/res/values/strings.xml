@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">iFantasy</string>
     <string name="play_off">开始游戏</string>
+    <string name="prompt_phone">手机号码</string>
+    <string name="get_code">获取验证码</string>
+    <string name="prompt_code">验证码</string>
+    <string name="login">登录</string>
 </resources>

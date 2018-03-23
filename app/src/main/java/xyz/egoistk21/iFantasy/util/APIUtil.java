@@ -6,6 +6,9 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.Path;
 
 /**
  * Created by EGOISTK21 on 2018/3/22.
@@ -30,6 +33,18 @@ public class APIUtil {
                     .build();
 
     private APIUtil() {
+    }
+
+    public interface verifyCodeAPI {
+        @Headers("iFantasy-android")
+        @GET("{phone}/{zone}/{code}")
+        io.reactivex.Observable<String> verify(@Path("phone") String phone,
+                                               @Path("zone") String zone,
+                                               @Path("code") String code);
+    }
+
+    public static verifyCodeAPI getVerifyCodeAPI() {
+        return sRetrofit.create(verifyCodeAPI.class);
     }
 
 }

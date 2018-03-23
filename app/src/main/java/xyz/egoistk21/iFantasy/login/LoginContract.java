@@ -6,7 +6,9 @@ package xyz.egoistk21.iFantasy.login;
 
 interface LoginContract {
     interface Model {
-        void login(String phone, String code);
+        void getCode();
+
+        void login(String phone, String zone, String code, io.reactivex.Observer observer);
     }
 
     interface View {
@@ -17,6 +19,8 @@ interface LoginContract {
 
         void detachMV();
 
-        void login(String phone, String code);
+        void getCode();
+
+        void login(String phone, String zone, String code);
     }
 }
