@@ -20,7 +20,7 @@ class LoginModel implements LoginContract.Model {
     }
 
     @Override
-    public void login(String phone, String zone, String code, Observer observer) {
+    public void login(String phone, String zone, String code, Observer<String> observer) {
         APIUtil.getVerifyCodeAPI().verify(phone, zone, code)
                 .debounce(FILTER_TIMEOUT, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
