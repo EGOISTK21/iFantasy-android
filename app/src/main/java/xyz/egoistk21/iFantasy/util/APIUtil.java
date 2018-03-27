@@ -2,6 +2,7 @@ package xyz.egoistk21.iFantasy.util;
 
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -36,11 +37,11 @@ public class APIUtil {
     }
 
     public interface verifyCodeAPI {
-        @Headers("iFantasy-android")
+        @Headers("User-Agent:iFantasy-android")
         @GET("{phone}/{zone}/{code}")
-        io.reactivex.Observable<String> verify(@Path("phone") String phone,
-                                               @Path("zone") String zone,
-                                               @Path("code") String code);
+        Observable<String> verify(@Path("phone") String phone,
+                                  @Path("zone") String zone,
+                                  @Path("code") String code);
     }
 
     public static verifyCodeAPI getVerifyCodeAPI() {

@@ -13,8 +13,6 @@ import android.widget.RelativeLayout;
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
-import cn.smssdk.EventHandler;
-import cn.smssdk.SMSSDK;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseActivity;
 import xyz.egoistk21.iFantasy.util.UIUtil;
@@ -87,37 +85,44 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @OnClick(R.id.btn_get_code)
     void getCode() {
-        if (verifyPhone()) {
-            // 注册一个事件回调，用于处理发送验证码操作的结果
-            SMSSDK.registerEventHandler(new EventHandler() {
-                public void afterEvent(int event, int result, Object data) {
-                    if (result == SMSSDK.RESULT_COMPLETE) {
-                        // TODO 处理成功得到验证码的结果
-                        // 请注意，此时只是完成了发送验证码的请求，验证码短信还需要几秒钟之后才送达
-                        UIUtil.slideOutToLeft(LoginActivity.this, llPhoneLoginForm);
-                        llPhoneLoginForm.setVisibility(View.GONE);
-                        llCodeLoginForm.setVisibility(View.VISIBLE);
-                        UIUtil.slideInFromRight(LoginActivity.this, llCodeLoginForm);
-                        isDisplayPhoneForm = false;
-                    } else {
-                        // TODO 处理错误的结果
-                    }
-
-                }
-            });
-            // 触发操作
-            SMSSDK.getVerificationCode("86", phone);
-        } else {
-
-        }
+        go2CodeForm();
+//        if (verifyPhone()) {
+//            // 注册一个事件回调，用于处理发送验证码操作的结果
+//            SMSSDK.registerEventHandler(new EventHandler() {
+//                public void afterEvent(int event, int result, Object data) {
+//                    if (result == SMSSDK.RESULT_COMPLETE) {
+//                        // TODO 处理成功得到验证码的结果
+//                        // 请注意，此时只是完成了发送验证码的请求，验证码短信还需要几秒钟之后才送达
+//                        go2CodeForm();
+//                    } else {
+//                        // TODO 处理错误的结果
+//                    }
+//
+//                }
+//            });
+//            // 触发操作
+//            SMSSDK.getVerificationCode("86", phone);
+//        } else {
+//
+//        }
     }
 
     @OnClick(R.id.btn_login)
     void login() {
-
+        mPresenter.login(phone, "86", code);
     }
 
-    void back2PhoneForm() {
+    @Override
+    public void go2CodeForm() {
+        UIUtil.slideOutToLeft(LoginActivity.this, llPhoneLoginForm);
+        llPhoneLoginForm.setVisibility(View.GONE);
+        llCodeLoginForm.setVisibility(View.VISIBLE);
+        UIUtil.slideInFromRight(LoginActivity.this, llCodeLoginForm);
+        isDisplayPhoneForm = false;
+    }
+
+    @Override
+    public void back2PhoneForm() {
         UIUtil.slideOutToRight(this, llCodeLoginForm);
         llCodeLoginForm.setVisibility(View.GONE);
         llPhoneLoginForm.setVisibility(View.VISIBLE);
