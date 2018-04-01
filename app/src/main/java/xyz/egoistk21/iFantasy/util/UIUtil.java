@@ -13,7 +13,7 @@ import xyz.egoistk21.iFantasy.R;
 
 public class UIUtil {
 
-    public static void hideNavi(Activity activity) {
+    public static void hideNav(Activity activity) {
         View decorView = activity.getWindow().getDecorView();
         // Hide both the navigation bar and the status bar.
         // SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as

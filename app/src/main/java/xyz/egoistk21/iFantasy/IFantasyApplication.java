@@ -12,13 +12,16 @@ import xyz.egoistk21.iFantasy.util.DBUtil;
 
 public class IFantasyApplication extends Application {
 
-    public static final String MOB_APPKEY = "24be6ffdbdc18";
+    private static IFantasyApplication sInstance;
 
-    public static final String MOB_APPSECRET = "70935d0cbb5fa524403accc95ec55b84";
+    public static IFantasyApplication getInstance() {
+        return sInstance;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        sInstance = this;
         DBUtil.init(this);
         MobSDK.init(this);
     }

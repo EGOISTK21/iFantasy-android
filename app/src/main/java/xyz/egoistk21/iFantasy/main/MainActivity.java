@@ -10,6 +10,7 @@ import butterknife.OnClick;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseActivity;
 import xyz.egoistk21.iFantasy.login.LoginActivity;
+import xyz.egoistk21.iFantasy.service.BGMService;
 import xyz.egoistk21.iFantasy.util.UIUtil;
 
 public class MainActivity extends BaseActivity implements MainContract.View {
@@ -24,6 +25,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     protected void initData() {
         mPresenter = new MainPresenter(this);
+        Intent intent = new Intent(MainActivity.this, BGMService.class);
+        intent.putExtra("name", "cant_stop");
+        startService(intent);
     }
 
     @Override
@@ -57,7 +61,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     protected void onResume() {
         super.onResume();
-        UIUtil.hideNavi(this);
+        UIUtil.hideNav(this);
     }
 
     @Override

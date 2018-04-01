@@ -15,6 +15,7 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseActivity;
+import xyz.egoistk21.iFantasy.util.DBUtil;
 import xyz.egoistk21.iFantasy.util.UIUtil;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View {
@@ -24,13 +25,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     private LoginContract.Presenter mPresenter;
 
     @BindView(R.id.ll_phone_login_form)
-    LinearLayout llPhoneLoginForm;
+    LinearLayout llPhoneLogin;
     @BindView(R.id.et_phone)
     EditText etPhone;
     @BindView(R.id.btn_get_code)
     Button btnGetCode;
     @BindView(R.id.ll_code_login_form)
-    LinearLayout llCodeLoginForm;
+    LinearLayout llCodeLogin;
     @BindView(R.id.et_code)
     EditText etCode;
     @BindView(R.id.btn_login)
@@ -58,8 +59,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     protected void initView() {
-        modifyUI(llPhoneLoginForm);
-        modifyUI(llCodeLoginForm);
+        modifyUI(llPhoneLogin);
+        modifyUI(llCodeLogin);
     }
 
     @Override
@@ -77,34 +78,12 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         code = editable.toString();
     }
 
-    private Boolean verifyPhone() {
-        // "[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
-        String telRegex = "^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(17[0,1,3,5,6,7,8]))\\d{8}$";
-        return !TextUtils.isEmpty(phone) && phone.matches(telRegex);
-    }
-
     @OnClick(R.id.btn_get_code)
     void getCode() {
-        go2CodeForm();
-//        if (verifyPhone()) {
-//            // 注册一个事件回调，用于处理发送验证码操作的结果
-//            SMSSDK.registerEventHandler(new EventHandler() {
-//                public void afterEvent(int event, int result, Object data) {
-//                    if (result == SMSSDK.RESULT_COMPLETE) {
-//                        // TODO 处理成功得到验证码的结果
-//                        // 请注意，此时只是完成了发送验证码的请求，验证码短信还需要几秒钟之后才送达
-//                        go2CodeForm();
-//                    } else {
-//                        // TODO 处理错误的结果
-//                    }
-//
-//                }
-//            });
-//            // 触发操作
+        if (DBUtil.verifyPhone(phone)) {
 //            SMSSDK.getVerificationCode("86", phone);
-//        } else {
-//
-//        }
+            go2VerificationCodeView();
+        }
     }
 
     @OnClick(R.id.btn_login)
@@ -113,21 +92,29 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     @Override
-    public void go2CodeForm() {
-        UIUtil.slideOutToLeft(LoginActivity.this, llPhoneLoginForm);
-        llPhoneLoginForm.setVisibility(View.GONE);
-        llCodeLoginForm.setVisibility(View.VISIBLE);
-        UIUtil.slideInFromRight(LoginActivity.this, llCodeLoginForm);
+    public void go2VerificationCodeView() {
+        UIUtil.slideOutToLeft(LoginActivity.this, llPhoneLogin);
+        llPhoneLogin.setVisibility(View.GONE);
+        llCodeLogin.setVisibility(View.VISIBLE);
+        UIUtil.slideInFromRight(LoginActivity.this, llCodeLogin);
         isDisplayPhoneForm = false;
+        etCode.requestFocus();
+        if (!TextUtils.isEmpty(code)) {
+            etCode.setSelection(code.length());
+        }
     }
 
     @Override
-    public void back2PhoneForm() {
-        UIUtil.slideOutToRight(this, llCodeLoginForm);
-        llCodeLoginForm.setVisibility(View.GONE);
-        llPhoneLoginForm.setVisibility(View.VISIBLE);
-        UIUtil.slideInFromLeft(this, llPhoneLoginForm);
+    public void back2PhoneView() {
+        UIUtil.slideOutToRight(LoginActivity.this, llCodeLogin);
+        llCodeLogin.setVisibility(View.GONE);
+        llPhoneLogin.setVisibility(View.VISIBLE);
+        UIUtil.slideInFromLeft(LoginActivity.this, llPhoneLogin);
         isDisplayPhoneForm = true;
+        etPhone.requestFocus();
+        if (!TextUtils.isEmpty(phone)) {
+            etPhone.setSelection(phone.length());
+        }
     }
 
     @Override
@@ -138,7 +125,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (!isDisplayPhoneForm && keyCode == KeyEvent.KEYCODE_BACK) {
-            back2PhoneForm();
+            back2PhoneView();
             return true;// return true;拦截事件传递,从而屏蔽back键。
         }
         return super.onKeyDown(keyCode, event);

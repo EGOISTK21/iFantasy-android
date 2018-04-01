@@ -4,6 +4,7 @@ import android.util.Log;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import xyz.egoistk21.iFantasy.util.ToastUtil;
 
 /**
  * Created by egoistk21 on 2018/3/22.
@@ -48,11 +49,13 @@ class LoginPresenter implements LoginContract.Presenter {
             @Override
             public void onNext(String s) {
                 Log.i(TAG, "onNext: " + s);
+                ToastUtil.show(s);
             }
 
             @Override
             public void onError(Throwable e) {
                 Log.i(TAG, "onError: " + e.getMessage());
+                ToastUtil.show(e.getMessage());
             }
 
             @Override

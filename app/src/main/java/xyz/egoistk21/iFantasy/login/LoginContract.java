@@ -14,9 +14,9 @@ interface LoginContract {
     }
 
     interface View {
-        void go2CodeForm();
+        void go2VerificationCodeView();
 
-        void back2PhoneForm();
+        void back2PhoneView();
     }
 
     interface Presenter {
