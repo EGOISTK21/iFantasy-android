@@ -5,4 +5,5 @@
     <string name="get_code">获取验证码</string>
     <string name="prompt_code">验证码</string>
     <string name="login">登录</string>
+    <string name="resend">重试</string>
 </resources>

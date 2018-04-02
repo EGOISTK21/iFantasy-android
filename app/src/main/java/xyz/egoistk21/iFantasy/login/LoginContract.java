@@ -1,5 +1,7 @@
 package xyz.egoistk21.iFantasy.login;
 
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+
 import io.reactivex.Observer;
 
 /**
@@ -8,15 +10,17 @@ import io.reactivex.Observer;
 
 interface LoginContract {
     interface Model {
-        void getCode();
-
-        void login(String phone, String zone, String code, Observer<String> observer);
+        void login(String phone, String zone, String code, RxAppCompatActivity rxAppCompatActivity, Observer<String> observer);
     }
 
     interface View {
         void go2VerificationCodeView();
 
         void back2PhoneView();
+
+        void showPB();
+
+        void dismissPB();
     }
 
     interface Presenter {
@@ -24,8 +28,6 @@ interface LoginContract {
 
         void detachMV();
 
-        void getCode();
-
-        void login(String phone, String zone, String code);
+        void login(String phone, String zone, String code, RxAppCompatActivity rxAppCompatActivity);
     }
 }

@@ -1,5 +1,7 @@
 package xyz.egoistk21.iFantasy.login;
 
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observer;
@@ -14,15 +16,12 @@ import static xyz.egoistk21.iFantasy.util.APIUtil.FILTER_TIMEOUT;
  */
 
 class LoginModel implements LoginContract.Model {
-    @Override
-    public void getCode() {
-
-    }
 
     @Override
-    public void login(String phone, String zone, String code, Observer<String> observer) {
+    public void login(String phone, String zone, String code, RxAppCompatActivity rxAppCompatActivity, Observer<String> observer) {
         APIUtil.getVerifyCodeAPI().verify(phone, zone, code)
                 .debounce(FILTER_TIMEOUT, TimeUnit.SECONDS)
+                .compose(rxAppCompatActivity.<String>bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())

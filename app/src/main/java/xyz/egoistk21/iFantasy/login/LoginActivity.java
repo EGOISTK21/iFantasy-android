@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -16,6 +18,7 @@ import butterknife.OnTextChanged;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseActivity;
 import xyz.egoistk21.iFantasy.util.DBUtil;
+import xyz.egoistk21.iFantasy.util.ToastUtil;
 import xyz.egoistk21.iFantasy.util.UIUtil;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View {
@@ -24,6 +27,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     private String phone, code;
     private LoginContract.Presenter mPresenter;
 
+    @BindView(R.id.login_progress)
+    ProgressBar mPB;
     @BindView(R.id.ll_phone_login_form)
     LinearLayout llPhoneLogin;
     @BindView(R.id.et_phone)
@@ -36,6 +41,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     EditText etCode;
     @BindView(R.id.btn_login)
     Button btnLogin;
+    @BindView(R.id.tv_resend)
+    TextView tvResend;
 
     @Override
     protected void initData() {
@@ -83,12 +90,18 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         if (DBUtil.verifyPhone(phone)) {
 //            SMSSDK.getVerificationCode("86", phone);
             go2VerificationCodeView();
+        } else {
+            ToastUtil.show("请输入13位中国大陆手机号");
         }
     }
 
     @OnClick(R.id.btn_login)
     void login() {
-        mPresenter.login(phone, "86", code);
+        if (DBUtil.verifyCode(code)) {
+            mPresenter.login(phone, "86", code, LoginActivity.this);
+        } else {
+            ToastUtil.show("请输入4位有效验证码");
+        }
     }
 
     @Override
@@ -115,6 +128,16 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         if (!TextUtils.isEmpty(phone)) {
             etPhone.setSelection(phone.length());
         }
+    }
+
+    @Override
+    public void showPB() {
+        mPB.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void dismissPB() {
+        mPB.setVisibility(View.GONE);
     }
 
     @Override
