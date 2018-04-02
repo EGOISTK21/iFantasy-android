@@ -11,6 +11,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import xyz.egoistk21.iFantasy.bean.HttpResult;
 
 /**
  * Created by EGOISTK21 on 2018/3/22.
@@ -41,9 +42,9 @@ public class APIUtil {
         @Headers("User-Agent:iFantasy-android")
         @POST("login")
         @FormUrlEncoded
-        Observable<String> verify(@Field("phone") String phone,
-                                  @Field("zone") String zone,
-                                  @Field("code") String code);
+        Observable<HttpResult> verify(@Field("phone") String phone,
+                                      @Field("zone") String zone,
+                                      @Field("code") String code);
     }
 
     public static verifyCodeAPI getVerifyCodeAPI() {

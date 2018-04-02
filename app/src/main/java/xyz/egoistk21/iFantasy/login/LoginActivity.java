@@ -1,8 +1,15 @@
 package xyz.egoistk21.iFantasy.login;
 
 import android.graphics.Point;
+import android.os.CountDownTimer;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +21,9 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
 import butterknife.OnTextChanged;
+import cn.smssdk.SMSSDK;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseActivity;
 import xyz.egoistk21.iFantasy.util.DBUtil;
@@ -23,8 +32,9 @@ import xyz.egoistk21.iFantasy.util.UIUtil;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View {
 
-    private Boolean isDisplayPhoneForm;
+    private boolean isPhoneChanged, isCounting, isDisplayPhoneForm;
     private String phone, code;
+    private TimeCounter timeCounter;
     private LoginContract.Presenter mPresenter;
 
     @BindView(R.id.login_progress)
@@ -46,7 +56,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     protected void initData() {
+        isPhoneChanged = true;
+        isCounting = false;
         isDisplayPhoneForm = true;
+        timeCounter = new TimeCounter(60000, 1000);
         mPresenter = new LoginPresenter(this);
     }
 
@@ -77,6 +90,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @OnTextChanged(R.id.et_phone)
     void getPhone(Editable editable) {
+        isPhoneChanged = !(editable.toString().equals(phone));
         phone = editable.toString();
     }
 
@@ -88,7 +102,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     @OnClick(R.id.btn_get_code)
     void getCode() {
         if (DBUtil.verifyPhone(phone)) {
-//            SMSSDK.getVerificationCode("86", phone);
+            if (isPhoneChanged) {
+//                SMSSDK.getVerificationCode("86", phone);
+            }
             go2VerificationCodeView();
         } else {
             ToastUtil.show("请输入13位中国大陆手机号");
@@ -104,12 +120,25 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         }
     }
 
+    @OnClick(R.id.tv_resend)
+    void resend() {
+        // SMSSDK.getVerificationCode("86", phone);
+        timeCounter.start();
+    }
+
     @Override
     public void go2VerificationCodeView() {
         UIUtil.slideOutToLeft(LoginActivity.this, llPhoneLogin);
         llPhoneLogin.setVisibility(View.GONE);
         llCodeLogin.setVisibility(View.VISIBLE);
         UIUtil.slideInFromRight(LoginActivity.this, llCodeLogin);
+        if (isPhoneChanged) {
+            if (isCounting) {
+                timeCounter.cancel();
+            }
+            timeCounter.start();
+        }
+        isCounting = true;
         isDisplayPhoneForm = false;
         etCode.requestFocus();
         if (!TextUtils.isEmpty(code)) {
@@ -123,6 +152,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         llCodeLogin.setVisibility(View.GONE);
         llPhoneLogin.setVisibility(View.VISIBLE);
         UIUtil.slideInFromLeft(LoginActivity.this, llPhoneLogin);
+        isPhoneChanged = false;
         isDisplayPhoneForm = true;
         etPhone.requestFocus();
         if (!TextUtils.isEmpty(phone)) {
@@ -141,8 +171,36 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     @Override
+    public void loginSuccess() {
+
+    }
+
+    @Override
     protected void onDetachP() {
         mPresenter.detachMV();
+    }
+
+    private class TimeCounter extends CountDownTimer {
+
+        TimeCounter(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            Spannable spannable = new SpannableString(String.format("验证码已发送至%s，%2ds后可再次获取", phone, millisUntilFinished / 1000));
+            spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(LoginActivity.this,
+                    R.color.colorPrimaryDark)), 19, 22, Spanned.SPAN_POINT_MARK);
+            tvResend.setText(spannable);
+        }
+
+        @Override
+        public void onFinish() {
+            Spannable spannable = new SpannableString("验证码已发送至" + phone + "，重新获取");
+            spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(LoginActivity.this,
+                    R.color.colorPrimaryDark)), 19, 23, Spanned.SPAN_POINT_MARK);
+            tvResend.setText(spannable);
+        }
     }
 
     @Override

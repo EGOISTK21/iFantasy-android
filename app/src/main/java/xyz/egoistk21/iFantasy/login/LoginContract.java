@@ -3,6 +3,7 @@ package xyz.egoistk21.iFantasy.login;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import io.reactivex.Observer;
+import xyz.egoistk21.iFantasy.bean.HttpResult;
 
 /**
  * Created by egoistk21 on 2018/3/22.
@@ -10,7 +11,7 @@ import io.reactivex.Observer;
 
 interface LoginContract {
     interface Model {
-        void login(String phone, String zone, String code, RxAppCompatActivity rxAppCompatActivity, Observer<String> observer);
+        void login(String phone, String zone, String code, RxAppCompatActivity rxAppCompatActivity, Observer<HttpResult> observer);
     }
 
     interface View {
@@ -21,6 +22,8 @@ interface LoginContract {
         void showPB();
 
         void dismissPB();
+
+        void loginSuccess();
     }
 
     interface Presenter {

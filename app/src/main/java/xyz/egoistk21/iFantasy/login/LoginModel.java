@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import xyz.egoistk21.iFantasy.bean.HttpResult;
 import xyz.egoistk21.iFantasy.util.APIUtil;
 
 import static xyz.egoistk21.iFantasy.util.APIUtil.FILTER_TIMEOUT;
@@ -18,10 +19,10 @@ import static xyz.egoistk21.iFantasy.util.APIUtil.FILTER_TIMEOUT;
 class LoginModel implements LoginContract.Model {
 
     @Override
-    public void login(String phone, String zone, String code, RxAppCompatActivity rxAppCompatActivity, Observer<String> observer) {
+    public void login(String phone, String zone, String code, RxAppCompatActivity rxAppCompatActivity, Observer<HttpResult> observer) {
         APIUtil.getVerifyCodeAPI().verify(phone, zone, code)
                 .debounce(FILTER_TIMEOUT, TimeUnit.SECONDS)
-                .compose(rxAppCompatActivity.<String>bindToLifecycle())
+                .compose(rxAppCompatActivity.<HttpResult>bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
