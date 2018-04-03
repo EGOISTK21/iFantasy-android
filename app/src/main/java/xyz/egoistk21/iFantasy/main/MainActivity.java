@@ -9,13 +9,15 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseActivity;
-import xyz.egoistk21.iFantasy.login.LoginActivity;
+import xyz.egoistk21.iFantasy.verify.VerifyActivity;
 import xyz.egoistk21.iFantasy.service.BGMService;
 import xyz.egoistk21.iFantasy.util.UIUtil;
 
 public class MainActivity extends BaseActivity implements MainContract.View {
 
-    public static final int LOGIN_SUCCESS = 351;
+    public static final int REQUEST_VERIFY = 650;
+    public static final int NEED_REGISTER = 350;
+    public static final int START_LOGIN = 351;
 
     private MainContract.Presenter mPresenter;
 
@@ -53,8 +55,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @OnClick(R.id.btn_start)
     void start() {
         if (!mPresenter.isLogined()) {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivityForResult(intent, LOGIN_SUCCESS);
+            Intent intent = new Intent(MainActivity.this, VerifyActivity.class);
+            startActivityForResult(intent, REQUEST_VERIFY);
         }
     }
 
@@ -69,16 +71,26 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         mPresenter.detachMV();
     }
 
+    private void startRegister() {
+        // todo
+    }
+
+    private void startLogin() {
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case LOGIN_SUCCESS:
+        if (requestCode == REQUEST_VERIFY) {
+            switch (resultCode) {
+                case NEED_REGISTER:
+                    startRegister();
+                    break;
+                case START_LOGIN:
+                    startLogin();
                     break;
             }
-        } else {
-            // ToastUtil根据requestCode够构造的键值对
         }
     }
 }

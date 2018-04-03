@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".login.LoginActivity">
+    tools:context=".verify.VerifyActivity">
 
     <ScrollView
         android:id="@+id/login_form"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:id="@+id/ll_phone_login_form"
+                android:id="@+id/ll_phone_verify_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -53,7 +53,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_code_login_form"
+                android:id="@+id/ll_code_verify_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -75,7 +75,7 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <Button
-                    android:id="@+id/btn_login"
+                    android:id="@+id/btn_verify"
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

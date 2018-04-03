@@ -12,12 +12,13 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
+import xyz.egoistk21.iFantasy.bean.User;
 
 /**
  * Created by EGOISTK21 on 2018/3/22.
  */
 
-public class APIUtil {
+public class ApiUtil {
     public static final int FILTER_TIMEOUT = 1;
     private static final int TIMEOUT = 5;
     private static final String ROOT = "http://ifantasy.ml:5000/api/v1/";
@@ -35,20 +36,43 @@ public class APIUtil {
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
 
-    private APIUtil() {
+    private ApiUtil() {
     }
 
-    public interface verifyCodeAPI {
+    public interface VerificationApi {
         @Headers("User-Agent:iFantasy-android")
-        @POST("login")
+        @POST("verification")
         @FormUrlEncoded
         Observable<HttpResult> verify(@Field("phone") String phone,
                                       @Field("zone") String zone,
                                       @Field("code") String code);
     }
 
-    public static verifyCodeAPI getVerifyCodeAPI() {
-        return sRetrofit.create(verifyCodeAPI.class);
+    public static VerificationApi getVerifyCodeAPI() {
+        return sRetrofit.create(VerificationApi.class);
+    }
+
+    public interface RegisterApi {
+        @Headers("User-Agent:iFantasy-android")
+        @POST("register")
+        @FormUrlEncoded
+        Observable<HttpResult> register(@Field("phone") String phone,
+                                        @Field("nickname") String nickname);
+    }
+
+    public static RegisterApi getRegisterApi() {
+        return sRetrofit.create(RegisterApi.class);
+    }
+
+    public interface LoginApi {
+        @Headers("User-Agent:iFantasy-android")
+        @POST("register")
+        @FormUrlEncoded
+        Observable<HttpResult<User>> login(@Field("phone") String phone);
+    }
+
+    public static LoginApi getLoginApi() {
+        return sRetrofit.create(LoginApi.class);
     }
 
 }

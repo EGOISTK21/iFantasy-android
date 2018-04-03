@@ -1,4 +1,4 @@
-package xyz.egoistk21.iFantasy.login;
+package xyz.egoistk21.iFantasy.verify;
 
 import android.util.Log;
 
@@ -13,20 +13,20 @@ import xyz.egoistk21.iFantasy.util.ToastUtil;
  * Created by egoistk21 on 2018/3/22.
  */
 
-class LoginPresenter implements LoginContract.Presenter {
+class VerifyPresenter implements VerifyContract.Presenter {
 
-    private static final String TAG = LoginActivity.class.getName();
+    private static final String TAG = VerifyActivity.class.getName();
 
-    private LoginContract.Model mModel;
-    private LoginContract.View mView;
+    private VerifyContract.Model mModel;
+    private VerifyContract.View mView;
 
-    LoginPresenter(LoginContract.View view) {
+    VerifyPresenter(VerifyContract.View view) {
         attachMV(view);
     }
 
     @Override
-    public void attachMV(LoginContract.View view) {
-        mModel = new LoginModel();
+    public void attachMV(VerifyContract.View view) {
+        mModel = new VerifyModel();
         mView = view;
     }
 
@@ -48,8 +48,10 @@ class LoginPresenter implements LoginContract.Presenter {
             @Override
             public void onNext(HttpResult httpResult) {
                 Log.i(TAG, "onNext: " + httpResult.toString());
-                if (200 == httpResult.getState()) {
-                    mView.loginSuccess();
+                if (201 == httpResult.getState()) {
+                    mView.register();
+                } else if (200 == httpResult.getState()) {
+                    mView.login();
                 } else {
                     ToastUtil.show(httpResult.getError());
                 }

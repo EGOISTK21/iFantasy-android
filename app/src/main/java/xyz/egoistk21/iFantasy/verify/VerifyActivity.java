@@ -1,4 +1,4 @@
-package xyz.egoistk21.iFantasy.login;
+package xyz.egoistk21.iFantasy.verify;
 
 import android.graphics.Point;
 import android.os.CountDownTimer;
@@ -9,7 +9,6 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -21,36 +20,35 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.OnItemClick;
 import butterknife.OnTextChanged;
-import cn.smssdk.SMSSDK;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseActivity;
+import xyz.egoistk21.iFantasy.main.MainActivity;
 import xyz.egoistk21.iFantasy.util.DBUtil;
 import xyz.egoistk21.iFantasy.util.ToastUtil;
 import xyz.egoistk21.iFantasy.util.UIUtil;
 
-public class LoginActivity extends BaseActivity implements LoginContract.View {
+public class VerifyActivity extends BaseActivity implements VerifyContract.View {
 
     private boolean isPhoneChanged, isCounting, isDisplayPhoneForm;
     private String phone, code;
     private TimeCounter timeCounter;
-    private LoginContract.Presenter mPresenter;
+    private VerifyContract.Presenter mPresenter;
 
     @BindView(R.id.login_progress)
     ProgressBar mPB;
-    @BindView(R.id.ll_phone_login_form)
+    @BindView(R.id.ll_phone_verify_form)
     LinearLayout llPhoneLogin;
     @BindView(R.id.et_phone)
     EditText etPhone;
     @BindView(R.id.btn_get_code)
     Button btnGetCode;
-    @BindView(R.id.ll_code_login_form)
+    @BindView(R.id.ll_code_verify_form)
     LinearLayout llCodeLogin;
     @BindView(R.id.et_code)
     EditText etCode;
-    @BindView(R.id.btn_login)
-    Button btnLogin;
+    @BindView(R.id.btn_verify)
+    Button btnVerify;
     @BindView(R.id.tv_resend)
     TextView tvResend;
 
@@ -60,7 +58,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         isCounting = false;
         isDisplayPhoneForm = true;
         timeCounter = new TimeCounter(60000, 1000);
-        mPresenter = new LoginPresenter(this);
+        mPresenter = new VerifyPresenter(this);
     }
 
     @Override
@@ -105,16 +103,16 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
             if (isPhoneChanged) {
 //                SMSSDK.getVerificationCode("86", phone);
             }
-            go2VerificationCodeView();
+            go2CodeView();
         } else {
             ToastUtil.show("请输入13位中国大陆手机号");
         }
     }
 
-    @OnClick(R.id.btn_login)
-    void login() {
+    @OnClick(R.id.btn_verify)
+    void startLogin() {
         if (DBUtil.verifyCode(code)) {
-            mPresenter.login(phone, "86", code, LoginActivity.this);
+            mPresenter.login(phone, "86", code, VerifyActivity.this);
         } else {
             ToastUtil.show("请输入4位有效验证码");
         }
@@ -127,11 +125,11 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     @Override
-    public void go2VerificationCodeView() {
-        UIUtil.slideOutToLeft(LoginActivity.this, llPhoneLogin);
+    public void go2CodeView() {
+        UIUtil.slideOutToLeft(VerifyActivity.this, llPhoneLogin);
         llPhoneLogin.setVisibility(View.GONE);
         llCodeLogin.setVisibility(View.VISIBLE);
-        UIUtil.slideInFromRight(LoginActivity.this, llCodeLogin);
+        UIUtil.slideInFromRight(VerifyActivity.this, llCodeLogin);
         if (isPhoneChanged) {
             if (isCounting) {
                 timeCounter.cancel();
@@ -148,10 +146,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public void back2PhoneView() {
-        UIUtil.slideOutToRight(LoginActivity.this, llCodeLogin);
+        UIUtil.slideOutToRight(VerifyActivity.this, llCodeLogin);
         llCodeLogin.setVisibility(View.GONE);
         llPhoneLogin.setVisibility(View.VISIBLE);
-        UIUtil.slideInFromLeft(LoginActivity.this, llPhoneLogin);
+        UIUtil.slideInFromLeft(VerifyActivity.this, llPhoneLogin);
         isPhoneChanged = false;
         isDisplayPhoneForm = true;
         etPhone.requestFocus();
@@ -171,8 +169,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     @Override
-    public void loginSuccess() {
+    public void register() {
+        setResult(MainActivity.NEED_REGISTER);
+    }
 
+    @Override
+    public void login() {
+        setResult(MainActivity.START_LOGIN);
     }
 
     @Override
@@ -189,7 +192,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         @Override
         public void onTick(long millisUntilFinished) {
             Spannable spannable = new SpannableString(String.format("验证码已发送至%s，%2ds后可再次获取", phone, millisUntilFinished / 1000));
-            spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(LoginActivity.this,
+            spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(VerifyActivity.this,
                     R.color.colorPrimaryDark)), 19, 22, Spanned.SPAN_POINT_MARK);
             tvResend.setText(spannable);
         }
@@ -197,7 +200,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         @Override
         public void onFinish() {
             Spannable spannable = new SpannableString("验证码已发送至" + phone + "，重新获取");
-            spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(LoginActivity.this,
+            spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(VerifyActivity.this,
                     R.color.colorPrimaryDark)), 19, 23, Spanned.SPAN_POINT_MARK);
             tvResend.setText(spannable);
         }
