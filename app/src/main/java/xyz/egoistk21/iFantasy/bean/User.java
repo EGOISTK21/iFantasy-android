@@ -13,6 +13,8 @@ public class User extends RealmObject implements Parcelable {
     private int score;
     private int money;
     private int viplevel;
+    private String logintoken;
+    private String accesstoken;
 
     public User() {
     }
@@ -24,6 +26,8 @@ public class User extends RealmObject implements Parcelable {
         score = in.readInt();
         money = in.readInt();
         viplevel = in.readInt();
+        logintoken = in.readString();
+        accesstoken = in.readString();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -62,6 +66,14 @@ public class User extends RealmObject implements Parcelable {
         return viplevel;
     }
 
+    public String getLogintoken() {
+        return logintoken;
+    }
+
+    public String getAccesstoken() {
+        return accesstoken;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -75,6 +87,8 @@ public class User extends RealmObject implements Parcelable {
         dest.writeInt(score);
         dest.writeInt(money);
         dest.writeInt(viplevel);
+        dest.writeString(logintoken);
+        dest.writeString(accesstoken);
     }
 
     @Override
@@ -86,6 +100,8 @@ public class User extends RealmObject implements Parcelable {
                 ", score=" + score +
                 ", money=" + money +
                 ", viplevel=" + viplevel +
+                ", logintoken='" + logintoken + '\'' +
+                ", accesstoken='" + accesstoken + '\'' +
                 '}';
     }
 }
