@@ -23,7 +23,7 @@ public class BGMService extends IntentService implements MediaPlayer.OnPreparedL
 
     @Override
     public void onCreate() {
-        Log.i(TAG, "onCreate: ");
+        Log.d(TAG, "onCreate");
         super.onCreate();
         mmp = new MediaPlayer();
         mmp.setOnPreparedListener(this);
@@ -35,7 +35,7 @@ public class BGMService extends IntentService implements MediaPlayer.OnPreparedL
         try {
             switch (intent.getStringExtra("name")) {
                 case "cant_stop":
-                    Log.i(TAG, "onHandleIntent: ");
+                    Log.d(TAG, "onHandleIntent");
                     mmp.setDataSource(BGMService.this, Uri.parse(URI_PREFIX + R.raw.cant_stop));
                     mmp.prepareAsync();
                     break;
@@ -48,7 +48,13 @@ public class BGMService extends IntentService implements MediaPlayer.OnPreparedL
 
     @Override
     public void onPrepared(MediaPlayer mediaPlayer) {
-        Log.i(TAG, "onPrepared: ");
+        Log.d(TAG, "onPrepared");
         mediaPlayer.start();
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.d(TAG, "onDestroy");
+        super.onDestroy();
     }
 }

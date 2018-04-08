@@ -7,6 +7,8 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
+import xyz.egoistk21.iFantasy.bean.User;
+import xyz.egoistk21.iFantasy.util.DBUtil;
 import xyz.egoistk21.iFantasy.util.ToastUtil;
 
 /**
@@ -38,35 +40,38 @@ class VerifyPresenter implements VerifyContract.Presenter {
 
     @Override
     public void login(String phone, String zone, String code, RxAppCompatActivity rxAppCompatActivity) {
-        mModel.login(phone, zone, code, rxAppCompatActivity, new Observer<HttpResult>() {
+        mModel.login(phone, zone, code, rxAppCompatActivity, new Observer<HttpResult<User>>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.i(TAG, "onSubscribe: ");
+                Log.d(TAG, "onSubscribe");
                 mView.showPB();
             }
 
             @Override
-            public void onNext(HttpResult httpResult) {
-                Log.i(TAG, "onNext: " + httpResult.toString());
-                if (201 == httpResult.getState()) {
-                    mView.register();
-                } else if (200 == httpResult.getState()) {
-                    mView.login();
+            public void onNext(HttpResult<User> userHttpResult) {
+                Log.d(TAG, "onNext: " + userHttpResult.toString());
+                if (201 == userHttpResult.getState()) {
+                    DBUtil.setUser(userHttpResult.getResult());
+                    mView.go2Register();
+                } else if (200 == userHttpResult.getState()) {
+                    DBUtil.setUser(userHttpResult.getResult());
+                    mView.go2Login();
                 } else {
-                    ToastUtil.show(httpResult.getError());
+                    mView.dismissPB();
+                    ToastUtil.show(userHttpResult.getError());
                 }
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.i(TAG, "onError: " + e.getMessage());
-                ToastUtil.show(e.getMessage());
+                Log.d(TAG, "onError: " + e.getMessage());
                 mView.dismissPB();
+                ToastUtil.show(e.getMessage());
             }
 
             @Override
             public void onComplete() {
-                Log.i(TAG, "onComplete: ");
+                Log.d(TAG, "onComplete");
                 mView.dismissPB();
             }
         });

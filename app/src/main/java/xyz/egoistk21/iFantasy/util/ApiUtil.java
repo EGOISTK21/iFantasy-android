@@ -9,6 +9,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
@@ -21,7 +22,7 @@ import xyz.egoistk21.iFantasy.bean.User;
 public class ApiUtil {
     public static final int FILTER_TIMEOUT = 1;
     private static final int TIMEOUT = 5;
-    private static final String ROOT = "http://ifantasy.ml:5000/api/v1/";
+    private static final String ROOT = "http://139.198.14.181/api/v1/";
     private static OkHttpClient sOkHttpClient =
             new OkHttpClient
                     .Builder()
@@ -41,11 +42,11 @@ public class ApiUtil {
 
     public interface VerificationApi {
         @Headers("User-Agent:iFantasy-android")
-        @POST("verification")
+        @POST("user/verification")
         @FormUrlEncoded
-        Observable<HttpResult> verify(@Field("phone") String phone,
-                                      @Field("zone") String zone,
-                                      @Field("code") String code);
+        Observable<HttpResult<User>> verify(@Field("phone") String phone,
+                                            @Field("zone") String zone,
+                                            @Field("code") String code);
     }
 
     public static VerificationApi getVerifyCodeAPI() {
@@ -54,10 +55,11 @@ public class ApiUtil {
 
     public interface RegisterApi {
         @Headers("User-Agent:iFantasy-android")
-        @POST("register")
+        @POST("user/register")
         @FormUrlEncoded
-        Observable<HttpResult> register(@Field("phone") String phone,
-                                        @Field("nickname") String nickname);
+        Observable<HttpResult<User>> register(@Header("Authorization") String temptoken,
+                                              @Field("phone") String phone,
+                                              @Field("nickname") String nickname);
     }
 
     public static RegisterApi getRegisterApi() {
@@ -66,13 +68,26 @@ public class ApiUtil {
 
     public interface LoginApi {
         @Headers("User-Agent:iFantasy-android")
-        @POST("register")
+        @POST("user/login")
         @FormUrlEncoded
-        Observable<HttpResult<User>> login(@Field("phone") String phone);
+        Observable<HttpResult<User>> login(@Header("Authorization") String logintoken,
+                                           @Field("phone") String phone);
     }
 
     public static LoginApi getLoginApi() {
         return sRetrofit.create(LoginApi.class);
     }
+
+//    public interface TestOnlineApi {
+//        @Headers("User-Agent:iFantasy-android")
+//        @POST("user/online")
+//        @FormUrlEncoded
+//        Observable<HttpResult<String>> isOnline(@Header("Authorization") String accesstoken,
+//                                                @Field("user_id") int id);
+//    }
+//
+//    public static TestOnlineApi getTestOnlineApi() {
+//        return sRetrofit.create(TestOnlineApi.class);
+//    }
 
 }

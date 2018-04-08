@@ -4,13 +4,15 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class User extends RealmObject implements Parcelable {
 
-    private int userid;
+    @PrimaryKey
+    private int id;
     private String nickname;
+    private String phone;
     private int level;
-    private int score;
     private int money;
     private int viplevel;
     private String logintoken;
@@ -20,10 +22,10 @@ public class User extends RealmObject implements Parcelable {
     }
 
     private User(Parcel in) {
-        userid = in.readInt();
+        id = in.readInt();
         nickname = in.readString();
+        phone = in.readString();
         level = in.readInt();
-        score = in.readInt();
         money = in.readInt();
         viplevel = in.readInt();
         logintoken = in.readString();
@@ -42,21 +44,22 @@ public class User extends RealmObject implements Parcelable {
         }
     };
 
-    public int getUserid() {
-        return userid;
+    public int getId() {
+        return id;
     }
 
     public String getNickname() {
         return nickname;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
     public int getLevel() {
         return level;
     }
 
-    public int getScore() {
-        return score;
-    }
 
     public int getMoney() {
         return money;
@@ -64,6 +67,14 @@ public class User extends RealmObject implements Parcelable {
 
     public int getViplevel() {
         return viplevel;
+    }
+
+    public void setLogintoken(String logintoken) {
+        this.logintoken = logintoken;
+    }
+
+    public void setAccesstoken(String accesstoken) {
+        this.accesstoken = accesstoken;
     }
 
     public String getLogintoken() {
@@ -81,10 +92,10 @@ public class User extends RealmObject implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(userid);
+        dest.writeInt(id);
         dest.writeString(nickname);
+        dest.writeString(phone);
         dest.writeInt(level);
-        dest.writeInt(score);
         dest.writeInt(money);
         dest.writeInt(viplevel);
         dest.writeString(logintoken);
@@ -94,10 +105,10 @@ public class User extends RealmObject implements Parcelable {
     @Override
     public String toString() {
         return "User{" +
-                "userid=" + userid +
+                "id=" + id +
                 ", nickname='" + nickname + '\'' +
+                ", phone='" + phone + '\'' +
                 ", level=" + level +
-                ", score=" + score +
                 ", money=" + money +
                 ", viplevel=" + viplevel +
                 ", logintoken='" + logintoken + '\'' +

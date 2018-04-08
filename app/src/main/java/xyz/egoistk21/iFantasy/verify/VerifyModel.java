@@ -8,6 +8,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
+import xyz.egoistk21.iFantasy.bean.User;
 import xyz.egoistk21.iFantasy.util.ApiUtil;
 
 import static xyz.egoistk21.iFantasy.util.ApiUtil.FILTER_TIMEOUT;
@@ -19,10 +20,10 @@ import static xyz.egoistk21.iFantasy.util.ApiUtil.FILTER_TIMEOUT;
 class VerifyModel implements VerifyContract.Model {
 
     @Override
-    public void login(String phone, String zone, String code, RxAppCompatActivity rxAppCompatActivity, Observer<HttpResult> observer) {
+    public void login(String phone, String zone, String code, RxAppCompatActivity rxAppCompatActivity, Observer<HttpResult<User>> observer) {
         ApiUtil.getVerifyCodeAPI().verify(phone, zone, code)
                 .debounce(FILTER_TIMEOUT, TimeUnit.SECONDS)
-                .compose(rxAppCompatActivity.<HttpResult>bindToLifecycle())
+                .compose(rxAppCompatActivity.<HttpResult<User>>bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())

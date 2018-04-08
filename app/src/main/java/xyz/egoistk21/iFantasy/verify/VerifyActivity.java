@@ -110,7 +110,7 @@ public class VerifyActivity extends BaseActivity implements VerifyContract.View 
     }
 
     @OnClick(R.id.btn_verify)
-    void startLogin() {
+    void verify() {
         if (DBUtil.verifyCode(code)) {
             mPresenter.login(phone, "86", code, VerifyActivity.this);
         } else {
@@ -169,13 +169,15 @@ public class VerifyActivity extends BaseActivity implements VerifyContract.View 
     }
 
     @Override
-    public void register() {
+    public void go2Register() {
         setResult(MainActivity.NEED_REGISTER);
+        finish();
     }
 
     @Override
-    public void login() {
+    public void go2Login() {
         setResult(MainActivity.START_LOGIN);
+        finish();
     }
 
     @Override

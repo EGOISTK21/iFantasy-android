@@ -1,6 +1,7 @@
 package xyz.egoistk21.iFantasy;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.mob.MobSDK;
 
@@ -12,6 +13,8 @@ import xyz.egoistk21.iFantasy.util.DBUtil;
 
 public class IFantasyApplication extends Application {
 
+    private static final String TAG = IFantasyApplication.class.getName();
+
     private static IFantasyApplication sInstance;
 
     public static IFantasyApplication getInstance() {
@@ -20,6 +23,7 @@ public class IFantasyApplication extends Application {
 
     @Override
     public void onCreate() {
+        Log.d(TAG, "onCreate");
         super.onCreate();
         sInstance = this;
         DBUtil.init(this);
@@ -28,6 +32,7 @@ public class IFantasyApplication extends Application {
 
     @Override
     public void onTerminate() {
+        Log.d(TAG, "onTerminate");
         super.onTerminate();
         DBUtil.close();
     }

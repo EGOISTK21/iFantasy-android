@@ -1,17 +1,25 @@
 package xyz.egoistk21.iFantasy.main;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseActivity;
-import xyz.egoistk21.iFantasy.verify.VerifyActivity;
 import xyz.egoistk21.iFantasy.service.BGMService;
+import xyz.egoistk21.iFantasy.util.DBUtil;
+import xyz.egoistk21.iFantasy.util.ToastUtil;
 import xyz.egoistk21.iFantasy.util.UIUtil;
+import xyz.egoistk21.iFantasy.verify.VerifyActivity;
 
 public class MainActivity extends BaseActivity implements MainContract.View {
 
@@ -21,6 +29,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     private MainContract.Presenter mPresenter;
 
+    @BindView(R.id.login_progress)
+    ProgressBar mPB;
     @BindView(R.id.btn_start)
     Button btnStart;
 
@@ -54,9 +64,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @OnClick(R.id.btn_start)
     void start() {
-        if (!mPresenter.isLogined()) {
+        if (!mPresenter.isLogin()) {
             Intent intent = new Intent(MainActivity.this, VerifyActivity.class);
             startActivityForResult(intent, REQUEST_VERIFY);
+        } else {
+            startLogin();
         }
     }
 
@@ -67,16 +79,43 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     @Override
+    public void showPB() {
+        mPB.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void dismissPB() {
+        mPB.setVisibility(View.GONE);
+    }
+
+    @Override
     protected void onDetachP() {
         mPresenter.detachMV();
     }
 
     private void startRegister() {
-        // todo
+        final EditText editText = new EditText(MainActivity.this);
+        editText.setGravity(View.TEXT_ALIGNMENT_CENTER);
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle("请输入玩家昵称")
+                .setView(editText)
+                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String phone = DBUtil.getUser().getPhone();
+                        String nickname = editText.getEditableText().toString();
+                        if (!TextUtils.isEmpty(nickname)) {
+                            mPresenter.register(phone, nickname, MainActivity.this);
+                        } else {
+                            ToastUtil.show("昵称不能为空");
+                        }
+                    }
+                }).show();
     }
 
     private void startLogin() {
-
+        String phone = DBUtil.getUser().getPhone();
+        mPresenter.login(phone, MainActivity.this);
     }
 
     @Override

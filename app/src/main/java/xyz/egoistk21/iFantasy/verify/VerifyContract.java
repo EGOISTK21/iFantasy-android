@@ -4,6 +4,7 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import io.reactivex.Observer;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
+import xyz.egoistk21.iFantasy.bean.User;
 
 /**
  * Created by egoistk21 on 2018/3/22.
@@ -11,7 +12,7 @@ import xyz.egoistk21.iFantasy.bean.HttpResult;
 
 interface VerifyContract {
     interface Model {
-        void login(String phone, String zone, String code, RxAppCompatActivity rxAppCompatActivity, Observer<HttpResult> observer);
+        void login(String phone, String zone, String code, RxAppCompatActivity rxAppCompatActivity, Observer<HttpResult<User>> observer);
     }
 
     interface View {
@@ -23,9 +24,9 @@ interface VerifyContract {
 
         void dismissPB();
 
-        void register();
+        void go2Register();
 
-        void login();
+        void go2Login();
     }
 
     interface Presenter {

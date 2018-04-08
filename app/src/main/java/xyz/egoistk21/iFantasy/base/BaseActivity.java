@@ -19,7 +19,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "onCreate");
+        Log.i(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         initData();
         setContentView(getLayoutId());
@@ -40,49 +40,49 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
     @Override
     protected void onRestart() {
-        Log.d(TAG, "onRestart");
+        Log.i(TAG, "onRestart");
         super.onRestart();
     }
 
     @Override
     protected void onStart() {
-        Log.d(TAG, "onStart");
+        Log.i(TAG, "onStart");
         super.onStart();
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        Log.d(TAG, "onRestoreInstanceState");
+        Log.i(TAG, "onRestoreInstanceState");
         super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
     protected void onResume() {
-        Log.d(TAG, "onResume");
+        Log.i(TAG, "onResume");
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        Log.d(TAG, "onPause");
+        Log.i(TAG, "onPause");
         super.onPause();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        Log.d(TAG, "onSaveInstanceState");
+        Log.i(TAG, "onSaveInstanceState");
         super.onSaveInstanceState(outState);
     }
 
     @Override
     protected void onStop() {
-        Log.d(TAG, "onStop");
+        Log.i(TAG, "onStop");
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        Log.d(TAG, "onDestroy");
+        Log.i(TAG, "onDestroy");
         onDetachP();
         super.onDestroy();
     }

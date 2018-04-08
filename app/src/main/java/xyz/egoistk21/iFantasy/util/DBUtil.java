@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import xyz.egoistk21.iFantasy.bean.User;
 
 /**
  * Created by EGOISTK21 on 2018/3/22.
@@ -13,8 +14,8 @@ import io.realm.RealmConfiguration;
 
 public class DBUtil {
     private static SharedPreferences sSharedPreferences;
-    private static SharedPreferences.Editor sEditor;
     private static Realm sRealm;
+    private static User sUser;
 
     private DBUtil() {
     }
@@ -30,11 +31,10 @@ public class DBUtil {
     }
 
     public static void init(Context context) {
-        sSharedPreferences = context.getSharedPreferences("iFantasy", Context.MODE_PRIVATE);
-        sEditor = sSharedPreferences.edit();
+        sSharedPreferences = context.getSharedPreferences("iFantasy-android", Context.MODE_PRIVATE);
         Realm.init(context);
         RealmConfiguration config = new RealmConfiguration.Builder()
-                .name("iFantasy-Realm")
+                .name("iFantasy-android")
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(config);
@@ -43,6 +43,42 @@ public class DBUtil {
 
     public static void close() {
         sRealm.close();
+    }
+
+    public static void setLoginToken(String loginoken) {
+        sRealm.beginTransaction();
+        sRealm.where(User.class).findFirst().setLogintoken(loginoken);
+        sRealm.commitTransaction();
+    }
+
+    public static void setAccessToken(String accessToken) {
+        sRealm.beginTransaction();
+        sRealm.where(User.class).findFirst().setAccesstoken(accessToken);
+        sRealm.commitTransaction();
+    }
+
+    public static String getLoginToken() {
+        return sUser == null ? null : sUser.getLogintoken();
+    }
+
+    public static String getAccessToken() {
+        return sUser == null ? null : sUser.getAccesstoken();
+    }
+
+    public static void setUser(User user) {
+        if (user != null) {
+            sRealm.beginTransaction();
+            sRealm.copyToRealmOrUpdate(user);
+            sRealm.commitTransaction();
+            sUser = sRealm.where(User.class).findFirst();
+        }
+    }
+
+    public static User getUser() {
+        if (sUser == null) {
+            sUser = sRealm.where(User.class).findFirst();
+        }
+        return sUser;
     }
 
 }
