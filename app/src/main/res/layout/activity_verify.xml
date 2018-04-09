@@ -12,7 +12,7 @@
     tools:context=".verify.VerifyActivity">
 
     <ScrollView
-        android:id="@+id/login_form"
+        android:id="@+id/verify_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -100,7 +100,7 @@
     </ScrollView>
 
     <ProgressBar
-        android:id="@+id/login_progress"
+        android:id="@+id/verify_progress"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -57,6 +57,7 @@ class MainPresenter implements MainContract.Presenter {
                 Log.d(TAG, "onNext: " + userHttpResult.toString());
                 if (200 == userHttpResult.getState()) {
                     DBUtil.setUser(userHttpResult.getResult());
+                    mView.startGame();
                 } else {
                     mView.dismissPB();
                     ToastUtil.show(userHttpResult.getError());
@@ -92,6 +93,7 @@ class MainPresenter implements MainContract.Presenter {
                 Log.d(TAG, "onNext: " + userHttpResult.toString());
                 if (200 == userHttpResult.getState()) {
                     DBUtil.setUser(userHttpResult.getResult());
+                    mView.startGame();
                 } else {
                     DBUtil.setLoginToken(null);
                     mView.dismissPB();

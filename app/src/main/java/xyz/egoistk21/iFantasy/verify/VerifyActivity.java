@@ -35,7 +35,7 @@ public class VerifyActivity extends BaseActivity implements VerifyContract.View 
     private TimeCounter timeCounter;
     private VerifyContract.Presenter mPresenter;
 
-    @BindView(R.id.login_progress)
+    @BindView(R.id.verify_progress)
     ProgressBar mPB;
     @BindView(R.id.ll_phone_verify_form)
     LinearLayout llPhoneLogin;
@@ -63,7 +63,7 @@ public class VerifyActivity extends BaseActivity implements VerifyContract.View 
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_login;
+        return R.layout.activity_verify;
     }
 
     private void modifyUI(LinearLayout linearLayout) {

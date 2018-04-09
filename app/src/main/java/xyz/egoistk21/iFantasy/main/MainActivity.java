@@ -15,6 +15,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseActivity;
+import xyz.egoistk21.iFantasy.game.GameActivity;
 import xyz.egoistk21.iFantasy.service.BGMService;
 import xyz.egoistk21.iFantasy.util.DBUtil;
 import xyz.egoistk21.iFantasy.util.ToastUtil;
@@ -29,7 +30,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     private MainContract.Presenter mPresenter;
 
-    @BindView(R.id.login_progress)
+    @BindView(R.id.main_progress)
     ProgressBar mPB;
     @BindView(R.id.btn_start)
     Button btnStart;
@@ -79,6 +80,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     @Override
+    protected void onDetachP() {
+        mPresenter.detachMV();
+    }
+
+    @Override
     public void showPB() {
         mPB.setVisibility(View.VISIBLE);
     }
@@ -86,11 +92,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     public void dismissPB() {
         mPB.setVisibility(View.GONE);
-    }
-
-    @Override
-    protected void onDetachP() {
-        mPresenter.detachMV();
     }
 
     private void startRegister() {
@@ -116,6 +117,13 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private void startLogin() {
         String phone = DBUtil.getUser().getPhone();
         mPresenter.login(phone, MainActivity.this);
+    }
+
+    @Override
+    public void startGame() {
+        Intent intent = new Intent(MainActivity.this, GameActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

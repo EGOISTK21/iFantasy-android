@@ -22,6 +22,8 @@ interface MainContract {
     }
 
     interface View {
+        void startGame();
+
         void showPB();
 
         void dismissPB();
