@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.api.BasicCallback;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
@@ -56,7 +58,14 @@ class MainPresenter implements MainContract.Presenter {
             public void onNext(HttpResult<User> userHttpResult) {
                 Log.d(TAG, "onNext: " + userHttpResult.toString());
                 if (200 == userHttpResult.getState()) {
-                    DBUtil.setUser(userHttpResult.getResult());
+                    User user = userHttpResult.getResult();
+                    DBUtil.setUser(user);
+                    JMessageClient.register(user.getNickname(), "12345qwert", new BasicCallback() {
+                        @Override
+                        public void gotResult(int i, String s) {
+                            Log.d(TAG, "gotResult" + i + " " + s);
+                        }
+                    });
                     mView.startGame();
                 } else {
                     mView.dismissPB();
@@ -92,7 +101,14 @@ class MainPresenter implements MainContract.Presenter {
             public void onNext(HttpResult<User> userHttpResult) {
                 Log.d(TAG, "onNext: " + userHttpResult.toString());
                 if (200 == userHttpResult.getState()) {
-                    DBUtil.setUser(userHttpResult.getResult());
+                    User user = userHttpResult.getResult();
+                    DBUtil.setUser(user);
+                    JMessageClient.login(user.getNickname(), "12345qwert", new BasicCallback() {
+                        @Override
+                        public void gotResult(int i, String s) {
+                            Log.d(TAG, "gotResult" + i + " " + s);
+                        }
+                    });
                     mView.startGame();
                 } else {
                     DBUtil.setLoginToken(null);

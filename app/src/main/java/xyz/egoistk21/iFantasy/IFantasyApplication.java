@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.mob.MobSDK;
 
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.im.android.api.JMessageClient;
 import xyz.egoistk21.iFantasy.util.DBUtil;
 
 /**
@@ -28,12 +30,18 @@ public class IFantasyApplication extends Application {
         sInstance = this;
         DBUtil.init(this);
         MobSDK.init(this);
+        JMessageClient.setDebugMode(true);
+        JMessageClient.init(this);
+//        JMessageClient.init(this, true);
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 
     @Override
     public void onTerminate() {
         Log.d(TAG, "onTerminate");
         super.onTerminate();
+        JMessageClient.logout();
         DBUtil.close();
     }
 }
