@@ -47,13 +47,15 @@ public class DBUtil {
 
     public static void setLoginToken(String loginoken) {
         sRealm.beginTransaction();
-        sRealm.where(User.class).findFirst().setLogintoken(loginoken);
+        if (getUser() != null)
+            sUser.setLogintoken(loginoken);
         sRealm.commitTransaction();
     }
 
     public static void setAccessToken(String accessToken) {
         sRealm.beginTransaction();
-        sRealm.where(User.class).findFirst().setAccesstoken(accessToken);
+        if (getUser() != null)
+            sUser.setAccesstoken(accessToken);
         sRealm.commitTransaction();
     }
 
@@ -68,9 +70,11 @@ public class DBUtil {
     public static void setUser(User user) {
         if (user != null) {
             sRealm.beginTransaction();
+            if (getUser() != null && user.getId() != getUser().getId()) {
+                getUser().deleteFromRealm();
+            }
             sRealm.copyToRealmOrUpdate(user);
             sRealm.commitTransaction();
-            sUser = sRealm.where(User.class).findFirst();
         }
     }
 

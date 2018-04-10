@@ -4,8 +4,10 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import butterknife.BindView;
+import cn.jpush.android.api.JPushInterface;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseActivity;
+import xyz.egoistk21.iFantasy.util.DBUtil;
 import xyz.egoistk21.iFantasy.util.UIUtil;
 
 public class GameActivity extends BaseActivity implements GameContract.View {
@@ -19,6 +21,7 @@ public class GameActivity extends BaseActivity implements GameContract.View {
 
     @Override
     protected void initData() {
+        JPushInterface.setAlias(GameActivity.this, 1, "1");
         mPresenter = new GamePresenter(GameActivity.this);
     }
 

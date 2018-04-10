@@ -63,7 +63,7 @@ class MainPresenter implements MainContract.Presenter {
                     JMessageClient.register(user.getNickname(), "12345qwert", new BasicCallback() {
                         @Override
                         public void gotResult(int i, String s) {
-                            Log.d(TAG, "gotResult" + i + " " + s);
+                            Log.d(TAG, "gotResult: " + i + " " + s);
                         }
                     });
                     mView.startGame();
@@ -106,7 +106,7 @@ class MainPresenter implements MainContract.Presenter {
                     JMessageClient.login(user.getNickname(), "12345qwert", new BasicCallback() {
                         @Override
                         public void gotResult(int i, String s) {
-                            Log.d(TAG, "gotResult" + i + " " + s);
+                            Log.d(TAG, "gotResult: " + i + " " + s);
                         }
                     });
                     mView.startGame();

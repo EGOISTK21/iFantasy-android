@@ -1,51 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:background="@drawable/background">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="54dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/head">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="一茬散人
-Lv.名人堂 VIP.1"
-            android:textStyle="bold" />
+            android:layout_centerVertical="true">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
 
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="球队战力：750"
-            android:textStyle="bold" />
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="180dp"
+            android:background="@drawable/frame">
 
-        <TextView
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="资金：1250万"
-            android:textStyle="bold" />
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="180dp"
+            android:background="@drawable/frame">
 
-    </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="28dp"
+            android:background="@drawable/settings" />
+
+    </RelativeLayout>
+
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/board">
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/center">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/foot"
+        android:divider="@drawable/divider_game_foot"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingEnd="144dp"
+        android:paddingStart="24dp"
+        android:showDividers="middle">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/message" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bag" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/recruit" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/tactics" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/team" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/pk" />
 
     <ProgressBar
         android:id="@+id/game_progress"
@@ -54,4 +130,4 @@ Lv.名人堂 VIP.1"
         android:layout_height="wrap_content"
         android:visibility="gone" />
 
-</LinearLayout>
+</RelativeLayout>
