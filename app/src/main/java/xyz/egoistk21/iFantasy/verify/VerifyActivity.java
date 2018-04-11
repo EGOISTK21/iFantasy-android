@@ -23,10 +23,10 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseActivity;
-import xyz.egoistk21.iFantasy.main.MainActivity;
 import xyz.egoistk21.iFantasy.util.DBUtil;
 import xyz.egoistk21.iFantasy.util.ToastUtil;
 import xyz.egoistk21.iFantasy.util.UIUtil;
+import xyz.egoistk21.iFantasy.welcome.WelcomeActivity;
 
 public class VerifyActivity extends BaseActivity implements VerifyContract.View {
 
@@ -170,13 +170,13 @@ public class VerifyActivity extends BaseActivity implements VerifyContract.View 
 
     @Override
     public void go2Register() {
-        setResult(MainActivity.NEED_REGISTER);
+        setResult(WelcomeActivity.NEED_REGISTER);
         finish();
     }
 
     @Override
     public void go2Login() {
-        setResult(MainActivity.START_LOGIN);
+        setResult(WelcomeActivity.START_LOGIN);
         finish();
     }
 

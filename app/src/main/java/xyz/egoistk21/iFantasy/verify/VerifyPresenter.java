@@ -2,7 +2,7 @@ package xyz.egoistk21.iFantasy.verify;
 
 import android.util.Log;
 
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.trello.rxlifecycle2.components.RxActivity;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -17,7 +17,7 @@ import xyz.egoistk21.iFantasy.util.ToastUtil;
 
 class VerifyPresenter implements VerifyContract.Presenter {
 
-    private static final String TAG = VerifyActivity.class.getName();
+    private static final String TAG = VerifyPresenter.class.getName();
 
     private VerifyContract.Model mModel;
     private VerifyContract.View mView;
@@ -39,8 +39,8 @@ class VerifyPresenter implements VerifyContract.Presenter {
     }
 
     @Override
-    public void login(String phone, String zone, String code, RxAppCompatActivity rxAppCompatActivity) {
-        mModel.login(phone, zone, code, rxAppCompatActivity, new Observer<HttpResult<User>>() {
+    public void login(String phone, String zone, String code, RxActivity rxActivity) {
+        mModel.login(phone, zone, code, rxActivity, new Observer<HttpResult<User>>() {
             @Override
             public void onSubscribe(Disposable d) {
                 Log.d(TAG, "onSubscribe");

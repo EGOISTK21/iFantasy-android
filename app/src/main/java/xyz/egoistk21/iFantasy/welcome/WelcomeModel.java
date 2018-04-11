@@ -1,6 +1,6 @@
-package xyz.egoistk21.iFantasy.main;
+package xyz.egoistk21.iFantasy.welcome;
 
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.trello.rxlifecycle2.components.RxActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +18,7 @@ import static xyz.egoistk21.iFantasy.util.ApiUtil.FILTER_TIMEOUT;
  * Created by EGOISTK21 on 2018/3/22.
  */
 
-class MainModel implements MainContract.Model {
+class WelcomeModel implements WelcomeContract.Model {
     @Override
     public boolean isLogin() {
         return DBUtil.getLoginToken() != null;
@@ -30,10 +30,10 @@ class MainModel implements MainContract.Model {
     }
 
     @Override
-    public void register(String phone, String nickname, RxAppCompatActivity rxAppCompatActivity, Observer<HttpResult<User>> observer) {
+    public void register(String phone, String nickname, RxActivity rxActivity, Observer<HttpResult<User>> observer) {
         ApiUtil.getRegisterApi().register(DBUtil.getLoginToken(), phone, nickname)
                 .debounce(FILTER_TIMEOUT, TimeUnit.SECONDS)
-                .compose(rxAppCompatActivity.<HttpResult<User>>bindToLifecycle())
+                .compose(rxActivity.<HttpResult<User>>bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
@@ -41,10 +41,10 @@ class MainModel implements MainContract.Model {
     }
 
     @Override
-    public void login(String phone, RxAppCompatActivity rxAppCompatActivity, Observer<HttpResult<User>> observer) {
+    public void login(String phone, RxActivity rxActivity, Observer<HttpResult<User>> observer) {
         ApiUtil.getLoginApi().login(DBUtil.getLoginToken(), phone)
                 .debounce(FILTER_TIMEOUT, TimeUnit.SECONDS)
-                .compose(rxAppCompatActivity.<HttpResult<User>>bindToLifecycle())
+                .compose(rxActivity.<HttpResult<User>>bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())

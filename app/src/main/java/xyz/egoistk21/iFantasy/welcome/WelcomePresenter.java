@@ -1,8 +1,8 @@
-package xyz.egoistk21.iFantasy.main;
+package xyz.egoistk21.iFantasy.welcome;
 
 import android.util.Log;
 
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.trello.rxlifecycle2.components.RxActivity;
 
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.api.BasicCallback;
@@ -17,20 +17,20 @@ import xyz.egoistk21.iFantasy.util.ToastUtil;
  * Created by EGOISTK21 on 2018/3/22.
  */
 
-class MainPresenter implements MainContract.Presenter {
+class WelcomePresenter implements WelcomeContract.Presenter {
 
-    private static final String TAG = MainPresenter.class.getName();
+    private static final String TAG = WelcomePresenter.class.getName();
 
-    private MainContract.Model mModel;
-    private MainContract.View mView;
+    private WelcomeContract.Model mModel;
+    private WelcomeContract.View mView;
 
-    MainPresenter(MainContract.View view) {
+    WelcomePresenter(WelcomeContract.View view) {
         attachMV(view);
     }
 
     @Override
-    public void attachMV(MainContract.View view) {
-        mModel = new MainModel();
+    public void attachMV(WelcomeContract.View view) {
+        mModel = new WelcomeModel();
         mView = view;
     }
 
@@ -46,8 +46,8 @@ class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
-    public void register(String phone, String nickname, RxAppCompatActivity rxAppCompatActivity) {
-        mModel.register(phone, nickname, rxAppCompatActivity, new Observer<HttpResult<User>>() {
+    public void register(String phone, String nickname, RxActivity rxActivity) {
+        mModel.register(phone, nickname, rxActivity, new Observer<HttpResult<User>>() {
             @Override
             public void onSubscribe(Disposable d) {
                 Log.d(TAG, "onSubscribe");
@@ -89,8 +89,8 @@ class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
-    public void login(String phone, RxAppCompatActivity rxAppCompatActivity) {
-        mModel.login(phone, rxAppCompatActivity, new Observer<HttpResult<User>>() {
+    public void login(String phone, RxActivity rxActivity) {
+        mModel.login(phone, rxActivity, new Observer<HttpResult<User>>() {
             @Override
             public void onSubscribe(Disposable d) {
                 Log.d(TAG, "onSubscribe");

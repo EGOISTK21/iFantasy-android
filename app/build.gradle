@@ -16,6 +16,14 @@ realm {
 }
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'key0'
+            keyPassword '12345qwert'
+            storeFile file('/Users/EGOISTK21/Library/Mobile Documents/com~apple~CloudDocs/Android/iFantasy.jks')
+            storePassword '12345qwert'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "xyz.egoistk21.iFantasy"
@@ -32,9 +40,9 @@ android {
         }
 
         manifestPlaceholders = [
-                JPUSH_PKGNAME : applicationId,
+                JPUSH_PKGNAME: applicationId,
                 JPUSH_APPKEY : "0631605ea161b8920b99cb38", //JPush上注册的包名对应的appkey.
-                JPUSH_CHANNEL : "4ae7edac861bc7962c50b167", //暂时填写默认值即可.
+                JPUSH_CHANNEL: "4ae7edac861bc7962c50b167", //暂时填写默认值即可.
         ]
 
     }
@@ -42,6 +50,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.release
         }
     }
     productFlavors {
@@ -64,9 +76,12 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.11'
-    implementation 'cn.jiguang.sdk:jmessage:2.5.0'  // 此处以JMessage 2.5.0 版本为例。
-    implementation 'cn.jiguang.sdk:jpush:3.1.1'  // 此处以JPush 3.1.1 版本为例。
-    implementation 'cn.jiguang.sdk:jcore:1.1.9'  // 此处以JCore 1.1.9 版本为例。
+    implementation 'cn.jiguang.sdk:jmessage:2.5.0'
+    // 此处以JMessage 2.5.0 版本为例。
+    implementation 'cn.jiguang.sdk:jpush:3.1.1'
+    // 此处以JPush 3.1.1 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:1.1.9'
+    // 此处以JCore 1.1.9 版本为例。
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

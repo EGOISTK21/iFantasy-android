@@ -1,4 +1,4 @@
-package xyz.egoistk21.iFantasy.main;
+package xyz.egoistk21.iFantasy.welcome;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,20 +15,20 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseActivity;
-import xyz.egoistk21.iFantasy.game.GameActivity;
+import xyz.egoistk21.iFantasy.main.MainContainerActivity;
 import xyz.egoistk21.iFantasy.service.BGMService;
 import xyz.egoistk21.iFantasy.util.DBUtil;
 import xyz.egoistk21.iFantasy.util.ToastUtil;
 import xyz.egoistk21.iFantasy.util.UIUtil;
 import xyz.egoistk21.iFantasy.verify.VerifyActivity;
 
-public class MainActivity extends BaseActivity implements MainContract.View {
+public class WelcomeActivity extends BaseActivity implements WelcomeContract.View {
 
     public static final int REQUEST_VERIFY = 650;
     public static final int NEED_REGISTER = 350;
     public static final int START_LOGIN = 351;
 
-    private MainContract.Presenter mPresenter;
+    private WelcomeContract.Presenter mPresenter;
 
     @BindView(R.id.main_progress)
     ProgressBar mPB;
@@ -37,15 +37,15 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Override
     protected void initData() {
-        mPresenter = new MainPresenter(this);
-        Intent intent = new Intent(MainActivity.this, BGMService.class);
+        mPresenter = new WelcomePresenter(this);
+        Intent intent = new Intent(WelcomeActivity.this, BGMService.class);
         intent.putExtra("name", "cant_stop");
         startService(intent);
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_main;
+        return R.layout.activity_welcome;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @OnClick(R.id.btn_start)
     void start() {
         if (!mPresenter.isLogin()) {
-            Intent intent = new Intent(MainActivity.this, VerifyActivity.class);
+            Intent intent = new Intent(WelcomeActivity.this, VerifyActivity.class);
             startActivityForResult(intent, REQUEST_VERIFY);
         } else {
             startLogin();
@@ -95,9 +95,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     private void startRegister() {
-        final EditText editText = new EditText(MainActivity.this);
+        final EditText editText = new EditText(WelcomeActivity.this);
         editText.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        new AlertDialog.Builder(MainActivity.this)
+        new AlertDialog.Builder(WelcomeActivity.this)
                 .setTitle("请输入玩家昵称")
                 .setView(editText)
                 .setPositiveButton("确认", new DialogInterface.OnClickListener() {
@@ -106,7 +106,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         String phone = DBUtil.getUser().getPhone();
                         String nickname = editText.getEditableText().toString();
                         if (!TextUtils.isEmpty(nickname)) {
-                            mPresenter.register(phone, nickname, MainActivity.this);
+                            mPresenter.register(phone, nickname, WelcomeActivity.this);
                         } else {
                             ToastUtil.show("昵称不能为空");
                         }
@@ -116,12 +116,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     private void startLogin() {
         String phone = DBUtil.getUser().getPhone();
-        mPresenter.login(phone, MainActivity.this);
+        mPresenter.login(phone, WelcomeActivity.this);
     }
 
     @Override
     public void startGame() {
-        Intent intent = new Intent(MainActivity.this, GameActivity.class);
+        Intent intent = new Intent(WelcomeActivity.this, MainContainerActivity.class);
         startActivity(intent);
         finish();
     }

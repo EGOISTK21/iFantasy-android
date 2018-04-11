@@ -1,6 +1,6 @@
 package xyz.egoistk21.iFantasy.verify;
 
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.trello.rxlifecycle2.components.RxActivity;
 
 import io.reactivex.Observer;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
@@ -12,7 +12,7 @@ import xyz.egoistk21.iFantasy.bean.User;
 
 interface VerifyContract {
     interface Model {
-        void login(String phone, String zone, String code, RxAppCompatActivity rxAppCompatActivity, Observer<HttpResult<User>> observer);
+        void login(String phone, String zone, String code, RxActivity rxActivity, Observer<HttpResult<User>> observer);
     }
 
     interface View {
@@ -34,6 +34,6 @@ interface VerifyContract {
 
         void detachMV();
 
-        void login(String phone, String zone, String code, RxAppCompatActivity rxAppCompatActivity);
+        void login(String phone, String zone, String code, RxActivity rxActivity);
     }
 }

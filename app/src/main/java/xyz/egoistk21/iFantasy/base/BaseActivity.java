@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.trello.rxlifecycle2.components.RxActivity;
 
 import butterknife.ButterKnife;
 
@@ -13,22 +13,9 @@ import butterknife.ButterKnife;
  * Created by EGOISTK21 on 2018/3/22.
  */
 
-public abstract class BaseActivity extends RxAppCompatActivity {
+public abstract class BaseActivity extends RxActivity {
 
     protected String TAG = getClass().getName();
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.i(TAG, "onCreate");
-        super.onCreate(savedInstanceState);
-        initData();
-        setContentView(getLayoutId());
-        ButterKnife.bind(this);
-        initView();
-        initEvent();
-    }
-
-    protected abstract void initData();
 
     protected abstract int getLayoutId();
 
@@ -36,7 +23,20 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
     protected abstract void initEvent();
 
+    protected abstract void initData();
+
     protected abstract void onDetachP();
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.i(TAG, "onCreate");
+        super.onCreate(savedInstanceState);
+        setContentView(getLayoutId());
+        ButterKnife.bind(this);
+        initView();
+        initEvent();
+        initData();
+    }
 
     @Override
     protected void onRestart() {

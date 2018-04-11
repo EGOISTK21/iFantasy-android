@@ -36,7 +36,7 @@
         <service android:name=".service.BGMService"/>
 
         <activity
-            android:name=".main.MainActivity"
+            android:name=".welcome.WelcomeActivity"
             android:screenOrientation="landscape">
 
             <intent-filter>
@@ -51,7 +51,7 @@
             android:theme="@style/loginTheme"/>
 
         <activity
-            android:name=".game.GameActivity"
+            android:name=".main.MainContainerActivity"
             android:screenOrientation="landscape">
 
         </activity>

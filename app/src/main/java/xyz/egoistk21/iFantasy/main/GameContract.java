@@ -1,4 +1,4 @@
-package xyz.egoistk21.iFantasy.game;
+package xyz.egoistk21.iFantasy.main;
 
 interface GameContract {
     interface Model {
