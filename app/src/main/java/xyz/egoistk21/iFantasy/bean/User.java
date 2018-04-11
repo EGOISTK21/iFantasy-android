@@ -65,7 +65,7 @@ public class User extends RealmObject implements Parcelable {
         return money;
     }
 
-    public int getViplevel() {
+    public int getVipLevel() {
         return viplevel;
     }
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background">
@@ -7,17 +8,75 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="54dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/head">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true">
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civ_avatar"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/avatar"
+                app:civ_border_color="@color/smssdk_black"
+                app:civ_border_width="2dp" />
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:text="一茬散人"
+                    android:textColor="@color/smssdk_white" />
+
+                <TextView
+                    android:id="@+id/tv_lv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_nickname"
+                    android:text="Lv"
+                    android:textColor="@color/smssdk_white" />
+
+                <TextView
+                    android:id="@+id/tv_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_nickname"
+                    android:layout_toEndOf="@id/tv_lv"
+                    android:text="18"
+                    android:textColor="@color/smssdk_white" />
+
+                <TextView
+                    android:id="@+id/tv_vip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_nickname"
+                    android:layout_marginStart="4dp"
+                    android:layout_toEndOf="@id/tv_level"
+                    android:text="Vip"
+                    android:textColor="@color/smssdk_white" />
+
+                <TextView
+                    android:id="@+id/tv_vip_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_nickname"
+                    android:layout_toEndOf="@id/tv_vip"
+                    android:text="0"
+                    android:textColor="@color/smssdk_white" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 
@@ -27,8 +86,25 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="180dp"
-            android:background="@drawable/frame">
+            android:layout_marginStart="200dp"
+            android:background="@drawable/frame"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="球队战力"
+                android:textColor="@color/smssdk_white" />
+
+            <TextView
+                android:id="@+id/tv_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="750"
+                android:textColor="@color/smssdk_white" />
 
         </LinearLayout>
 
@@ -38,7 +114,35 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="180dp"
-            android:background="@drawable/frame">
+            android:background="@drawable/frame"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="资金"
+                android:textColor="@color/smssdk_white" />
+
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="1000"
+                android:textColor="@color/smssdk_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="万"
+                android:textColor="@color/smssdk_white" />
+
+            <View
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/plus" />
 
         </LinearLayout>
 
@@ -47,20 +151,37 @@
             android:layout_height="28dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="28dp"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:background="@drawable/settings" />
 
     </RelativeLayout>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="264dp"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:background="@drawable/board">
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:text="排行榜"
+            android:textColor="@color/smssdk_white" />
+
+        <View
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/arrow" />
+
+    </RelativeLayout>
 
 
     <LinearLayout
