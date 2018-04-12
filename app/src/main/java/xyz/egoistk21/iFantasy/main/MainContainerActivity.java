@@ -3,6 +3,7 @@ package xyz.egoistk21.iFantasy.main;
 import cn.jpush.android.api.JPushInterface;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseActivity;
+import xyz.egoistk21.iFantasy.main.home.HomeFragment;
 import xyz.egoistk21.iFantasy.util.UIUtil;
 
 public class MainContainerActivity extends BaseActivity {
@@ -16,8 +17,8 @@ public class MainContainerActivity extends BaseActivity {
     protected void initView() {
         getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.container_main, GameFragment.newInstance())
-                .addToBackStack("main")
+                .replace(R.id.container_main, HomeFragment.newInstance())
+                .addToBackStack("home")
                 .commit();
     }
 

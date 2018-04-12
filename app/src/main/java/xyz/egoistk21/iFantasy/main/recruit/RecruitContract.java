@@ -1,6 +1,6 @@
-package xyz.egoistk21.iFantasy.main;
+package xyz.egoistk21.iFantasy.main.recruit;
 
-interface GameContract {
+interface RecruitContract {
     interface Model {
     }
 

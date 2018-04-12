@@ -1,16 +1,18 @@
-package xyz.egoistk21.iFantasy.main;
+package xyz.egoistk21.iFantasy.main.home;
 
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseFragment;
+import xyz.egoistk21.iFantasy.main.recruit.RecruitFragment;
 import xyz.egoistk21.iFantasy.util.DBUtil;
 
-public class GameFragment extends BaseFragment implements GameContract.View {
+public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @BindView(R.id.game_progress)
     ProgressBar mPB;
@@ -27,15 +29,15 @@ public class GameFragment extends BaseFragment implements GameContract.View {
     @BindView(R.id.tv_money)
     TextView tvMoney;
 
-    private GameContract.Presenter mPresenter;
+    private HomeContract.Presenter mPresenter;
 
-    public static GameFragment newInstance() {
-        return new GameFragment();
+    public static HomeFragment newInstance() {
+        return new HomeFragment();
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_game;
+        return R.layout.fragment_home;
     }
 
     @Override
@@ -46,13 +48,22 @@ public class GameFragment extends BaseFragment implements GameContract.View {
     protected void initEvent() {
     }
 
+    @OnClick(R.id.v_recruit)
+    void recruit() {
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container_main, RecruitFragment.newInstance())
+                .addToBackStack("recruit")
+                .commit();
+    }
+
     @Override
     protected void lazyFetchData() {
         tvNickname.setText(DBUtil.getUser().getNickname());
         tvLevel.setText(String.valueOf(DBUtil.getUser().getLevel()));
         tvVipLevel.setText(String.valueOf(DBUtil.getUser().getVipLevel()));
         tvMoney.setText(String.valueOf(DBUtil.getUser().getMoney()));
-        mPresenter = new GamePresenter(GameFragment.this);
+        mPresenter = new HomePresenter(HomeFragment.this);
     }
 
     @Override
