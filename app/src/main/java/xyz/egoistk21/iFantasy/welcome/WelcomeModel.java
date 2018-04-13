@@ -1,5 +1,6 @@
 package xyz.egoistk21.iFantasy.welcome;
 
+import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.components.RxActivity;
 
 import java.util.concurrent.TimeUnit;
@@ -30,10 +31,10 @@ class WelcomeModel implements WelcomeContract.Model {
     }
 
     @Override
-    public void register(String phone, String nickname, RxActivity rxActivity, Observer<HttpResult<User>> observer) {
+    public void register(String phone, String nickname, LifecycleProvider rxLifecycle, Observer<HttpResult<User>> observer) {
         ApiUtil.getRegisterApi().register(DBUtil.getLoginToken(), phone, nickname)
                 .debounce(FILTER_TIMEOUT, TimeUnit.SECONDS)
-                .compose(rxActivity.<HttpResult<User>>bindToLifecycle())
+                .compose(rxLifecycle.<HttpResult<User>>bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
@@ -41,10 +42,10 @@ class WelcomeModel implements WelcomeContract.Model {
     }
 
     @Override
-    public void login(String phone, RxActivity rxActivity, Observer<HttpResult<User>> observer) {
+    public void login(String phone, LifecycleProvider rxLifecycle, Observer<HttpResult<User>> observer) {
         ApiUtil.getLoginApi().login(DBUtil.getLoginToken(), phone)
                 .debounce(FILTER_TIMEOUT, TimeUnit.SECONDS)
-                .compose(rxActivity.<HttpResult<User>>bindToLifecycle())
+                .compose(rxLifecycle.<HttpResult<User>>bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())

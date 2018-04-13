@@ -2,7 +2,7 @@ package xyz.egoistk21.iFantasy.welcome;
 
 import android.util.Log;
 
-import com.trello.rxlifecycle2.components.RxActivity;
+import com.trello.rxlifecycle2.LifecycleProvider;
 
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.api.BasicCallback;
@@ -46,8 +46,8 @@ class WelcomePresenter implements WelcomeContract.Presenter {
     }
 
     @Override
-    public void register(String phone, String nickname, RxActivity rxActivity) {
-        mModel.register(phone, nickname, rxActivity, new Observer<HttpResult<User>>() {
+    public void register(String phone, String nickname, LifecycleProvider rxLifecycle) {
+        mModel.register(phone, nickname, rxLifecycle, new Observer<HttpResult<User>>() {
             @Override
             public void onSubscribe(Disposable d) {
                 Log.d(TAG, "onSubscribe");
@@ -89,8 +89,8 @@ class WelcomePresenter implements WelcomeContract.Presenter {
     }
 
     @Override
-    public void login(String phone, RxActivity rxActivity) {
-        mModel.login(phone, rxActivity, new Observer<HttpResult<User>>() {
+    public void login(String phone, LifecycleProvider rxLifecycle) {
+        mModel.login(phone, rxLifecycle, new Observer<HttpResult<User>>() {
             @Override
             public void onSubscribe(Disposable d) {
                 Log.d(TAG, "onSubscribe");

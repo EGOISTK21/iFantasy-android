@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background">
@@ -38,7 +39,6 @@
                 android:textColor="@color/smssdk_white"
                 android:textSize="24sp"
                 android:textStyle="bold" />
-
 
         </LinearLayout>
 
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/head_recruit"
+        android:layout_below="@+id/head_recruit"
         android:layout_centerVertical="true"
         android:layout_margin="32dp"
         android:orientation="horizontal">
@@ -163,7 +163,6 @@
                     android:textColor="@color/smssdk_white"
                     android:textSize="12sp" />
 
-
             </LinearLayout>
 
         </LinearLayout>
@@ -187,6 +186,70 @@
                 android:text="定向招募"
                 android:textColor="@color/smssdk_white"
                 android:textSize="20sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tbl_recruit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/sp_recruit"
+                    app:tabSelectedTextColor="@color/smssdk_white"
+                    app:tabTextColor="@color/smssdk_white">
+
+                    <android.support.design.widget.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ALL" />
+
+                    <android.support.design.widget.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="C" />
+
+                    <android.support.design.widget.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PF" />
+
+                    <android.support.design.widget.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SF"
+                        app:tabSelectedTextColor="@color/smssdk_white"
+                        app:tabTextColor="@color/smssdk_white" />
+
+                    <android.support.design.widget.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SG" />
+
+                    <android.support.design.widget.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PG" />
+
+                </android.support.design.widget.TabLayout>
+
+                <Spinner
+                    android:id="@+id/sp_recruit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/vp_recruit"
+                    android:layout_alignParentEnd="true"
+                    android:entries="@array/classify" />
+
+                <xyz.egoistk21.iFantasy.widget.NoScrollViewPager
+                    android:id="@+id/vp_recruit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@+id/tbl_recruit" />
+
+            </RelativeLayout>
 
 
         </LinearLayout>

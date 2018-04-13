@@ -1,5 +1,6 @@
 package xyz.egoistk21.iFantasy.verify;
 
+import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.components.RxActivity;
 
 import java.util.concurrent.TimeUnit;
@@ -20,10 +21,10 @@ import static xyz.egoistk21.iFantasy.util.ApiUtil.FILTER_TIMEOUT;
 class VerifyModel implements VerifyContract.Model {
 
     @Override
-    public void login(String phone, String zone, String code, RxActivity rxActivity, Observer<HttpResult<User>> observer) {
+    public void login(String phone, String zone, String code, LifecycleProvider rxLifecycle, Observer<HttpResult<User>> observer) {
         ApiUtil.getVerifyCodeAPI().verify(phone, zone, code)
                 .debounce(FILTER_TIMEOUT, TimeUnit.SECONDS)
-                .compose(rxActivity.<HttpResult<User>>bindToLifecycle())
+                .compose(rxLifecycle.<HttpResult<User>>bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())

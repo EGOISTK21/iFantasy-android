@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.trello.rxlifecycle2.components.RxActivity;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;
 
@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
  * Created by EGOISTK21 on 2018/3/22.
  */
 
-public abstract class BaseActivity extends RxActivity {
+public abstract class BaseActivity extends RxAppCompatActivity {
 
     protected String TAG = getClass().getName();
 

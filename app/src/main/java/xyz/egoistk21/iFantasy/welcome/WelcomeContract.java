@@ -1,6 +1,6 @@
 package xyz.egoistk21.iFantasy.welcome;
 
-import com.trello.rxlifecycle2.components.RxActivity;
+import com.trello.rxlifecycle2.LifecycleProvider;
 
 import io.reactivex.Observer;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
@@ -16,9 +16,9 @@ interface WelcomeContract {
 
         boolean isOnline();
 
-        void register(String phone, String nickname, RxActivity rxActivity, Observer<HttpResult<User>> observer);
+        void register(String phone, String nickname, LifecycleProvider rxLifecycle, Observer<HttpResult<User>> observer);
 
-        void login(String phone, RxActivity rxActivity, Observer<HttpResult<User>> observer);
+        void login(String phone, LifecycleProvider rxLifecycle, Observer<HttpResult<User>> observer);
     }
 
     interface View {
@@ -36,8 +36,8 @@ interface WelcomeContract {
 
         boolean isLogin();
 
-        void register(String phone, String nickname, RxActivity rxActivity);
+        void register(String phone, String nickname, LifecycleProvider rxLifecycle);
 
-        void login(String phone, RxActivity rxActivity);
+        void login(String phone, LifecycleProvider rxLifecycle);
     }
 }

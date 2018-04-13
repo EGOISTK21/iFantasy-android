@@ -1,5 +1,7 @@
 package xyz.egoistk21.iFantasy.main;
 
+import android.view.KeyEvent;
+
 import cn.jpush.android.api.JPushInterface;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseActivity;
@@ -15,7 +17,7 @@ public class MainContainerActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        getFragmentManager()
+        getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container_main, HomeFragment.newInstance())
                 .addToBackStack("home")
@@ -41,5 +43,13 @@ public class MainContainerActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         UIUtil.hideNav(this);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return true;// return true;拦截事件传递,从而屏蔽back键。
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

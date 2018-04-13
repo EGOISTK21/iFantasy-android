@@ -2,7 +2,7 @@ package xyz.egoistk21.iFantasy.verify;
 
 import android.util.Log;
 
-import com.trello.rxlifecycle2.components.RxActivity;
+import com.trello.rxlifecycle2.LifecycleProvider;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -39,8 +39,8 @@ class VerifyPresenter implements VerifyContract.Presenter {
     }
 
     @Override
-    public void login(String phone, String zone, String code, RxActivity rxActivity) {
-        mModel.login(phone, zone, code, rxActivity, new Observer<HttpResult<User>>() {
+    public void login(String phone, String zone, String code, LifecycleProvider rxLifecycle) {
+        mModel.login(phone, zone, code, rxLifecycle, new Observer<HttpResult<User>>() {
             @Override
             public void onSubscribe(Disposable d) {
                 Log.d(TAG, "onSubscribe");

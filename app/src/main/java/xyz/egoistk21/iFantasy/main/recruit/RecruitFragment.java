@@ -1,5 +1,9 @@
 package xyz.egoistk21.iFantasy.main.recruit;
 
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -7,11 +11,17 @@ import butterknife.OnClick;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseFragment;
 import xyz.egoistk21.iFantasy.util.DBUtil;
+import xyz.egoistk21.iFantasy.widget.GalleryFragment;
+import xyz.egoistk21.iFantasy.widget.NoScrollViewPager;
 
 public class RecruitFragment extends BaseFragment implements RecruitContract.View {
 
     @BindView(R.id.tv_money)
     TextView tvMoney;
+    @BindView(R.id.tbl_recruit)
+    TabLayout tblRecruit;
+    @BindView(R.id.vp_recruit)
+    NoScrollViewPager vpRecruit;
 
     public static RecruitFragment newInstance() {
         return new RecruitFragment();
@@ -24,12 +34,47 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
 
     @Override
     protected void initView() {
+        vpRecruit.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
 
+            private CharSequence[] titles = new CharSequence[]{
+                    "ALL",
+                    "C",
+                    "PF",
+                    "SF",
+                    "SG",
+                    "PG",
+            };
+
+            private Fragment[] fragments = new Fragment[]{
+                    GalleryFragment.newInstance(),
+                    GalleryFragment.newInstance(),
+                    GalleryFragment.newInstance(),
+                    GalleryFragment.newInstance(),
+                    GalleryFragment.newInstance(),
+                    GalleryFragment.newInstance(),
+            };
+
+            @Override
+            public Fragment getItem(int position) {
+                return fragments[position];
+            }
+
+            @Override
+            public int getCount() {
+                return 6;
+            }
+
+            @Nullable
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return titles[position];
+            }
+        });
     }
 
     @Override
     protected void initEvent() {
-
+        tblRecruit.setupWithViewPager(vpRecruit);
     }
 
     @OnClick(R.id.tv_back)
