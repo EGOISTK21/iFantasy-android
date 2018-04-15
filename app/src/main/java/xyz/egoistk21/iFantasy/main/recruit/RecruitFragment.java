@@ -1,5 +1,6 @@
 package xyz.egoistk21.iFantasy.main.recruit;
 
+import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,8 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
     @BindView(R.id.vp_recruit)
     NoScrollViewPager vpRecruit;
 
+    private Context mContext;
+
     public static RecruitFragment newInstance() {
         return new RecruitFragment();
     }
@@ -34,6 +37,7 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
 
     @Override
     protected void initView() {
+        mContext = getContext();
         vpRecruit.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
 
             private CharSequence[] titles = new CharSequence[]{
