@@ -1,5 +1,6 @@
 package xyz.egoistk21.iFantasy.util;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -9,10 +10,15 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
+import xyz.egoistk21.iFantasy.bean.RawPlayer;
+import xyz.egoistk21.iFantasy.bean.RecruitInfo;
+import xyz.egoistk21.iFantasy.bean.RecruitResult;
 import xyz.egoistk21.iFantasy.bean.User;
 
 /**
@@ -89,5 +95,48 @@ public class ApiUtil {
 //    public static TestOnlineApi getTestOnlineApi() {
 //        return sRetrofit.create(TestOnlineApi.class);
 //    }
+
+    public interface RecruitInfoApi {
+        @Headers("User-Agent:iFantasy-android")
+        @GET("recruit/get_recruit_info")
+        Observable<HttpResult<RecruitInfo>> getRecruitInfo(@Query("user_id") int user_id);
+    }
+
+    public static RecruitInfoApi getRecruitInfoApi() {
+        return sRetrofit.create(RecruitInfoApi.class);
+    }
+
+    public interface OneRecruitApi {
+        @Headers("User-Agent:iFantasy-android")
+        @POST("recruit/one_recruit")
+        @FormUrlEncoded
+        Observable<HttpResult<RecruitResult>> recruitOne(@Field("user_id") int user_id);
+    }
+
+    public static OneRecruitApi getOneRecruitApi() {
+        return sRetrofit.create(OneRecruitApi.class);
+    }
+
+    public interface FiveRecruitApi {
+        @Headers("User-Agent:iFantasy-android")
+        @POST("recruit/five_recruit")
+        @FormUrlEncoded
+        Observable<HttpResult<ArrayList<RecruitResult>>> recruitFive(@Field("user_id") int user_id);
+    }
+
+    public static FiveRecruitApi getFiveRecruitApi() {
+        return sRetrofit.create(FiveRecruitApi.class);
+    }
+
+    public interface RecruitShowPlayerApi {
+        @Headers("User-Agent:iFantasy-android")
+        @GET("recruit/show_all_payer")
+        Observable<HttpResult<ArrayList<RawPlayer>>> showPlayer(@Query("pos") int position,
+                                                                @Query("type") int type);
+    }
+
+    public static RecruitShowPlayerApi getRecruitShowPlayerApi() {
+        return sRetrofit.create(RecruitShowPlayerApi.class);
+    }
 
 }

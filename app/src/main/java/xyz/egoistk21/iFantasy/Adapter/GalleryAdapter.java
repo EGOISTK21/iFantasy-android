@@ -14,16 +14,16 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.egoistk21.iFantasy.R;
-import xyz.egoistk21.iFantasy.bean.Player;
+import xyz.egoistk21.iFantasy.bean.RawPlayer;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder> {
 
     private Context mContext;
-    private List<Player> mPlayers;
+    private List<RawPlayer> mRawPlayers;
 
-    public GalleryAdapter(Context context, List<Player> players) {
+    public GalleryAdapter(Context context, List<RawPlayer> players) {
         mContext = context;
-        mPlayers = players;
+        mRawPlayers = players;
     }
 
     @NonNull
@@ -37,12 +37,12 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
 
     @Override
     public void onBindViewHolder(@NonNull GalleryViewHolder holder, int position) {
-        holder.setData(mPlayers.get(position));
+        holder.setData(mRawPlayers.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mPlayers.size();
+        return mRawPlayers.size();
     }
 
     class GalleryViewHolder extends RecyclerView.ViewHolder {
@@ -59,8 +59,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
             ButterKnife.bind(this, itemView);
         }
 
-        private void setData(Player player) {
-            tvPlayer.setText(player.getName());
+        private void setData(RawPlayer rawPlayer) {
+            tvPlayer.setText(rawPlayer.getName());
         }
     }
 }

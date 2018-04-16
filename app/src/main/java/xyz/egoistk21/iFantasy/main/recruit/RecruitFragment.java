@@ -1,6 +1,5 @@
 package xyz.egoistk21.iFantasy.main.recruit;
 
-import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -24,7 +23,7 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
     @BindView(R.id.vp_recruit)
     NoScrollViewPager vpRecruit;
 
-    private Context mContext;
+    private RecruitContract.Presenter mPresenter;
 
     public static RecruitFragment newInstance() {
         return new RecruitFragment();
@@ -37,7 +36,6 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
 
     @Override
     protected void initView() {
-        mContext = getContext();
         vpRecruit.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
 
             private CharSequence[] titles = new CharSequence[]{
@@ -88,12 +86,16 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
 
     @Override
     protected void lazyFetchData() {
+        mPresenter = new RecruitPresenter(this);
+        mPresenter.getRecruitInfo(DBUtil.getUser().getId(), this);
+        mPresenter.getPlayers(0, 0, this);
         tvMoney.setText(String.valueOf(DBUtil.getUser().getMoney()));
+
     }
 
     @Override
     protected void onDetachP() {
-
+        mPresenter.detachMV();
     }
 
     @Override
