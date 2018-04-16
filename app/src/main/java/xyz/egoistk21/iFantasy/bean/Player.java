@@ -14,6 +14,9 @@ public class Player extends RealmObject implements Parcelable {
     private int score;
     private String price;
 
+    public Player() {
+
+    }
 
     public int getId() {
         return id;
