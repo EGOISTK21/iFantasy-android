@@ -64,13 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="1000"
-                android:textColor="@color/smssdk_white" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="万"
+                android:text="%万"
                 android:textColor="@color/smssdk_white" />
 
             <View
@@ -115,23 +109,35 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_one_recruit_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="免费"
+                    android:textColor="@color/smssdk_white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_one_recruit_msg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:text="再招募2次，必得评分70+的球员"
+                    android:text="@string/one_recruit"
                     android:textColor="@color/smssdk_white"
                     android:textSize="12sp" />
 
                 <Button
+                    android:id="@+id/btn_lucky_recruit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="招募1次" />
 
                 <TextView
+                    android:id="@+id/tv_one_recruit_cost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -150,6 +156,7 @@
                     android:textSize="12sp" />
 
                 <Button
+                    android:id="@+id/btn_penta_lucky_recruit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="招募5次" />
@@ -250,7 +257,6 @@
                     android:layout_below="@+id/tbl_recruit" />
 
             </RelativeLayout>
-
 
         </LinearLayout>
 

@@ -5,7 +5,14 @@
     <string name="prompt_phone">手机号码</string>
     <string name="get_code">获取验证码</string>
     <string name="prompt_code">验证码</string>
+    <string name="verify_wait">"验证码已发送至%s，%2ds后可再次获取"</string>
+    <string name="verify_resend">""验证码已发送至%s，重新获取"</string>
     <string name="login">登录</string>
     <string name="resend">重试</string>
     <string name="app_version">v1.0.0</string>
+    <string name="one_recruit">再招募%d次，必得评分70+的球员</string>
+    <string name="level">Lv%d</string>
+    <string name="vip_level">Vip%d</string>
+    <string name="money">%d万</string>
+    <string name="one_recruit_time">%s之后免费</string>
 </resources>

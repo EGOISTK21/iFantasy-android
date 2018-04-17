@@ -41,30 +41,11 @@
                     android:textColor="@color/smssdk_white" />
 
                 <TextView
-                    android:id="@+id/tv_lv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_nickname"
-                    android:text="Lv"
-                    android:textColor="@color/smssdk_white" />
-
-                <TextView
                     android:id="@+id/tv_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_nickname"
-                    android:layout_toEndOf="@id/tv_lv"
-                    android:text="18"
-                    android:textColor="@color/smssdk_white" />
-
-                <TextView
-                    android:id="@+id/tv_vip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_nickname"
-                    android:layout_marginStart="4dp"
-                    android:layout_toEndOf="@id/tv_level"
-                    android:text="Vip"
+                    android:text="@string/level"
                     android:textColor="@color/smssdk_white" />
 
                 <TextView
@@ -72,8 +53,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_nickname"
-                    android:layout_toEndOf="@id/tv_vip"
-                    android:text="0"
+                    android:layout_marginStart="4dp"
+                    android:layout_toEndOf="@id/tv_level"
+                    android:text="@string/vip_level"
                     android:textColor="@color/smssdk_white" />
 
             </RelativeLayout>
@@ -130,13 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="1000"
-                android:textColor="@color/smssdk_white" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="万"
+                android:text="@string/money"
                 android:textColor="@color/smssdk_white" />
 
             <View

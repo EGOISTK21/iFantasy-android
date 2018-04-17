@@ -30,11 +30,6 @@ import xyz.egoistk21.iFantasy.welcome.WelcomeActivity;
 
 public class VerifyActivity extends BaseActivity implements VerifyContract.View {
 
-    private boolean isPhoneChanged, isCounting, isDisplayPhoneForm;
-    private String phone, code;
-    private TimeCounter timeCounter;
-    private VerifyContract.Presenter mPresenter;
-
     @BindView(R.id.verify_progress)
     ProgressBar mPB;
     @BindView(R.id.ll_phone_verify_form)
@@ -52,14 +47,10 @@ public class VerifyActivity extends BaseActivity implements VerifyContract.View 
     @BindView(R.id.tv_resend)
     TextView tvResend;
 
-    @Override
-    protected void initData() {
-        isPhoneChanged = true;
-        isCounting = false;
-        isDisplayPhoneForm = true;
-        timeCounter = new TimeCounter(60000, 1000);
-        mPresenter = new VerifyPresenter(this);
-    }
+    private boolean isPhoneChanged, isCounting, isDisplayPhoneForm;
+    private String phone, code;
+    private TimeCounter timeCounter;
+    private VerifyContract.Presenter mPresenter;
 
     @Override
     protected int getLayoutId() {
@@ -125,6 +116,15 @@ public class VerifyActivity extends BaseActivity implements VerifyContract.View 
     }
 
     @Override
+    protected void initData() {
+        isPhoneChanged = true;
+        isCounting = false;
+        isDisplayPhoneForm = true;
+        timeCounter = new TimeCounter(60000, 1000);
+        mPresenter = new VerifyPresenter(this);
+    }
+
+    @Override
     public void go2CodeView() {
         UIUtil.slideOutToLeft(VerifyActivity.this, llPhoneLogin);
         llPhoneLogin.setVisibility(View.GONE);
@@ -159,6 +159,11 @@ public class VerifyActivity extends BaseActivity implements VerifyContract.View 
     }
 
     @Override
+    protected void onDetachP() {
+        mPresenter.detachMV();
+    }
+
+    @Override
     public void showPB() {
         mPB.setVisibility(View.VISIBLE);
     }
@@ -180,11 +185,6 @@ public class VerifyActivity extends BaseActivity implements VerifyContract.View 
         finish();
     }
 
-    @Override
-    protected void onDetachP() {
-        mPresenter.detachMV();
-    }
-
     private class TimeCounter extends CountDownTimer {
 
         TimeCounter(long millisInFuture, long countDownInterval) {
@@ -193,7 +193,7 @@ public class VerifyActivity extends BaseActivity implements VerifyContract.View 
 
         @Override
         public void onTick(long millisUntilFinished) {
-            Spannable spannable = new SpannableString(String.format("验证码已发送至%s，%2ds后可再次获取", phone, millisUntilFinished / 1000));
+            Spannable spannable = new SpannableString(String.format(getResources().getString(R.string.verify_wait), phone, millisUntilFinished / 1000));
             spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(VerifyActivity.this,
                     R.color.colorPrimaryDark)), 19, 22, Spanned.SPAN_POINT_MARK);
             tvResend.setText(spannable);
@@ -201,7 +201,7 @@ public class VerifyActivity extends BaseActivity implements VerifyContract.View 
 
         @Override
         public void onFinish() {
-            Spannable spannable = new SpannableString("验证码已发送至" + phone + "，重新获取");
+            Spannable spannable = new SpannableString(String.format(getResources().getString(R.string.verify_resend), phone));
             spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(VerifyActivity.this,
                     R.color.colorPrimaryDark)), 19, 23, Spanned.SPAN_POINT_MARK);
             tvResend.setText(spannable);

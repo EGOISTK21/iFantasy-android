@@ -19,6 +19,7 @@ import xyz.egoistk21.iFantasy.bean.HttpResult;
 import xyz.egoistk21.iFantasy.bean.RawPlayer;
 import xyz.egoistk21.iFantasy.bean.RecruitInfo;
 import xyz.egoistk21.iFantasy.bean.RecruitResult;
+import xyz.egoistk21.iFantasy.bean.RecruitedPlayer;
 import xyz.egoistk21.iFantasy.bean.User;
 
 /**
@@ -106,37 +107,61 @@ public class ApiUtil {
         return sRetrofit.create(RecruitInfoApi.class);
     }
 
-    public interface OneRecruitApi {
+    public interface LuckyRecruitApi {
         @Headers("User-Agent:iFantasy-android")
         @POST("recruit/one_recruit")
         @FormUrlEncoded
-        Observable<HttpResult<RecruitResult>> recruitOne(@Field("user_id") int user_id);
+        Observable<HttpResult<RecruitResult>> recruit(@Field("user_id") int user_id);
     }
 
-    public static OneRecruitApi getOneRecruitApi() {
-        return sRetrofit.create(OneRecruitApi.class);
+    public static LuckyRecruitApi getLuckyRecruitApi() {
+        return sRetrofit.create(LuckyRecruitApi.class);
     }
 
-    public interface FiveRecruitApi {
+    public interface PentaLuckyRecruitApi {
         @Headers("User-Agent:iFantasy-android")
         @POST("recruit/five_recruit")
         @FormUrlEncoded
-        Observable<HttpResult<ArrayList<RecruitResult>>> recruitFive(@Field("user_id") int user_id);
+        Observable<HttpResult<ArrayList<RecruitResult>>> recruit(@Field("user_id") int userId);
     }
 
-    public static FiveRecruitApi getFiveRecruitApi() {
-        return sRetrofit.create(FiveRecruitApi.class);
+    public static PentaLuckyRecruitApi getPentaLuckyRecruitApi() {
+        return sRetrofit.create(PentaLuckyRecruitApi.class);
     }
 
-    public interface RecruitShowPlayerApi {
+    public interface RecruitShowRawPlayerApi {
         @Headers("User-Agent:iFantasy-android")
         @GET("recruit/show_all_payer")
         Observable<HttpResult<ArrayList<RawPlayer>>> showPlayer(@Query("pos") int position,
                                                                 @Query("type") int type);
     }
 
-    public static RecruitShowPlayerApi getRecruitShowPlayerApi() {
-        return sRetrofit.create(RecruitShowPlayerApi.class);
+    public static RecruitShowRawPlayerApi getRecruitShowRawPlayerApi() {
+        return sRetrofit.create(RecruitShowRawPlayerApi.class);
+    }
+
+    public interface DirectRecruitApi {
+        @Headers("User-Agent:iFantasy-android")
+        @POST("recruit/recruit")
+        @FormUrlEncoded
+        Observable<HttpResult<RecruitedPlayer>> recruit(@Field("user_id") int userId,
+                                                        @Field("player_id") int playerId);
+    }
+
+    public static DirectRecruitApi getDirectRecruitApi() {
+        return sRetrofit.create(DirectRecruitApi.class);
+    }
+
+    public interface TripleDirectRecruitApi {
+        @Headers("User-Agent:iFantasy-android")
+        @POST("recruit/buy_theme")
+        @FormUrlEncoded
+        Observable<HttpResult<ArrayList<RecruitedPlayer>>> recruit(@Field("user_id") int userId,
+                                                                   @Field("theme_id") int themeId);
+    }
+
+    public static TripleDirectRecruitApi getTripleDirectRecruitApi() {
+        return sRetrofit.create(TripleDirectRecruitApi.class);
     }
 
 }
