@@ -38,9 +38,13 @@ public class GalleryFragment extends BaseFragment implements GalleryContract.Vie
     }
 
     @Override
-    protected void lazyFetchData() {
+    protected void initData() {
         pos = getArguments() != null ? getArguments().getInt("pos") : 0;
-        mPresenter = new GalleryPresenter(this);
+        mPresenter = GalleryPresenter.getInstance(pos, this);
+    }
+
+    @Override
+    protected void lazyFetchData() {
         mPresenter.getRawPlayers(pos, 0, this);
     }
 
@@ -51,7 +55,7 @@ public class GalleryFragment extends BaseFragment implements GalleryContract.Vie
 
     @Override
     protected void onDetachP() {
-        mPresenter.detachMV();
+        mPresenter.detachMV(pos);
     }
 
     @Override

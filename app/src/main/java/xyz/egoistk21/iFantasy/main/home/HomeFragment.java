@@ -58,6 +58,11 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     }
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     protected void lazyFetchData() {
         tvNickname.setText(DBUtil.getUser().getNickname());
         tvLevel.setText(String.format(getResources().getString(R.string.level), DBUtil.getUser().getLevel()));

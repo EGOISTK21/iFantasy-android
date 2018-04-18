@@ -27,21 +27,11 @@ public class WelcomeActivity extends BaseActivity implements WelcomeContract.Vie
     public static final int REQUEST_VERIFY = 650;
     public static final int NEED_REGISTER = 350;
     public static final int START_LOGIN = 351;
-
-    private WelcomeContract.Presenter mPresenter;
-
     @BindView(R.id.main_progress)
     ProgressBar mPB;
     @BindView(R.id.btn_start)
     Button btnStart;
-
-    @Override
-    protected void initData() {
-        mPresenter = new WelcomePresenter(this);
-        Intent intent = new Intent(WelcomeActivity.this, BGMService.class);
-        intent.putExtra("name", "cant_stop");
-        startService(intent);
-    }
+    private WelcomeContract.Presenter mPresenter;
 
     @Override
     protected int getLayoutId() {
@@ -71,6 +61,14 @@ public class WelcomeActivity extends BaseActivity implements WelcomeContract.Vie
         } else {
             startLogin();
         }
+    }
+
+    @Override
+    protected void initData() {
+        mPresenter = new WelcomePresenter(this);
+        Intent intent = new Intent(this, BGMService.class);
+        intent.putExtra("name", "cant_stop");
+        startService(intent);
     }
 
     @Override

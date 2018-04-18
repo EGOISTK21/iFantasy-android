@@ -3,7 +3,6 @@ package xyz.egoistk21.iFantasy.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
-import android.util.Log;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -49,11 +48,25 @@ public class DBUtil {
         sRealm.close();
     }
 
+    public static String getLoginToken() {
+        if (sUser == null) {
+            sUser = sRealm.where(User.class).findFirst();
+        }
+        return sUser == null ? null : sUser.getLogintoken();
+    }
+
     public static void setLoginToken(String loginoken) {
         sRealm.beginTransaction();
         if (getUser() != null)
             sUser.setLogintoken(loginoken);
         sRealm.commitTransaction();
+    }
+
+    public static String getAccessToken() {
+        if (sUser == null) {
+            sUser = sRealm.where(User.class).findFirst();
+        }
+        return sUser == null ? null : sUser.getAccesstoken();
     }
 
     public static void setAccessToken(String accessToken) {
@@ -63,12 +76,11 @@ public class DBUtil {
         sRealm.commitTransaction();
     }
 
-    public static String getLoginToken() {
-        return sUser == null ? null : sUser.getLogintoken();
-    }
-
-    public static String getAccessToken() {
-        return sUser == null ? null : sUser.getAccesstoken();
+    public static User getUser() {
+        if (sUser == null) {
+            sUser = sRealm.where(User.class).findFirst();
+        }
+        return sUser;
     }
 
     public static void setUser(User user) {
@@ -80,13 +92,6 @@ public class DBUtil {
             sRealm.copyToRealmOrUpdate(user);
             sRealm.commitTransaction();
         }
-    }
-
-    public static User getUser() {
-        if (sUser == null) {
-            sUser = sRealm.where(User.class).findFirst();
-        }
-        return sUser;
     }
 
     public static int refreshMoney(int refresh) {

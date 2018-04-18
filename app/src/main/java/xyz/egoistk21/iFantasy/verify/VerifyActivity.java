@@ -185,6 +185,15 @@ public class VerifyActivity extends BaseActivity implements VerifyContract.View 
         finish();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (!isDisplayPhoneForm && keyCode == KeyEvent.KEYCODE_BACK) {
+            back2PhoneView();
+            return true;// return true;拦截事件传递,从而屏蔽back键。
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     private class TimeCounter extends CountDownTimer {
 
         TimeCounter(long millisInFuture, long countDownInterval) {
@@ -206,15 +215,6 @@ public class VerifyActivity extends BaseActivity implements VerifyContract.View 
                     R.color.colorPrimaryDark)), 19, 23, Spanned.SPAN_POINT_MARK);
             tvResend.setText(spannable);
         }
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (!isDisplayPhoneForm && keyCode == KeyEvent.KEYCODE_BACK) {
-            back2PhoneView();
-            return true;// return true;拦截事件传递,从而屏蔽back键。
-        }
-        return super.onKeyDown(keyCode, event);
     }
 
 }

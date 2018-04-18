@@ -9,7 +9,6 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
-import xyz.egoistk21.iFantasy.bean.RawPlayer;
 import xyz.egoistk21.iFantasy.bean.RecruitInfo;
 import xyz.egoistk21.iFantasy.bean.RecruitResult;
 import xyz.egoistk21.iFantasy.bean.User;

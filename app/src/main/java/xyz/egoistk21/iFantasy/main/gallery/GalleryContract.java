@@ -22,9 +22,9 @@ interface GalleryContract {
     }
 
     interface Presenter {
-        void attachMV(GalleryContract.View view);
+        void attachMV(int pos, GalleryContract.View view);
 
-        void detachMV();
+        void detachMV(int pos);
 
         void getRawPlayers(int pos, int type, LifecycleProvider rxLifecycle);
     }

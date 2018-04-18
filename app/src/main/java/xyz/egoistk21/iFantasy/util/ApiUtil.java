@@ -47,42 +47,28 @@ public class ApiUtil {
     private ApiUtil() {
     }
 
-    public interface VerificationApi {
-        @Headers("User-Agent:iFantasy-android")
-        @POST("user/verification")
-        @FormUrlEncoded
-        Observable<HttpResult<User>> verify(@Field("phone") String phone,
-                                            @Field("zone") String zone,
-                                            @Field("code") String code);
-    }
-
     public static VerificationApi getVerifyCodeAPI() {
         return sRetrofit.create(VerificationApi.class);
-    }
-
-    public interface RegisterApi {
-        @Headers("User-Agent:iFantasy-android")
-        @POST("user/register")
-        @FormUrlEncoded
-        Observable<HttpResult<User>> register(@Header("Authorization") String temptoken,
-                                              @Field("phone") String phone,
-                                              @Field("nickname") String nickname);
     }
 
     public static RegisterApi getRegisterApi() {
         return sRetrofit.create(RegisterApi.class);
     }
 
-    public interface LoginApi {
-        @Headers("User-Agent:iFantasy-android")
-        @POST("user/login")
-        @FormUrlEncoded
-        Observable<HttpResult<User>> login(@Header("Authorization") String logintoken,
-                                           @Field("phone") String phone);
-    }
-
     public static LoginApi getLoginApi() {
         return sRetrofit.create(LoginApi.class);
+    }
+
+    public static RecruitInfoApi getRecruitInfoApi() {
+        return sRetrofit.create(RecruitInfoApi.class);
+    }
+
+    public static LuckyRecruitApi getLuckyRecruitApi() {
+        return sRetrofit.create(LuckyRecruitApi.class);
+    }
+
+    public static PentaLuckyRecruitApi getPentaLuckyRecruitApi() {
+        return sRetrofit.create(PentaLuckyRecruitApi.class);
     }
 
 //    public interface TestOnlineApi {
@@ -97,14 +83,48 @@ public class ApiUtil {
 //        return sRetrofit.create(TestOnlineApi.class);
 //    }
 
+    public static RecruitShowRawPlayerApi getRecruitShowRawPlayerApi() {
+        return sRetrofit.create(RecruitShowRawPlayerApi.class);
+    }
+
+    public static DirectRecruitApi getDirectRecruitApi() {
+        return sRetrofit.create(DirectRecruitApi.class);
+    }
+
+    public static TripleDirectRecruitApi getTripleDirectRecruitApi() {
+        return sRetrofit.create(TripleDirectRecruitApi.class);
+    }
+
+    public interface VerificationApi {
+        @Headers("User-Agent:iFantasy-android")
+        @POST("user/verification")
+        @FormUrlEncoded
+        Observable<HttpResult<User>> verify(@Field("phone") String phone,
+                                            @Field("zone") String zone,
+                                            @Field("code") String code);
+    }
+
+    public interface RegisterApi {
+        @Headers("User-Agent:iFantasy-android")
+        @POST("user/register")
+        @FormUrlEncoded
+        Observable<HttpResult<User>> register(@Header("Authorization") String temptoken,
+                                              @Field("phone") String phone,
+                                              @Field("nickname") String nickname);
+    }
+
+    public interface LoginApi {
+        @Headers("User-Agent:iFantasy-android")
+        @POST("user/login")
+        @FormUrlEncoded
+        Observable<HttpResult<User>> login(@Header("Authorization") String logintoken,
+                                           @Field("phone") String phone);
+    }
+
     public interface RecruitInfoApi {
         @Headers("User-Agent:iFantasy-android")
         @GET("recruit/get_recruit_info")
         Observable<HttpResult<RecruitInfo>> getRecruitInfo(@Query("user_id") int user_id);
-    }
-
-    public static RecruitInfoApi getRecruitInfoApi() {
-        return sRetrofit.create(RecruitInfoApi.class);
     }
 
     public interface LuckyRecruitApi {
@@ -114,10 +134,6 @@ public class ApiUtil {
         Observable<HttpResult<RecruitResult>> recruit(@Field("user_id") int user_id);
     }
 
-    public static LuckyRecruitApi getLuckyRecruitApi() {
-        return sRetrofit.create(LuckyRecruitApi.class);
-    }
-
     public interface PentaLuckyRecruitApi {
         @Headers("User-Agent:iFantasy-android")
         @POST("recruit/five_recruit")
@@ -125,19 +141,11 @@ public class ApiUtil {
         Observable<HttpResult<ArrayList<RecruitResult>>> recruit(@Field("user_id") int userId);
     }
 
-    public static PentaLuckyRecruitApi getPentaLuckyRecruitApi() {
-        return sRetrofit.create(PentaLuckyRecruitApi.class);
-    }
-
     public interface RecruitShowRawPlayerApi {
         @Headers("User-Agent:iFantasy-android")
         @GET("recruit/show_all_payer")
         Observable<HttpResult<ArrayList<RawPlayer>>> showPlayer(@Query("pos") int position,
                                                                 @Query("type") int type);
-    }
-
-    public static RecruitShowRawPlayerApi getRecruitShowRawPlayerApi() {
-        return sRetrofit.create(RecruitShowRawPlayerApi.class);
     }
 
     public interface DirectRecruitApi {
@@ -148,20 +156,12 @@ public class ApiUtil {
                                                         @Field("player_id") int playerId);
     }
 
-    public static DirectRecruitApi getDirectRecruitApi() {
-        return sRetrofit.create(DirectRecruitApi.class);
-    }
-
     public interface TripleDirectRecruitApi {
         @Headers("User-Agent:iFantasy-android")
         @POST("recruit/buy_theme")
         @FormUrlEncoded
         Observable<HttpResult<ArrayList<RecruitedPlayer>>> recruit(@Field("user_id") int userId,
                                                                    @Field("theme_id") int themeId);
-    }
-
-    public static TripleDirectRecruitApi getTripleDirectRecruitApi() {
-        return sRetrofit.create(TripleDirectRecruitApi.class);
     }
 
 }

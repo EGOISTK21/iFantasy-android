@@ -7,6 +7,17 @@ import io.realm.RealmObject;
 
 public class RawPlayer extends RealmObject implements Parcelable {
 
+    public static final Creator<RawPlayer> CREATOR = new Creator<RawPlayer>() {
+        @Override
+        public RawPlayer createFromParcel(Parcel in) {
+            return new RawPlayer(in);
+        }
+
+        @Override
+        public RawPlayer[] newArray(int size) {
+            return new RawPlayer[size];
+        }
+    };
     private int id;
     private String name;
     private String pic;
@@ -17,6 +28,16 @@ public class RawPlayer extends RealmObject implements Parcelable {
 
     public RawPlayer() {
 
+    }
+
+    private RawPlayer(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        pic = in.readString();
+        pos1 = in.readString();
+        pos2 = in.readString();
+        score = in.readInt();
+        price = in.readString();
     }
 
     public int getId() {
@@ -46,28 +67,6 @@ public class RawPlayer extends RealmObject implements Parcelable {
     public String getPrice() {
         return price;
     }
-
-    private RawPlayer(Parcel in) {
-        id = in.readInt();
-        name = in.readString();
-        pic = in.readString();
-        pos1 = in.readString();
-        pos2 = in.readString();
-        score = in.readInt();
-        price = in.readString();
-    }
-
-    public static final Creator<RawPlayer> CREATOR = new Creator<RawPlayer>() {
-        @Override
-        public RawPlayer createFromParcel(Parcel in) {
-            return new RawPlayer(in);
-        }
-
-        @Override
-        public RawPlayer[] newArray(int size) {
-            return new RawPlayer[size];
-        }
-    };
 
     @Override
     public int describeContents() {

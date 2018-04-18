@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 public abstract class BaseFragment extends RxFragment {
 
     protected String TAG = getClass().getName();
+
     protected View rootView;
     private boolean isViewPrepared; // 标识fragment视图已经初始化完毕
     private boolean hasFetchData; // 标识已经触发过懒加载数据
@@ -25,6 +26,8 @@ public abstract class BaseFragment extends RxFragment {
     protected abstract void initView();
 
     protected abstract void initEvent();
+
+    protected abstract void initData();
 
     private void lazyFetchDataIfPrepared() {
         // 用户可见fragment && 没有加载过数据 && 视图已经准备完毕
@@ -67,6 +70,7 @@ public abstract class BaseFragment extends RxFragment {
         Log.d(TAG, "onViewCreated");
         super.onViewCreated(view, savedInstanceState);
         isViewPrepared = true;
+        initData();
         lazyFetchDataIfPrepared();
     }
 

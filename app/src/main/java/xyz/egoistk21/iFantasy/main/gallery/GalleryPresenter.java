@@ -16,26 +16,31 @@ public class GalleryPresenter implements GalleryContract.Presenter {
     private static final String TAG = GalleryContract.class.getName();
 
     private GalleryContract.Model mModel;
-    private GalleryContract.View mView;
+    private GalleryContract.View[] mViews;
 
-    GalleryPresenter(GalleryContract.View view) {
-        attachMV(view);
+    private GalleryPresenter() {
+        mViews = new GalleryContract.View[6];
+    }
+
+    public static GalleryPresenter getInstance(int pos, GalleryContract.View view) {
+        SingletonHolder.INSTANCE.attachMV(pos, view);
+        return SingletonHolder.INSTANCE;
     }
 
     @Override
-    public void attachMV(GalleryContract.View view) {
+    public void attachMV(int pos, GalleryContract.View view) {
         mModel = new GalleryModel();
-        mView = view;
+        mViews[pos] = view;
     }
 
     @Override
-    public void detachMV() {
-        mModel = null;
-        mView = null;
+    public void detachMV(int pos) {
+//        mModel = null;
+        mViews[pos] = null;
     }
 
     @Override
-    public void getRawPlayers(int pos, int type, LifecycleProvider rxLifecycle) {
+    public void getRawPlayers(final int pos, int type, LifecycleProvider rxLifecycle) {
         mModel.getRawPlayers(pos, type, rxLifecycle, new Observer<HttpResult<ArrayList<RawPlayer>>>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -46,7 +51,7 @@ public class GalleryPresenter implements GalleryContract.Presenter {
             public void onNext(HttpResult<ArrayList<RawPlayer>> listHttpResult) {
                 Log.d(TAG, "onNext: " + listHttpResult.toString());
                 if (0 == listHttpResult.getState()) {
-                    mView.setRawPlayers(listHttpResult.getResult());
+                    mViews[pos].setRawPlayers(listHttpResult.getResult());
                 }
             }
 
@@ -60,5 +65,9 @@ public class GalleryPresenter implements GalleryContract.Presenter {
                 Log.d(TAG, "onComplete");
             }
         });
+    }
+
+    private static class SingletonHolder {
+        private static final GalleryPresenter INSTANCE = new GalleryPresenter();
     }
 }

@@ -20,7 +20,6 @@ import xyz.egoistk21.iFantasy.base.BaseFragment;
 import xyz.egoistk21.iFantasy.bean.RecruitInfo;
 import xyz.egoistk21.iFantasy.bean.RecruitResult;
 import xyz.egoistk21.iFantasy.main.gallery.GalleryFragment;
-import xyz.egoistk21.iFantasy.main.gallery.GalleryPresenter;
 import xyz.egoistk21.iFantasy.util.DBUtil;
 import xyz.egoistk21.iFantasy.widget.NoScrollViewPager;
 
@@ -62,7 +61,6 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
             fragments[i] = GalleryFragment.newInstance();
             fragments[i].setArguments(bundle);
         }
-
         vpRecruit.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
 
             @Override
@@ -103,6 +101,10 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
         mPresenter.pentaLuckyRecruit(DBUtil.getUser().getId(), this);
     }
 
+    @Override
+    protected void initData() {
+
+    }
 
     @Override
     protected void lazyFetchData() {
@@ -116,21 +118,29 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
         tvMoney.setText(String.format(getResources().getString(R.string.money), DBUtil.refreshMoney(refresh)));
     }
 
+    private void showLuckyRecruitFree() {
+        luckyFree = true;
+        tvOneRecruitTime.setText("");
+        tvOneRecruitCost.setText("免费");
+    }
+
+    private void showLuckyRecruitUnfree(int time) {
+        luckyFree = false;
+        if (timeCounter == null) {
+            timeCounter = new TimeCounter(time, 1000);
+            timeCounter.start();
+        }
+        tvOneRecruitCost.setText(R.string.one_lucky_recruit_price);
+    }
+
     @Override
     public void setRecruitInfo(RecruitInfo recruitInfo) {
         tvOneRecruitMsg.setText(String.format(getResources().getString(R.string.one_recruit), recruitInfo.getNum()));
         int time = recruitInfo.getTime() * 1000;
         if (time != 0) {
-            luckyFree = false;
-            if (timeCounter == null) {
-                timeCounter = new TimeCounter(time, 1000);
-                timeCounter.start();
-            }
-            tvOneRecruitCost.setText(R.string.one_lucky_recruit_price);
+            showLuckyRecruitUnfree(time);
         } else {
-            luckyFree = true;
-            tvOneRecruitTime.setText("");
-            tvOneRecruitCost.setText("免费");
+            showLuckyRecruitFree();
         }
     }
 
@@ -178,9 +188,7 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
 
         @Override
         public void onFinish() {
-            luckyFree = true;
-            tvOneRecruitTime.setText("");
-            tvOneRecruitCost.setText("免费");
+            showLuckyRecruitFree();
         }
     }
 }

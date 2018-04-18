@@ -1,7 +1,6 @@
 package xyz.egoistk21.iFantasy.verify;
 
 import com.trello.rxlifecycle2.LifecycleProvider;
-import com.trello.rxlifecycle2.components.RxActivity;
 
 import java.util.concurrent.TimeUnit;
 

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
-import xyz.egoistk21.iFantasy.bean.RawPlayer;
 import xyz.egoistk21.iFantasy.bean.RecruitInfo;
 import xyz.egoistk21.iFantasy.bean.RecruitResult;
 
