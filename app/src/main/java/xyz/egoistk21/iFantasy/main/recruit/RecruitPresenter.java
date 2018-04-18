@@ -65,34 +65,6 @@ class RecruitPresenter implements RecruitContract.Presenter {
     }
 
     @Override
-    public void getPlayers(int pos, int type, LifecycleProvider rxLifecycle) {
-        mModel.getRawPlayers(pos, type, rxLifecycle, new Observer<HttpResult<ArrayList<RawPlayer>>>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-                Log.d(TAG, "onSubscribe");
-            }
-
-            @Override
-            public void onNext(HttpResult<ArrayList<RawPlayer>> listHttpResult) {
-                Log.d(TAG, "onNext: " + listHttpResult.toString());
-                if (0 == listHttpResult.getState()) {
-                    mView.setRawPlayers(listHttpResult.getResult());
-                }
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.d(TAG, "onError: " + e.getMessage());
-            }
-
-            @Override
-            public void onComplete() {
-                Log.d(TAG, "onComplete");
-            }
-        });
-    }
-
-    @Override
     public void luckyRecruit(int userId, LifecycleProvider rxLifecycle) {
         mModel.luckyRecruit(userId, rxLifecycle, new Observer<HttpResult<RecruitResult>>() {
             @Override
@@ -130,7 +102,7 @@ class RecruitPresenter implements RecruitContract.Presenter {
 
             @Override
             public void onNext(HttpResult<ArrayList<RecruitResult>> arrayListHttpResult) {
-                Log.d(TAG, "onNext: " + arrayListHttpResult.getState());
+                Log.d(TAG, "onNext: " + arrayListHttpResult.toString());
                 if (0 == arrayListHttpResult.getState()) {
                     mView.showPentaLuckyRecruitResult(arrayListHttpResult.getResult());
                 }

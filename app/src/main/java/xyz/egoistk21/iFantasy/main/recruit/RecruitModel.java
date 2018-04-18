@@ -31,17 +31,6 @@ class RecruitModel implements RecruitContract.Model {
     }
 
     @Override
-    public void getRawPlayers(int pos, int type, LifecycleProvider rxLifecycle, Observer<HttpResult<ArrayList<RawPlayer>>> observer) {
-        ApiUtil.getRecruitShowRawPlayerApi().showPlayer(pos, type)
-                .debounce(FILTER_TIMEOUT, TimeUnit.SECONDS)
-                .compose(rxLifecycle.<HttpResult<User>>bindToLifecycle())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .unsubscribeOn(Schedulers.io())
-                .subscribe(observer);
-    }
-
-    @Override
     public void luckyRecruit(int userId, LifecycleProvider rxLifecycle, Observer<HttpResult<RecruitResult>> observer) {
         ApiUtil.getLuckyRecruitApi().recruit(userId)
                 .debounce(FILTER_TIMEOUT, TimeUnit.SECONDS)

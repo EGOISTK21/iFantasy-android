@@ -1,5 +1,6 @@
 package xyz.egoistk21.iFantasy.main.recruit;
 
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -16,11 +17,11 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseFragment;
-import xyz.egoistk21.iFantasy.bean.RawPlayer;
 import xyz.egoistk21.iFantasy.bean.RecruitInfo;
 import xyz.egoistk21.iFantasy.bean.RecruitResult;
+import xyz.egoistk21.iFantasy.main.gallery.GalleryFragment;
+import xyz.egoistk21.iFantasy.main.gallery.GalleryPresenter;
 import xyz.egoistk21.iFantasy.util.DBUtil;
-import xyz.egoistk21.iFantasy.widget.GalleryFragment;
 import xyz.egoistk21.iFantasy.widget.NoScrollViewPager;
 
 public class RecruitFragment extends BaseFragment implements RecruitContract.View {
@@ -38,9 +39,11 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
     @BindView(R.id.vp_recruit)
     NoScrollViewPager vpRecruit;
 
+    private boolean luckyFree;
     private TimeCounter timeCounter;
     private RecruitContract.Presenter mPresenter;
-
+    private CharSequence[] titles = new CharSequence[]{"ALL", "C", "PF", "SF", "SG", "PG",};
+    private Fragment[] fragments = new Fragment[titles.length];
 
     public static RecruitFragment newInstance() {
         return new RecruitFragment();
@@ -53,25 +56,14 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
 
     @Override
     protected void initView() {
+        for (int i = 0; i < fragments.length; i++) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("pos", i);
+            fragments[i] = GalleryFragment.newInstance();
+            fragments[i].setArguments(bundle);
+        }
+
         vpRecruit.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
-
-            private CharSequence[] titles = new CharSequence[]{
-                    "ALL",
-                    "C",
-                    "PF",
-                    "SF",
-                    "SG",
-                    "PG",
-            };
-
-            private Fragment[] fragments = new Fragment[]{
-                    GalleryFragment.newInstance(),
-                    GalleryFragment.newInstance(),
-                    GalleryFragment.newInstance(),
-                    GalleryFragment.newInstance(),
-                    GalleryFragment.newInstance(),
-                    GalleryFragment.newInstance(),
-            };
 
             @Override
             public Fragment getItem(int position) {
@@ -80,7 +72,7 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
 
             @Override
             public int getCount() {
-                return 6;
+                return fragments.length;
             }
 
             @Nullable
@@ -101,17 +93,6 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
         getFragmentManager().popBackStack();
     }
 
-    @Override
-    protected void lazyFetchData() {
-        mPresenter = new RecruitPresenter(this);
-        mPresenter.getRecruitInfo(DBUtil.getUser().getId(), this);
-        mPresenter.getPlayers(0, 0, this);
-        if (this.isAdded()) {
-            tvMoney.setText(String.format(getResources().getString(R.string.money), DBUtil.getUser().getMoney()));
-        }
-
-    }
-
     @OnClick(R.id.btn_lucky_recruit)
     void luckyRecruit() {
         mPresenter.luckyRecruit(DBUtil.getUser().getId(), this);
@@ -122,35 +103,46 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
         mPresenter.pentaLuckyRecruit(DBUtil.getUser().getId(), this);
     }
 
+
+    @Override
+    protected void lazyFetchData() {
+        mPresenter = new RecruitPresenter(this);
+        mPresenter.getRecruitInfo(DBUtil.getUser().getId(), this);
+        tvMoney.setText(String.format(getResources().getString(R.string.money), DBUtil.getUser().getMoney()));
+    }
+
+    @Override
+    public void setMoney(int refresh) {
+        tvMoney.setText(String.format(getResources().getString(R.string.money), DBUtil.refreshMoney(refresh)));
+    }
+
     @Override
     public void setRecruitInfo(RecruitInfo recruitInfo) {
-        if (isAdded()) {
-            tvOneRecruitMsg.setText(String.format(getResources().getString(R.string.one_recruit), recruitInfo.getNum()));
-        }
+        tvOneRecruitMsg.setText(String.format(getResources().getString(R.string.one_recruit), recruitInfo.getNum()));
         int time = recruitInfo.getTime() * 1000;
         if (time != 0) {
-            timeCounter = new TimeCounter(time, 1000);
-            timeCounter.start();
-            tvOneRecruitCost.setText("100万");
+            luckyFree = false;
+            if (timeCounter == null) {
+                timeCounter = new TimeCounter(time, 1000);
+                timeCounter.start();
+            }
+            tvOneRecruitCost.setText(R.string.one_lucky_recruit_price);
         } else {
+            luckyFree = true;
             tvOneRecruitTime.setText("");
             tvOneRecruitCost.setText("免费");
         }
     }
 
     @Override
-    public void setRawPlayers(ArrayList<RawPlayer> rawPlayers) {
-
-    }
-
-    @Override
     public void showLuckyRecruitResult(RecruitResult recruitResult) {
+        if (!luckyFree) setMoney(-100);
         mPresenter.getRecruitInfo(DBUtil.getUser().getId(), this);
     }
 
     @Override
     public void showPentaLuckyRecruitResult(ArrayList<RecruitResult> recruitResults) {
-
+        setMoney(-400);
     }
 
     @Override
@@ -186,7 +178,9 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
 
         @Override
         public void onFinish() {
+            luckyFree = true;
             tvOneRecruitTime.setText("");
+            tvOneRecruitCost.setText("免费");
         }
     }
 }

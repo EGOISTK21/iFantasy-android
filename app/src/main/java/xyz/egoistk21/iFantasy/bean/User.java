@@ -85,6 +85,10 @@ public class User extends RealmObject implements Parcelable {
         return accesstoken;
     }
 
+    public void refreshMoney(int refresh) {
+        money += refresh;
+    }
+
     @Override
     public int describeContents() {
         return 0;

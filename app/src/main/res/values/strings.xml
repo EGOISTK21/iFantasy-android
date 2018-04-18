@@ -15,4 +15,5 @@
     <string name="vip_level">Vip%d</string>
     <string name="money">%d万</string>
     <string name="one_recruit_time">%s之后免费</string>
+    <string name="one_lucky_recruit_price">100万</string>
 </resources>

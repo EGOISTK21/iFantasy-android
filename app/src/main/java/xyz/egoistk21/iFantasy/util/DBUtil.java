@@ -3,6 +3,7 @@ package xyz.egoistk21.iFantasy.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+import android.util.Log;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -13,6 +14,9 @@ import xyz.egoistk21.iFantasy.bean.User;
  */
 
 public class DBUtil {
+
+    private static final String TAG = DBUtil.class.getName();
+
     private static SharedPreferences sSharedPreferences;
     private static Realm sRealm;
     private static User sUser;
@@ -83,6 +87,13 @@ public class DBUtil {
             sUser = sRealm.where(User.class).findFirst();
         }
         return sUser;
+    }
+
+    public static int refreshMoney(int refresh) {
+        sRealm.beginTransaction();
+        sUser.refreshMoney(refresh);
+        sRealm.commitTransaction();
+        return sUser.getMoney();
     }
 
 }

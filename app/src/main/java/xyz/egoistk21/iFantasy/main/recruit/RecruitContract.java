@@ -14,17 +14,15 @@ interface RecruitContract {
     interface Model {
         void getRecruitInfo(int user_id, LifecycleProvider rxLifecycle, Observer<HttpResult<RecruitInfo>> observer);
 
-        void getRawPlayers(int pos, int type, LifecycleProvider rxLifecycle, Observer<HttpResult<ArrayList<RawPlayer>>> observer);
-
         void luckyRecruit(int userId, LifecycleProvider rxLifecycle, Observer<HttpResult<RecruitResult>> observer);
 
         void pentaLuckyRecruit(int userId, LifecycleProvider rxLifecycle, Observer<HttpResult<ArrayList<RecruitResult>>> observer);
     }
 
     interface View {
-        void setRecruitInfo(RecruitInfo recruitInfo);
+        void setMoney(int refresh);
 
-        void setRawPlayers(ArrayList<RawPlayer> rawPlayers);
+        void setRecruitInfo(RecruitInfo recruitInfo);
 
         void showLuckyRecruitResult(RecruitResult recruitResult);
 
@@ -41,8 +39,6 @@ interface RecruitContract {
         void detachMV();
 
         void getRecruitInfo(int userId, LifecycleProvider rxLifecycle);
-
-        void getPlayers(int pos, int type, LifecycleProvider rxLifecycle);
 
         void luckyRecruit(int userId, LifecycleProvider rxLifecycle);
 
