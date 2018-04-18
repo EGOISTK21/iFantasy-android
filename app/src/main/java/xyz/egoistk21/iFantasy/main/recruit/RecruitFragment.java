@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.OnItemSelected;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseFragment;
 import xyz.egoistk21.iFantasy.bean.RecruitInfo;
@@ -40,9 +42,11 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
 
     private boolean luckyFree;
     private TimeCounter timeCounter;
-    private RecruitContract.Presenter mPresenter;
     private CharSequence[] titles = new CharSequence[]{"ALL", "C", "PF", "SF", "SG", "PG",};
     private Fragment[] fragments = new Fragment[titles.length];
+    private MyFragmentStatePagerAdapter mPagerAdapter;
+    private int mType = 0;
+    private RecruitContract.Presenter mPresenter;
 
     public static RecruitFragment newInstance() {
         return new RecruitFragment();
@@ -58,27 +62,12 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
         for (int i = 0; i < fragments.length; i++) {
             Bundle bundle = new Bundle();
             bundle.putInt("pos", i);
+            bundle.putInt("type", mType);
             fragments[i] = GalleryFragment.newInstance();
             fragments[i].setArguments(bundle);
         }
-        vpRecruit.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
 
-            @Override
-            public Fragment getItem(int position) {
-                return fragments[position];
-            }
-
-            @Override
-            public int getCount() {
-                return fragments.length;
-            }
-
-            @Nullable
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return titles[position];
-            }
-        });
+        vpRecruit.setAdapter(mPagerAdapter = new MyFragmentStatePagerAdapter());
     }
 
     @Override
@@ -101,16 +90,27 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
         mPresenter.pentaLuckyRecruit(DBUtil.getUser().getId(), this);
     }
 
+    @OnItemSelected(R.id.sp_recruit)
+    void sortGallery(int type) {
+        if (mType != type) {
+            mType = type;
+            mPagerAdapter.getCurrentFragment().onStart();
+        }
+    }
+
+    public int getType() {
+        return mType;
+    }
+
     @Override
     protected void initData() {
-
+        mPresenter = new RecruitPresenter(this);
+        tvMoney.setText(String.format(getResources().getString(R.string.money), DBUtil.getUser().getMoney()));
     }
 
     @Override
     protected void lazyFetchData() {
-        mPresenter = new RecruitPresenter(this);
         mPresenter.getRecruitInfo(DBUtil.getUser().getId(), this);
-        tvMoney.setText(String.format(getResources().getString(R.string.money), DBUtil.getUser().getMoney()));
     }
 
     @Override
@@ -189,6 +189,41 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
         @Override
         public void onFinish() {
             showLuckyRecruitFree();
+        }
+    }
+
+    private class MyFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
+
+        private GalleryFragment mCurrentFragment;
+
+        public MyFragmentStatePagerAdapter() {
+            super(RecruitFragment.this.getChildFragmentManager());
+        }
+
+        @Override
+        public void setPrimaryItem(ViewGroup container, int position, Object object) {
+            mCurrentFragment = (GalleryFragment) object;
+            super.setPrimaryItem(container, position, object);
+        }
+
+        public GalleryFragment getCurrentFragment() {
+            return mCurrentFragment;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments[position];
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.length;
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titles[position];
         }
     }
 }

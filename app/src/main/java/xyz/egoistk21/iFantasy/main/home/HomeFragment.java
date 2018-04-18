@@ -59,16 +59,16 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     protected void initData() {
-
-    }
-
-    @Override
-    protected void lazyFetchData() {
+        mPresenter = new HomePresenter(HomeFragment.this);
         tvNickname.setText(DBUtil.getUser().getNickname());
         tvLevel.setText(String.format(getResources().getString(R.string.level), DBUtil.getUser().getLevel()));
         tvVipLevel.setText(String.format(getResources().getString(R.string.vip_level), DBUtil.getUser().getVipLevel()));
         tvMoney.setText(String.format(getResources().getString(R.string.money), DBUtil.getUser().getMoney()));
-        mPresenter = new HomePresenter(HomeFragment.this);
+    }
+
+    @Override
+    protected void lazyFetchData() {
+
     }
 
     @Override

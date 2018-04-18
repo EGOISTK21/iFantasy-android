@@ -74,7 +74,7 @@ public class WelcomeActivity extends BaseActivity implements WelcomeContract.Vie
     @Override
     protected void onResume() {
         super.onResume();
-        UIUtil.hideNav(this);
+        UIUtil.go2FullScreen(this);
     }
 
     @Override
