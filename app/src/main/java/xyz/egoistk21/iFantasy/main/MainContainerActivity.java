@@ -6,6 +6,7 @@ import cn.jpush.android.api.JPushInterface;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseActivity;
 import xyz.egoistk21.iFantasy.main.home.HomeFragment;
+import xyz.egoistk21.iFantasy.util.DBUtil;
 import xyz.egoistk21.iFantasy.util.UIUtil;
 
 public class MainContainerActivity extends BaseActivity {
@@ -31,7 +32,7 @@ public class MainContainerActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        JPushInterface.setAlias(this, 1, "1");
+        JPushInterface.setAlias(this, 0, String.valueOf(DBUtil.getUser().getId()));
     }
 
     @Override

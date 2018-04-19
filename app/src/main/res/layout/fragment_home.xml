@@ -70,13 +70,12 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="200dp"
             android:background="@drawable/data_frame"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
                 android:text="球队战力"
                 android:textColor="@color/smssdk_white" />
 
@@ -97,13 +96,12 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="180dp"
             android:background="@drawable/data_frame"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
                 android:text="资金"
                 android:textColor="@color/smssdk_white" />
 

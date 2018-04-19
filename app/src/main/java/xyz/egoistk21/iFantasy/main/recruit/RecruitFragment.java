@@ -1,5 +1,7 @@
 package xyz.egoistk21.iFantasy.main.recruit;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;

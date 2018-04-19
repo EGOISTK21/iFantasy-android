@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import xyz.egoistk21.iFantasy.R;
 
-public class BGMService extends IntentService implements MediaPlayer.OnPreparedListener {
+public class BGMService extends IntentService {
 
     private static final String TAG = BGMService.class.getName();
     private static final String URI_PREFIX = "android.resource://xyz.egoistk21.iFantasy/";
@@ -26,17 +26,34 @@ public class BGMService extends IntentService implements MediaPlayer.OnPreparedL
         Log.d(TAG, "onCreate");
         super.onCreate();
         mmp = new MediaPlayer();
-        mmp.setOnPreparedListener(this);
+        mmp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                Log.d(TAG, "onPrepared");
+                mp.start();
+            }
+        });
     }
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        assert intent != null;
         try {
+            if (mmp.isPlaying()) {
+                mmp.stop();
+                mmp.release();
+                mmp = new MediaPlayer();
+                mmp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mp) {
+                        Log.d(TAG, "onPrepared");
+                        mp.start();
+                    }
+                });
+            }
             switch (intent.getStringExtra("name")) {
                 case "cant_stop":
                     Log.d(TAG, "onHandleIntent");
-                    mmp.setDataSource(BGMService.this, Uri.parse(URI_PREFIX + R.raw.cant_stop));
+                    mmp.setDataSource(this, Uri.parse(URI_PREFIX + R.raw.cant_stop));
                     mmp.prepareAsync();
                     break;
                 default:
@@ -44,12 +61,6 @@ public class BGMService extends IntentService implements MediaPlayer.OnPreparedL
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void onPrepared(MediaPlayer mediaPlayer) {
-        Log.d(TAG, "onPrepared");
-        mediaPlayer.start();
     }
 
     @Override

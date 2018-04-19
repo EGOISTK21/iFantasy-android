@@ -66,9 +66,9 @@ public class WelcomeActivity extends BaseActivity implements WelcomeContract.Vie
     @Override
     protected void initData() {
         mPresenter = new WelcomePresenter(this);
-        Intent intent = new Intent(this, BGMService.class);
-        intent.putExtra("name", "cant_stop");
-        startService(intent);
+//        Intent intent = new Intent(this, BGMService.class);
+//        intent.putExtra("name", "cant_stop");
+//        startService(intent);
     }
 
     @Override
