@@ -63,7 +63,7 @@ class WelcomePresenter implements WelcomeContract.Presenter {
                     JMessageClient.register(user.getNickname(), "12345qwert", new BasicCallback() {
                         @Override
                         public void gotResult(int i, String s) {
-                            Log.d(TAG, "JMessage register: " + i + " " + s);
+                            Log.d(TAG, "JMessageClient register: " + i + " " + s);
                         }
                     });
                     mView.startGame();
@@ -106,7 +106,7 @@ class WelcomePresenter implements WelcomeContract.Presenter {
                     JMessageClient.login(user.getNickname(), "12345qwert", new BasicCallback() {
                         @Override
                         public void gotResult(int i, String s) {
-                            Log.d(TAG, "JMessageClient register: " + i + " " + s);
+                            Log.d(TAG, "JMessageClient login: " + i + " " + s);
                         }
                     });
                     mView.startGame();

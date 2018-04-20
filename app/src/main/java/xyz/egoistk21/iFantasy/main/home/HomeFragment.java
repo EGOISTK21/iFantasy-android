@@ -4,11 +4,14 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseFragment;
+import xyz.egoistk21.iFantasy.main.message.MessageFragment;
 import xyz.egoistk21.iFantasy.main.recruit.RecruitFragment;
 import xyz.egoistk21.iFantasy.util.DBUtil;
 
@@ -48,6 +51,15 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     protected void initEvent() {
     }
 
+    @OnClick(R.id.v_message)
+    void message() {
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container_main, MessageFragment.newInstance())
+                .addToBackStack("message")
+                .commit();
+    }
+
     @OnClick(R.id.v_recruit)
     void recruit() {
         getFragmentManager()
@@ -60,6 +72,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     @Override
     protected void initData() {
         mPresenter = new HomePresenter(HomeFragment.this);
+        Glide.with(getContext()).load("file:///android_asset/2544/pic.webp").into(civAvatar);
         tvNickname.setText(DBUtil.getUser().getNickname());
         tvLevel.setText(String.format(getResources().getString(R.string.level), DBUtil.getUser().getLevel()));
         tvVipLevel.setText(String.format(getResources().getString(R.string.vip_level), DBUtil.getUser().getVipLevel()));
