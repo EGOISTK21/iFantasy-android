@@ -71,7 +71,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
 
         private void setData(RawPlayer rawPlayer) {
             mRawPlayer = rawPlayer;
-            Glide.with(mContext).load(mRawPlayer.getPic()).apply(sRequestOptions).into(ivPlayer);
+            Glide.with(mContext)
+                    .load("file:///android_asset/" + rawPlayer.getId() + "/pic.webp")
+                    .apply(sRequestOptions)
+                    .into(ivPlayer);
             tvPlayer.setText(mRawPlayer.getName());
         }
 
