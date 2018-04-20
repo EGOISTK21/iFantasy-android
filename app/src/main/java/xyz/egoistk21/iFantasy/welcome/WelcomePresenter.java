@@ -60,7 +60,7 @@ class WelcomePresenter implements WelcomeContract.Presenter {
                 if (200 == userHttpResult.getState()) {
                     User user = userHttpResult.getResult();
                     DBUtil.setUser(user);
-                    JMessageClient.register(user.getNickname(), "12345qwert", new BasicCallback() {
+                    JMessageClient.register("iFantasy_android_" + user.getId(), "12345qwert", new BasicCallback() {
                         @Override
                         public void gotResult(int i, String s) {
                             Log.d(TAG, "JMessageClient register: " + i + " " + s);
@@ -103,7 +103,7 @@ class WelcomePresenter implements WelcomeContract.Presenter {
                 if (200 == userHttpResult.getState()) {
                     User user = userHttpResult.getResult();
                     DBUtil.setUser(user);
-                    JMessageClient.login(user.getNickname(), "12345qwert", new BasicCallback() {
+                    JMessageClient.login("iFantasy_android_" + user.getId(), "12345qwert", new BasicCallback() {
                         @Override
                         public void gotResult(int i, String s) {
                             Log.d(TAG, "JMessageClient login: " + i + " " + s);

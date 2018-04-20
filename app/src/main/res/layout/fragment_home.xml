@@ -122,6 +122,7 @@
         </LinearLayout>
 
         <View
+            android:id="@+id/v_settings"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_alignParentEnd="true"
@@ -178,13 +179,14 @@
         android:paddingStart="24dp">
 
         <View
-            android:id="@+id/v_message"
+            android:id="@+id/v_chat"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/message" />
 
         <View
+            android:id="@+id/v_bag"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -198,12 +200,14 @@
             android:background="@drawable/recruit" />
 
         <View
+            android:id="@+id/v_tactics"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/tactics" />
 
         <View
+            android:id="@+id/v_team"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -211,13 +215,14 @@
 
     </LinearLayout>
 
-    <View
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_game"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/pk" />
+        android:src="@drawable/game" />
 
     <ProgressBar
         android:id="@+id/game_progress"

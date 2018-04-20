@@ -71,18 +71,6 @@ public class ApiUtil {
         return sRetrofit.create(PentaLuckyRecruitApi.class);
     }
 
-//    public interface TestOnlineApi {
-//        @Headers("User-Agent:iFantasy-android")
-//        @POST("user/online")
-//        @FormUrlEncoded
-//        Observable<HttpResult<String>> isOnline(@Header("Authorization") String accesstoken,
-//                                                @Field("user_id") int id);
-//    }
-//
-//    public static TestOnlineApi getTestOnlineApi() {
-//        return sRetrofit.create(TestOnlineApi.class);
-//    }
-
     public static RecruitShowRawPlayerApi getRecruitShowRawPlayerApi() {
         return sRetrofit.create(RecruitShowRawPlayerApi.class);
     }

@@ -11,8 +11,13 @@ import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseFragment;
-import xyz.egoistk21.iFantasy.main.message.MessageFragment;
+import xyz.egoistk21.iFantasy.main.bag.BagFragment;
+import xyz.egoistk21.iFantasy.main.chat.ChatFragment;
+import xyz.egoistk21.iFantasy.main.game.GameFragment;
 import xyz.egoistk21.iFantasy.main.recruit.RecruitFragment;
+import xyz.egoistk21.iFantasy.main.settings.SettingsFragment;
+import xyz.egoistk21.iFantasy.main.tactics.TacticsFragment;
+import xyz.egoistk21.iFantasy.main.team.TeamFragment;
 import xyz.egoistk21.iFantasy.util.DBUtil;
 
 public class HomeFragment extends BaseFragment implements HomeContract.View {
@@ -51,12 +56,30 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     protected void initEvent() {
     }
 
-    @OnClick(R.id.v_message)
-    void message() {
+    @OnClick(R.id.v_settings)
+    void settings() {
         getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.container_main, MessageFragment.newInstance())
+                .replace(R.id.container_main, SettingsFragment.newInstance())
+                .addToBackStack("settings")
+                .commit();
+    }
+
+    @OnClick(R.id.v_chat)
+    void chat() {
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container_main, ChatFragment.newInstance())
                 .addToBackStack("message")
+                .commit();
+    }
+
+    @OnClick(R.id.v_bag)
+    void bag() {
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container_main, BagFragment.newInstance())
+                .addToBackStack("bag")
                 .commit();
     }
 
@@ -66,6 +89,33 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
                 .beginTransaction()
                 .replace(R.id.container_main, RecruitFragment.newInstance())
                 .addToBackStack("recruit")
+                .commit();
+    }
+
+    @OnClick(R.id.v_tactics)
+    void tactics() {
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container_main, TacticsFragment.newInstance())
+                .addToBackStack("tactics")
+                .commit();
+    }
+
+    @OnClick(R.id.v_team)
+    void team() {
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container_main, TeamFragment.newInstance())
+                .addToBackStack("team")
+                .commit();
+    }
+
+    @OnClick(R.id.civ_game)
+    void game() {
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container_main, GameFragment.newInstance())
+                .addToBackStack("game")
                 .commit();
     }
 
