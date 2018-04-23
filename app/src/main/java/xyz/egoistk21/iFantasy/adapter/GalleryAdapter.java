@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -30,6 +31,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
                     .diskCacheStrategy(DiskCacheStrategy.ALL);
     private Context mContext;
     private List<RawPlayer> mRawPlayers;
+
+    public GalleryAdapter() {
+        mRawPlayers = new ArrayList<>();
+    }
 
     public void setRawPlayers(List<RawPlayer> rawPlayers) {
         mRawPlayers = rawPlayers;

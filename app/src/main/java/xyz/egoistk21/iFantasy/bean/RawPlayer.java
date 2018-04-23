@@ -25,7 +25,7 @@ public class RawPlayer extends RealmObject implements Parcelable {
     private String pos1;
     private String pos2;
     private int score;
-    private String price;
+    private int price;
 
     public RawPlayer() {
 
@@ -37,7 +37,7 @@ public class RawPlayer extends RealmObject implements Parcelable {
         pos1 = in.readString();
         pos2 = in.readString();
         score = in.readInt();
-        price = in.readString();
+        price = in.readInt();
     }
 
     public int getId() {
@@ -60,7 +60,7 @@ public class RawPlayer extends RealmObject implements Parcelable {
         return score;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
@@ -76,7 +76,7 @@ public class RawPlayer extends RealmObject implements Parcelable {
         parcel.writeString(pos1);
         parcel.writeString(pos2);
         parcel.writeInt(score);
-        parcel.writeString(price);
+        parcel.writeInt(price);
     }
 
     @Override

@@ -2,6 +2,7 @@ package xyz.egoistk21.iFantasy.main.gallery;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -34,7 +35,14 @@ public class GalleryFragment extends BaseFragment implements GalleryContract.Vie
 
     @Override
     protected void initView() {
-
+        if (mGalleryAdapter == null) {
+            mGalleryAdapter = new GalleryAdapter();
+            rvGallery.setAdapter(mGalleryAdapter);
+        }
+        if (mGridLayoutManager == null) {
+            mGridLayoutManager = new GridLayoutManager(getContext(), 6);
+        }
+        rvGallery.setLayoutManager(mGridLayoutManager);
     }
 
     @Override
@@ -44,9 +52,10 @@ public class GalleryFragment extends BaseFragment implements GalleryContract.Vie
 
     @Override
     protected void initData() {
-        mPos = getArguments() != null ? getArguments().getInt("mPos") : 0;
+        mPos = getArguments() != null ? getArguments().getInt("pos") : 0;
         mType = getArguments() != null ? getArguments().getInt("type") : 0;
         mPresenter = GalleryPresenter.getInstance(mPos, this);
+        Log.d(TAG, "initData: " + mPos + " " + mType);
     }
 
     @Override
@@ -60,15 +69,7 @@ public class GalleryFragment extends BaseFragment implements GalleryContract.Vie
 
     @Override
     public void setRawPlayers(ArrayList<RawPlayer> rawPlayers) {
-        if (mGalleryAdapter == null) {
-            mGalleryAdapter = new GalleryAdapter();
-        }
         mGalleryAdapter.setRawPlayers(rawPlayers);
-        rvGallery.setAdapter(mGalleryAdapter);
-        if (mGridLayoutManager == null) {
-            mGridLayoutManager = new GridLayoutManager(getContext(), 6);
-        }
-        rvGallery.setLayoutManager(mGridLayoutManager);
     }
 
     @Override

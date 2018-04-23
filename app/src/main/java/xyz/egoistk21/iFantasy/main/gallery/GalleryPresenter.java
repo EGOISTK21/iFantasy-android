@@ -10,10 +10,11 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
 import xyz.egoistk21.iFantasy.bean.RawPlayer;
+import xyz.egoistk21.iFantasy.util.DBUtil;
 
 public class GalleryPresenter implements GalleryContract.Presenter {
 
-    private static final String TAG = GalleryContract.class.getName();
+    private static final String TAG = GalleryPresenter.class.getName();
 
     private GalleryContract.Model mModel;
     private GalleryContract.View[] mViews;
@@ -31,6 +32,7 @@ public class GalleryPresenter implements GalleryContract.Presenter {
     public void attachMV(int pos, GalleryContract.View view) {
         mModel = new GalleryModel();
         mViews[pos] = view;
+        Log.d(TAG, "attachMV: " + pos);
     }
 
     @Override
@@ -41,8 +43,8 @@ public class GalleryPresenter implements GalleryContract.Presenter {
 
     @Override
     public void getRawPlayers(final int pos, final int type, LifecycleProvider rxLifecycle) {
-//        if (DBUtil.isRawPlayersNull()) {
-        mModel.getRawPlayers(pos, type, rxLifecycle, new Observer<HttpResult<ArrayList<RawPlayer>>>() {
+        if (DBUtil.isRawPlayersNull()) {
+            mModel.getRawPlayers(0, 0, rxLifecycle, new Observer<HttpResult<ArrayList<RawPlayer>>>() {
             @Override
             public void onSubscribe(Disposable d) {
                 Log.d(TAG, "onSubscribe");
@@ -52,8 +54,8 @@ public class GalleryPresenter implements GalleryContract.Presenter {
             public void onNext(HttpResult<ArrayList<RawPlayer>> listHttpResult) {
                 Log.d(TAG, "onNext: " + listHttpResult.toString());
                 if (0 == listHttpResult.getState()) {
-//                        DBUtil.setRawPlayers(listHttpResult.getResult());
-                    mViews[pos].setRawPlayers(listHttpResult.getResult());
+                    DBUtil.setRawPlayers(listHttpResult.getResult());
+                    mViews[pos].setRawPlayers(DBUtil.getRawPlayers(pos, type));
                 }
             }
 
@@ -67,9 +69,9 @@ public class GalleryPresenter implements GalleryContract.Presenter {
                 Log.d(TAG, "onComplete");
             }
         });
-//        } else {
-//            mViews[pos].setRawPlayers(DBUtil.getRawPlayers(pos, type));
-//        }
+        } else {
+            mViews[pos].setRawPlayers(DBUtil.getRawPlayers(pos, type));
+        }
     }
 
     private static class SingletonHolder {

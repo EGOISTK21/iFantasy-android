@@ -183,16 +183,16 @@
                 android:textColor="@color/smssdk_white"
                 android:textSize="20sp"/>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <android.support.design.widget.TabLayout
                     android:id="@+id/tbl_recruit"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/sp_recruit"
+                    android:layout_weight="1"
                     app:tabSelectedTextColor="@color/smssdk_white"
                     app:tabTextColor="@color/smssdk_white">
 
@@ -230,22 +230,17 @@
 
                 </android.support.design.widget.TabLayout>
 
-                <Spinner
-                    android:id="@+id/sp_recruit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_above="@+id/vp_recruit"
-                    android:layout_alignParentEnd="true"
-                    android:entries="@array/classify"/>
+                <com.zxl.library.DropDownMenu
+                    android:id="@+id/ddm_recruit"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent" />
 
-                <xyz.egoistk21.iFantasy.widget.NoScrollViewPager
-                    android:id="@+id/vp_recruit"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentBottom="true"
-                    android:layout_below="@+id/tbl_recruit"/>
+            </LinearLayout>
 
-            </RelativeLayout>
+            <xyz.egoistk21.iFantasy.widget.NoScrollViewPager
+                android:id="@+id/vp_recruit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 

@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.zxl.library.DropDownMenu;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -16,7 +18,6 @@ import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.OnItemSelected;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseFragment;
 import xyz.egoistk21.iFantasy.bean.RecruitInfo;
@@ -37,12 +38,15 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
     TextView tvOneRecruitCost;
     @BindView(R.id.tbl_recruit)
     TabLayout tblRecruit;
+    @BindView(R.id.ddm_recruit)
+    DropDownMenu ddmRecruit;
     @BindView(R.id.vp_recruit)
     NoScrollViewPager vpRecruit;
 
     private boolean luckyFree;
     private TimeCounter timeCounter;
-    private CharSequence[] titles = new CharSequence[]{"ALL", "C", "PF", "SF", "SG", "PG",};
+    private String[] titles = new String[]{"ALL", "C", "PF", "SF", "SG", "PG",};
+    private String[] types = new String[]{"位置", "评分", "薪资",};
     private Fragment[] fragments = new Fragment[titles.length];
     private MyFragmentStatePagerAdapter mPagerAdapter;
     private int mType = 0;
@@ -87,14 +91,6 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
     @OnClick(R.id.btn_penta_lucky_recruit)
     void pentaLuckyRecruit() {
         mPresenter.pentaLuckyRecruit(DBUtil.getUser().getId(), this);
-    }
-
-    @OnItemSelected(R.id.sp_recruit)
-    void sortGallery(int type) {
-        if (mType != type) {
-            mType = type;
-            ((GalleryFragment) mPagerAdapter.getCurrentFragment()).refreshRawPlayers(type);
-        }
     }
 
     public int getType() {
@@ -195,7 +191,7 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
 
         private GalleryFragment mCurrentFragment;
 
-        public MyFragmentStatePagerAdapter() {
+        MyFragmentStatePagerAdapter() {
             super(RecruitFragment.this.getChildFragmentManager());
         }
 

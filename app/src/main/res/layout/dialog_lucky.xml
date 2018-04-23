@@ -24,15 +24,15 @@
         android:orientation="horizontal"
         android:showDividers="middle">
 
-        <include layout="@layout/dialog_item"/>
+        <include layout="@layout/item_dialog" />
 
-        <include layout="@layout/dialog_item"/>
+        <include layout="@layout/item_dialog" />
 
-        <include layout="@layout/dialog_item"/>
+        <include layout="@layout/item_dialog" />
 
-        <include layout="@layout/dialog_item"/>
+        <include layout="@layout/item_dialog" />
 
-        <include layout="@layout/dialog_item"/>
+        <include layout="@layout/item_dialog" />
 
     </LinearLayout>
 

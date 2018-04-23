@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
+import io.realm.Sort;
 import xyz.egoistk21.iFantasy.bean.RawPlayer;
 import xyz.egoistk21.iFantasy.bean.User;
 
@@ -106,11 +107,10 @@ public class DBUtil {
     }
 
     public static ArrayList<RawPlayer> getRawPlayers(int pos, int type) {
-        Log.d(TAG, "getRawPlayers: " + pos + " " + type);
         RealmResults<RawPlayer> rawPlayers = "ALL".equals(sPos[pos])
-                ? sRealm.where(RawPlayer.class).findAll()
-                : sRealm.where(RawPlayer.class).equalTo("pos1", sPos[pos]).or().equalTo("pos2", sPos[pos]).findAll();
-        if (type != 0) rawPlayers.sort(sType[type]);
+                ? sRealm.where(RawPlayer.class).findAllAsync()
+                : sRealm.where(RawPlayer.class).equalTo("pos1", sPos[pos]).or().equalTo("pos2", sPos[pos]).findAllAsync();
+        if (type != 0) rawPlayers.sort(sType[type], Sort.DESCENDING);
         return (ArrayList<RawPlayer>) sRealm.copyFromRealm(rawPlayers);
     }
 

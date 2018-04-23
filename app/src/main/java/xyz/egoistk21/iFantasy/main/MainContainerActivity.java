@@ -52,6 +52,7 @@ public class MainContainerActivity extends BaseActivity {
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
+        //隐藏虚拟按键，并且全屏
         if (hasFocus) {
             UIUtil.go2FullScreen(this);
         }
