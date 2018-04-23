@@ -3,9 +3,14 @@ package xyz.egoistk21.iFantasy.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
+import xyz.egoistk21.iFantasy.bean.RawPlayer;
 import xyz.egoistk21.iFantasy.bean.User;
 
 /**
@@ -19,6 +24,8 @@ public class DBUtil {
     private static SharedPreferences sSharedPreferences;
     private static Realm sRealm;
     private static User sUser;
+    private static final String[] sPos = {"ALL", "C", "F", "F", "G", "G"};
+    private static final String[] sType = {"name", "score", "price"};
 
     private DBUtil() {
     }
@@ -90,6 +97,27 @@ public class DBUtil {
                 getUser().deleteFromRealm();
             }
             sRealm.copyToRealmOrUpdate(user);
+            sRealm.commitTransaction();
+        }
+    }
+
+    public static boolean isRawPlayersNull() {
+        return sRealm.where(RawPlayer.class).count() == 0;
+    }
+
+    public static ArrayList<RawPlayer> getRawPlayers(int pos, int type) {
+        Log.d(TAG, "getRawPlayers: " + pos + " " + type);
+        RealmResults<RawPlayer> rawPlayers = "ALL".equals(sPos[pos])
+                ? sRealm.where(RawPlayer.class).findAll()
+                : sRealm.where(RawPlayer.class).equalTo("pos1", sPos[pos]).or().equalTo("pos2", sPos[pos]).findAll();
+        if (type != 0) rawPlayers.sort(sType[type]);
+        return (ArrayList<RawPlayer>) sRealm.copyFromRealm(rawPlayers);
+    }
+
+    public static void setRawPlayers(ArrayList<RawPlayer> rawPlayers) {
+        if (rawPlayers != null) {
+            sRealm.beginTransaction();
+            sRealm.copyToRealmOrUpdate(rawPlayers);
             sRealm.commitTransaction();
         }
     }

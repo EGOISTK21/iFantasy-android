@@ -83,7 +83,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     @Override
     protected void onDestroy() {
         Log.i(TAG, "onDestroy");
-        onDetachP();
         super.onDestroy();
+        onDetachP();
     }
 }

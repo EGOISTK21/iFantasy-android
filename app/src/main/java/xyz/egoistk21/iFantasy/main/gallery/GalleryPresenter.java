@@ -40,7 +40,8 @@ public class GalleryPresenter implements GalleryContract.Presenter {
     }
 
     @Override
-    public void getRawPlayers(final int pos, int type, LifecycleProvider rxLifecycle) {
+    public void getRawPlayers(final int pos, final int type, LifecycleProvider rxLifecycle) {
+//        if (DBUtil.isRawPlayersNull()) {
         mModel.getRawPlayers(pos, type, rxLifecycle, new Observer<HttpResult<ArrayList<RawPlayer>>>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -51,6 +52,7 @@ public class GalleryPresenter implements GalleryContract.Presenter {
             public void onNext(HttpResult<ArrayList<RawPlayer>> listHttpResult) {
                 Log.d(TAG, "onNext: " + listHttpResult.toString());
                 if (0 == listHttpResult.getState()) {
+//                        DBUtil.setRawPlayers(listHttpResult.getResult());
                     mViews[pos].setRawPlayers(listHttpResult.getResult());
                 }
             }
@@ -65,6 +67,9 @@ public class GalleryPresenter implements GalleryContract.Presenter {
                 Log.d(TAG, "onComplete");
             }
         });
+//        } else {
+//            mViews[pos].setRawPlayers(DBUtil.getRawPlayers(pos, type));
+//        }
     }
 
     private static class SingletonHolder {

@@ -16,7 +16,6 @@ import butterknife.OnClick;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseActivity;
 import xyz.egoistk21.iFantasy.main.MainContainerActivity;
-import xyz.egoistk21.iFantasy.service.BGMService;
 import xyz.egoistk21.iFantasy.util.DBUtil;
 import xyz.egoistk21.iFantasy.util.ToastUtil;
 import xyz.egoistk21.iFantasy.util.UIUtil;

@@ -27,7 +27,6 @@ public class MainContainerActivity extends BaseActivity {
 
     @Override
     protected void initEvent() {
-
     }
 
     @Override
@@ -37,7 +36,6 @@ public class MainContainerActivity extends BaseActivity {
 
     @Override
     protected void onDetachP() {
-
     }
 
     @Override
@@ -46,13 +44,11 @@ public class MainContainerActivity extends BaseActivity {
         UIUtil.go2FullScreen(this);
     }
 
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if (keyCode == KeyEvent.KEYCODE_BACK) {
-//            return true;// return true;拦截事件传递,从而屏蔽back键。
-//        }
-//        return super.onKeyDown(keyCode, event);
-//    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // return true;拦截事件传递,从而屏蔽back键。
+        return keyCode == KeyEvent.KEYCODE_BACK || super.onKeyDown(keyCode, event);
+    }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

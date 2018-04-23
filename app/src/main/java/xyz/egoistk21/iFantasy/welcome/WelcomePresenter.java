@@ -46,7 +46,7 @@ class WelcomePresenter implements WelcomeContract.Presenter {
     }
 
     @Override
-    public void register(String phone, String nickname, LifecycleProvider rxLifecycle) {
+    public void register(final String phone, String nickname, final LifecycleProvider rxLifecycle) {
         mModel.register(phone, nickname, rxLifecycle, new Observer<HttpResult<User>>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -64,9 +64,26 @@ class WelcomePresenter implements WelcomeContract.Presenter {
                         @Override
                         public void gotResult(int i, String s) {
                             Log.d(TAG, "JMessageClient register: " + i + " " + s);
+                            switch (i) {
+                                case 0:
+                                    ToastUtil.show("注册成功");
+                                    login(phone, rxLifecycle);
+                                    break;
+                                case 898001:
+                                    ToastUtil.show("用户名已存在");
+                                    break;
+                                case 871301:
+                                    ToastUtil.show("密码格式错误");
+                                    break;
+                                case 871304:
+                                    ToastUtil.show("密码错误");
+                                    break;
+                                default:
+                                    ToastUtil.show(s);
+                                    break;
+                            }
                         }
                     });
-                    mView.startGame();
                 } else {
                     mView.dismissPB();
                     ToastUtil.show(userHttpResult.getError());
@@ -107,6 +124,22 @@ class WelcomePresenter implements WelcomeContract.Presenter {
                         @Override
                         public void gotResult(int i, String s) {
                             Log.d(TAG, "JMessageClient login: " + i + " " + s);
+                            switch (i) {
+                                case 801003:
+                                    ToastUtil.show("用户名不存在");
+                                    break;
+                                case 871301:
+                                    ToastUtil.show("密码格式错误");
+                                    break;
+                                case 801004:
+                                    ToastUtil.show("密码错误");
+                                    break;
+                                case 0:
+                                    ToastUtil.show("登陆成功");
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                     });
                     mView.startGame();

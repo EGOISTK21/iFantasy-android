@@ -1,7 +1,5 @@
 package xyz.egoistk21.iFantasy.main.recruit;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
@@ -68,7 +66,6 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
             fragments[i] = GalleryFragment.newInstance();
             fragments[i].setArguments(bundle);
         }
-
         vpRecruit.setAdapter(mPagerAdapter = new MyFragmentStatePagerAdapter());
     }
 
@@ -96,7 +93,7 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
     void sortGallery(int type) {
         if (mType != type) {
             mType = type;
-            mPagerAdapter.getCurrentFragment().onStart();
+            ((GalleryFragment) mPagerAdapter.getCurrentFragment()).refreshRawPlayers(type);
         }
     }
 

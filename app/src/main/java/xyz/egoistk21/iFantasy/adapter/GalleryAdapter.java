@@ -23,16 +23,16 @@ import xyz.egoistk21.iFantasy.bean.RawPlayer;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder> {
 
-    private Context mContext;
-    private List<RawPlayer> mRawPlayers;
     private static RequestOptions sRequestOptions =
             new RequestOptions()
                     .placeholder(R.mipmap.ic_launcher)
                     .error(R.mipmap.ic_launcher)
                     .diskCacheStrategy(DiskCacheStrategy.ALL);
+    private Context mContext;
+    private List<RawPlayer> mRawPlayers;
 
-    public GalleryAdapter(List<RawPlayer> players) {
-        mRawPlayers = players;
+    public void setRawPlayers(List<RawPlayer> rawPlayers) {
+        mRawPlayers = rawPlayers;
     }
 
     @NonNull

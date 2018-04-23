@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class RawPlayer extends RealmObject implements Parcelable {
 
@@ -18,6 +19,7 @@ public class RawPlayer extends RealmObject implements Parcelable {
             return new RawPlayer[size];
         }
     };
+    @PrimaryKey
     private int id;
     private String name;
     private String pos1;

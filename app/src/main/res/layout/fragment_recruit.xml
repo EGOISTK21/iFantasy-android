@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/background">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/background"
+              android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
                 android:text="返回"
-                android:textColor="@color/smssdk_white" />
+                android:textColor="@color/smssdk_white"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
                 android:text="招募"
                 android:textColor="@color/smssdk_white"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="资金"
-                android:textColor="@color/smssdk_white" />
+                android:textColor="@color/smssdk_white"/>
 
             <TextView
                 android:id="@+id/tv_money"
@@ -61,13 +61,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:text="%万"
-                android:textColor="@color/smssdk_white" />
+                android:textColor="@color/smssdk_white"/>
 
             <View
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="2dp"
-                android:background="@drawable/plus" />
+                android:background="@drawable/plus"/>
 
         </LinearLayout>
 
@@ -95,7 +95,7 @@
                 android:layout_marginTop="8dp"
                 android:text="幸运招募"
                 android:textColor="@color/smssdk_white"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -110,7 +110,7 @@
                     android:layout_marginTop="12dp"
                     android:text="免费"
                     android:textColor="@color/smssdk_white"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
                 <TextView
                     android:id="@+id/tv_one_recruit_msg"
@@ -119,13 +119,13 @@
                     android:maxLines="1"
                     android:text="@string/one_recruit"
                     android:textColor="@color/smssdk_white"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
                 <Button
                     android:id="@+id/btn_lucky_recruit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="招募1次" />
+                    android:text="招募1次"/>
 
                 <TextView
                     android:id="@+id/tv_one_recruit_cost"
@@ -135,7 +135,7 @@
                     android:maxLines="1"
                     android:text="免费"
                     android:textColor="@color/smssdk_white"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -144,13 +144,13 @@
                     android:maxLines="1"
                     android:text="必得评分80+的球员"
                     android:textColor="@color/smssdk_white"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
                 <Button
                     android:id="@+id/btn_penta_lucky_recruit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="招募5次" />
+                    android:text="招募5次"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -159,7 +159,7 @@
                     android:maxLines="1"
                     android:text="400万"
                     android:textColor="@color/smssdk_white"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -181,7 +181,7 @@
                 android:layout_marginTop="8dp"
                 android:text="定向招募"
                 android:textColor="@color/smssdk_white"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -199,34 +199,34 @@
                     <android.support.design.widget.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ALL" />
+                        android:text="ALL"/>
 
                     <android.support.design.widget.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="C" />
+                        android:text="C"/>
 
                     <android.support.design.widget.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="PF" />
+                        android:text="PF"/>
 
                     <android.support.design.widget.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="SF"
                         app:tabSelectedTextColor="@color/smssdk_white"
-                        app:tabTextColor="@color/smssdk_white" />
+                        app:tabTextColor="@color/smssdk_white"/>
 
                     <android.support.design.widget.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SG" />
+                        android:text="SG"/>
 
                     <android.support.design.widget.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="PG" />
+                        android:text="PG"/>
 
                 </android.support.design.widget.TabLayout>
 
@@ -236,14 +236,14 @@
                     android:layout_height="match_parent"
                     android:layout_above="@+id/vp_recruit"
                     android:layout_alignParentEnd="true"
-                    android:entries="@array/classify" />
+                    android:entries="@array/classify"/>
 
                 <xyz.egoistk21.iFantasy.widget.NoScrollViewPager
                     android:id="@+id/vp_recruit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_alignParentBottom="true"
-                    android:layout_below="@+id/tbl_recruit" />
+                    android:layout_below="@+id/tbl_recruit"/>
 
             </RelativeLayout>
 
