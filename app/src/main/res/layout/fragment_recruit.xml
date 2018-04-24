@@ -234,7 +234,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-            <xyz.egoistk21.iFantasy.widget.DropDownMenu
+            <com.baiiu.filter.DropDownMenu
                 android:id="@+id/ddm_recruit"
                 android:layout_width="64dp"
                 android:layout_height="wrap_content"
@@ -249,7 +249,7 @@
                     android:textSize="22sp"
                     android:visibility="gone" />
 
-            </xyz.egoistk21.iFantasy.widget.DropDownMenu>
+            </com.baiiu.filter.DropDownMenu>
 
         </RelativeLayout>
 

@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.baiiu.filter.DropDownMenu;
 import com.baiiu.filter.interfaces.OnFilterDoneListener;
 
 import java.text.SimpleDateFormat;
@@ -25,7 +26,6 @@ import xyz.egoistk21.iFantasy.bean.RecruitInfo;
 import xyz.egoistk21.iFantasy.bean.RecruitResult;
 import xyz.egoistk21.iFantasy.main.gallery.GalleryFragment;
 import xyz.egoistk21.iFantasy.util.DBUtil;
-import xyz.egoistk21.iFantasy.widget.DropDownMenu;
 import xyz.egoistk21.iFantasy.widget.NoScrollViewPager;
 
 public class RecruitFragment extends BaseFragment implements RecruitContract.View {

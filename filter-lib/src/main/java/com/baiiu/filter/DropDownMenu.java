@@ -54,7 +54,7 @@ public class DropDownMenu extends RelativeLayout implements View.OnClickListener
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-//        setContentView(findViewById(R.id.mFilterContentView));
+        setContentView(findViewById(R.id.mFilterContentView));
     }
 
     public void setContentView(View contentView) {
