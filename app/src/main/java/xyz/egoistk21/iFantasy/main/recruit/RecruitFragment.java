@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.zxl.library.DropDownMenu;
+import com.baiiu.filter.interfaces.OnFilterDoneListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,11 +19,13 @@ import java.util.TimeZone;
 import butterknife.BindView;
 import butterknife.OnClick;
 import xyz.egoistk21.iFantasy.R;
+import xyz.egoistk21.iFantasy.adapter.DropMenuAdapter;
 import xyz.egoistk21.iFantasy.base.BaseFragment;
 import xyz.egoistk21.iFantasy.bean.RecruitInfo;
 import xyz.egoistk21.iFantasy.bean.RecruitResult;
 import xyz.egoistk21.iFantasy.main.gallery.GalleryFragment;
 import xyz.egoistk21.iFantasy.util.DBUtil;
+import xyz.egoistk21.iFantasy.widget.DropDownMenu;
 import xyz.egoistk21.iFantasy.widget.NoScrollViewPager;
 
 public class RecruitFragment extends BaseFragment implements RecruitContract.View {
@@ -71,6 +73,14 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
             fragments[i].setArguments(bundle);
         }
         vpRecruit.setAdapter(mPagerAdapter = new MyFragmentStatePagerAdapter());
+
+        ddmRecruit.setMenuAdapter(new DropMenuAdapter(getContext(), new String[]{"位置"}, new OnFilterDoneListener() {
+            @Override
+            public void onFilterDone(int i, String s, String s1) {
+                ddmRecruit.setPositionIndicatorText(i, s);
+                ddmRecruit.close();
+            }
+        }));
     }
 
     @Override
