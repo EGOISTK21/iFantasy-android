@@ -26,6 +26,7 @@ import xyz.egoistk21.iFantasy.bean.RecruitInfo;
 import xyz.egoistk21.iFantasy.bean.RecruitResult;
 import xyz.egoistk21.iFantasy.main.gallery.GalleryFragment;
 import xyz.egoistk21.iFantasy.util.DBUtil;
+import xyz.egoistk21.iFantasy.widget.LuckyDialog;
 import xyz.egoistk21.iFantasy.widget.NoScrollViewPager;
 
 public class RecruitFragment extends BaseFragment implements RecruitContract.View {
@@ -158,6 +159,7 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
     @Override
     public void showPentaLuckyRecruitResult(ArrayList<RecruitResult> recruitResults) {
         setMoney(-400);
+        new LuckyDialog.Builder(getActivity(), R.layout.dialog_lucky).create().show();
     }
 
     @Override

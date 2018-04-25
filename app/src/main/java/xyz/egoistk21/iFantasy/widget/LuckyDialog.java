@@ -1,16 +1,16 @@
 package xyz.egoistk21.iFantasy.widget;
 
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.view.Window;
+import android.view.WindowManager;
 
 import xyz.egoistk21.iFantasy.R;
+import xyz.egoistk21.iFantasy.util.UIUtil;
 
-public class LuckyDialog extends AlertDialog {
+public class LuckyDialog extends Dialog {
 
     private LuckyDialog(Context context) {
         super(context);
@@ -22,6 +22,19 @@ public class LuckyDialog extends AlertDialog {
 
     private LuckyDialog(Context context, int themeResId) {
         super(context, themeResId);
+    }
+
+    @Override
+    public void show() {
+        if (UIUtil.checkDeviceHasNavigationBar(getContext())) {
+            Window window = getWindow();
+            window.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+            super.show();
+            window.getDecorView().setSystemUiVisibility(UIUtil.IMMERSIVE_STICKY);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+        } else {
+            super.show();
+        }
     }
 
     public static class Builder {
@@ -52,15 +65,15 @@ public class LuckyDialog extends AlertDialog {
             View rootView = ((LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(mThemeResId, null);
             mLuckyDialog = new LuckyDialog(mContext, R.style.dialogTheme);
             mLuckyDialog.setContentView(rootView);
-            ((TextView) rootView.findViewById(R.id.tv_dialog_title)).setText(mTitle);
-            Button positiveButton = rootView.findViewById(R.id.tv_dialog_positive);
-            positiveButton.setText(mPositiveButtonText);
-            positiveButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mPositiveOnClickListener.onClick(mLuckyDialog, DialogInterface.BUTTON_POSITIVE);
-                }
-            });
+//            ((TextView) rootView.findViewById(R.id.tv_dialog_title)).setText(mTitle);
+//            Button positiveButton = rootView.findViewById(R.id.tv_dialog_positive);
+//            positiveButton.setText(mPositiveButtonText);
+//            positiveButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    mPositiveOnClickListener.onClick(mLuckyDialog, DialogInterface.BUTTON_POSITIVE);
+//                }
+//            });
             return mLuckyDialog;
         }
     }
