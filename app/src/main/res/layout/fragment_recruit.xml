@@ -189,7 +189,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_direct_recruit_title"
-                android:layout_toStartOf="@id/ddm_recruit"
+                android:layout_toStartOf="@+id/ddm_recruit"
                 app:tabGravity="fill"
                 app:tabSelectedTextColor="@color/smssdk_white"
                 app:tabTextColor="@color/smssdk_white">
@@ -229,7 +229,7 @@
                 </android.support.design.widget.TabLayout>
 
             <xyz.egoistk21.iFantasy.widget.NoScrollViewPager
-                android:layout_below="@id/tbl_recruit"
+                android:layout_below="@+id/tbl_recruit"
                 android:id="@+id/vp_recruit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -239,17 +239,8 @@
                 android:layout_width="64dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_below="@+id/tv_direct_recruit_title">
-
-                <TextView
-                    android:id="@+id/mFilterContentView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:textSize="22sp"
-                    android:visibility="gone" />
-
-            </com.baiiu.filter.DropDownMenu>
+                android:layout_below="@+id/tv_direct_recruit_title"
+                android:gravity="center" />
 
         </RelativeLayout>
 

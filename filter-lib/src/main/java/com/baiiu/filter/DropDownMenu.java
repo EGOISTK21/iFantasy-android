@@ -54,10 +54,10 @@ public class DropDownMenu extends RelativeLayout implements View.OnClickListener
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        setContentView(findViewById(R.id.mFilterContentView));
+        setContentView();
     }
 
-    public void setContentView(View contentView) {
+    public void setContentView() {
         removeAllViews();
 
         /*
@@ -70,19 +70,14 @@ public class DropDownMenu extends RelativeLayout implements View.OnClickListener
         LayoutParams params = new LayoutParams(-1, -1);
         params.addRule(BELOW, R.id.fixedTabIndicator);
 
-        /*
-         * 2.添加contentView,内容界面
-         */
-        addView(contentView, params);
 
         /*
          * 3.添加展开页面,装载筛选器list
          */
         frameLayoutContainer = new FrameLayout(getContext());
-        frameLayoutContainer.setBackgroundColor(getResources().getColor(R.color.black_p50));
-        addView(frameLayoutContainer, params);
-
         frameLayoutContainer.setVisibility(GONE);
+        frameLayoutContainer.setBackgroundColor(0xFF121669);
+        addView(frameLayoutContainer, params);
 
         initListener();
         initAnimation();

@@ -1,9 +1,9 @@
 package com.baiiu.filter.view;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.widget.Checkable;
-import android.widget.TextView;
 
 /**
  * author: baiiu
@@ -11,7 +11,7 @@ import android.widget.TextView;
  * description:
  */
 
-public class FilterCheckedTextView extends TextView implements Checkable {
+public class FilterCheckedTextView extends AppCompatTextView implements Checkable {
     private boolean mChecked;
 
     public FilterCheckedTextView(Context context) {

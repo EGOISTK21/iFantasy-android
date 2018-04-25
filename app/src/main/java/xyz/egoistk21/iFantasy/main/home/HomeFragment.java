@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseFragment;
 import xyz.egoistk21.iFantasy.main.bag.BagFragment;
@@ -19,6 +18,7 @@ import xyz.egoistk21.iFantasy.main.settings.SettingsFragment;
 import xyz.egoistk21.iFantasy.main.tactics.TacticsFragment;
 import xyz.egoistk21.iFantasy.main.team.TeamFragment;
 import xyz.egoistk21.iFantasy.util.DBUtil;
+import xyz.egoistk21.iFantasy.widget.CircleImageView;
 
 public class HomeFragment extends BaseFragment implements HomeContract.View {
 

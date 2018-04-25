@@ -25,7 +25,6 @@ import java.util.List;
 public class FixedTabIndicator extends LinearLayout {
 
     private Context context;
-    private int mTabVisibleCount = 4;// tab数量
 
     /*
      * 分割线
@@ -34,17 +33,10 @@ public class FixedTabIndicator extends LinearLayout {
     private int mDividerColor = 0xFFdddddd;// 分割线颜色
     private int mDividerPadding = 13;// 分割线距离上下padding
 
-    /*
-     * 上下两条线
-     */
-    private Paint mLinePaint;
-    private float mLineHeight = 1;
-    private int mLineColor = 0xFFeeeeee;
-
 
     private int mTabTextSize = 13;// 指针文字的大小,sp
-    private int mTabDefaultColor = 0xFF666666;// 未选中默认颜色
-    private int mTabSelectedColor = 0xFF008DF2;// 指针选中颜色
+    private int mTabDefaultColor = 0xFFFFFFFF;// 未选中默认颜色
+    private int mTabSelectedColor = 0xFFFFFFFF;// 指针选中颜色
     private int drawableRight = 10;
 
     private int measureHeight;
@@ -92,15 +84,12 @@ public class FixedTabIndicator extends LinearLayout {
     private void init(Context context) {
         this.context = context;
         setOrientation(LinearLayout.HORIZONTAL);
-        setBackgroundColor(Color.WHITE);
+        setBackgroundColor(0xFF121669);
         setWillNotDraw(false);
 
         mDividerPaint = new Paint();
         mDividerPaint.setAntiAlias(true);
         mDividerPaint.setColor(mDividerColor);
-
-        mLinePaint = new Paint();
-        mLinePaint.setColor(mLineColor);
 
         mDividerPadding = UIUtil.dp(context, mDividerPadding);
         drawableRight = UIUtil.dp(context, drawableRight);
@@ -127,12 +116,6 @@ public class FixedTabIndicator extends LinearLayout {
             canvas.drawLine(child.getRight(), mDividerPadding, child.getRight(), measureHeight - mDividerPadding, mDividerPaint);
         }
 
-
-        //上边黑线
-        canvas.drawRect(0, 0, measuredWidth, mLineHeight, mLinePaint);
-
-        //下边黑线
-        canvas.drawRect(0, measureHeight - mLineHeight, measuredWidth, measureHeight, mLinePaint);
     }
 
     /**

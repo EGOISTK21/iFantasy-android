@@ -19,7 +19,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <xyz.egoistk21.iFantasy.widget.CircleImageView
                 android:id="@+id/civ_avatar"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -215,7 +215,7 @@
 
     </LinearLayout>
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <xyz.egoistk21.iFantasy.widget.CircleImageView
         android:id="@+id/civ_game"
         android:layout_width="120dp"
         android:layout_height="120dp"
