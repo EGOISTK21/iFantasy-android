@@ -2,19 +2,20 @@ package xyz.egoistk21.iFantasy.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import com.baiiu.filter.adapter.MenuAdapter;
 import com.baiiu.filter.adapter.SimpleTextAdapter;
 import com.baiiu.filter.interfaces.OnFilterDoneListener;
 import com.baiiu.filter.interfaces.OnFilterItemClickListener;
 import com.baiiu.filter.typeview.SingleListView;
-import com.baiiu.filter.util.UIUtil;
 import com.baiiu.filter.view.FilterCheckedTextView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+
+import static android.view.Gravity.CENTER;
 
 /**
  * author: baiiu
@@ -44,24 +45,12 @@ public class DropMenuAdapter implements MenuAdapter {
 
     @Override
     public int getBottomMargin(int position) {
-        if (position == 3) {
-            return 0;
-        }
-
-        return UIUtil.dp(mContext, 140);
+        return 0;
     }
 
     @Override
     public View getView(int position, FrameLayout parentContainer) {
-        View view = parentContainer.getChildAt(position);
-
-        switch (position) {
-            case 0:
-                view = createSingleListView();
-                break;
-        }
-
-        return view;
+        return createSingleListView();
     }
 
     private View createSingleListView() {
@@ -74,23 +63,23 @@ public class DropMenuAdapter implements MenuAdapter {
 
                     @Override
                     protected void initCheckedTextView(FilterCheckedTextView checkedTextView) {
-                        int dp = UIUtil.dp(mContext, 15);
-                        checkedTextView.setPadding(dp, dp, 0, dp);
+                        checkedTextView.setGravity(CENTER);
                     }
                 })
                 .onItemClick(new OnFilterItemClickListener<String>() {
                     @Override
                     public void onItemClick(String item) {
-                        onFilterDone();
+                        onFilterDone(item);
                     }
                 });
         singleListView.setList(Arrays.asList("位置", "评分", "薪资"), -1);
-
+        RelativeLayout.LayoutParams mParam = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 200);
+        singleListView.setLayoutParams(mParam);
         return singleListView;
     }
 
 
-    private void onFilterDone() {
+    private void onFilterDone(String item) {
         if (onFilterDoneListener != null) {
             onFilterDoneListener.onFilterDone(0, "", "");
         }

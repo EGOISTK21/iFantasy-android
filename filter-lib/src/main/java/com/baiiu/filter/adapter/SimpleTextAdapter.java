@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.baiiu.filter.R;
-import com.baiiu.filter.util.UIUtil;
 import com.baiiu.filter.view.FilterCheckedTextView;
 
 import java.util.List;
@@ -37,7 +36,6 @@ public abstract class SimpleTextAdapter<T> extends BaseBaseAdapter<T> {
 
             holder = new FilterItemHolder();
             holder.checkedTextView = (FilterCheckedTextView) convertView;
-            holder.checkedTextView.setPadding(0, UIUtil.dp(context, 15), 0, UIUtil.dp(context, 15));
             initCheckedTextView(holder.checkedTextView);
 
             convertView.setTag(holder);

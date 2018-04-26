@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -78,7 +79,8 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
         ddmRecruit.setMenuAdapter(new DropMenuAdapter(getContext(), new String[]{"位置"}, new OnFilterDoneListener() {
             @Override
             public void onFilterDone(int i, String s, String s1) {
-                ddmRecruit.setPositionIndicatorText(i, s);
+                Log.d(TAG, "onFilterDone: " + s1);
+                ddmRecruit.setCurrentIndicatorText(s);
                 ddmRecruit.close();
             }
         }));

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
@@ -48,7 +49,7 @@ public class DropDownMenu extends RelativeLayout implements View.OnClickListener
     }
 
     private void init(Context context) {
-        setBackgroundColor(Color.WHITE);
+        setBackgroundColor(Color.TRANSPARENT);
     }
 
     @Override
@@ -65,9 +66,9 @@ public class DropDownMenu extends RelativeLayout implements View.OnClickListener
          */
         fixedTabIndicator = new FixedTabIndicator(getContext());
         fixedTabIndicator.setId(R.id.fixedTabIndicator);
-        addView(fixedTabIndicator, -1, UIUtil.dp(getContext(), 50));
+        addView(fixedTabIndicator, -1, UIUtil.dp(getContext(), 48));
 
-        LayoutParams params = new LayoutParams(-1, -1);
+        LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.addRule(BELOW, R.id.fixedTabIndicator);
 
 
