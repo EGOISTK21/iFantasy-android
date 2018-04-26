@@ -3,7 +3,6 @@ package xyz.egoistk21.iFantasy.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -11,7 +10,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 import io.realm.Sort;
-import xyz.egoistk21.iFantasy.bean.RawPlayer;
+import xyz.egoistk21.iFantasy.bean.SimplePlayer;
 import xyz.egoistk21.iFantasy.bean.User;
 
 /**
@@ -103,21 +102,21 @@ public class DBUtil {
     }
 
     public static boolean isRawPlayersNull() {
-        return sRealm.where(RawPlayer.class).count() == 0;
+        return sRealm.where(SimplePlayer.class).count() == 0;
     }
 
-    public static ArrayList<RawPlayer> getRawPlayers(int pos, int type) {
-        RealmResults<RawPlayer> rawPlayers = "ALL".equals(sPos[pos])
-                ? sRealm.where(RawPlayer.class).findAllAsync()
-                : sRealm.where(RawPlayer.class).equalTo("pos1", sPos[pos]).or().equalTo("pos2", sPos[pos]).findAllAsync();
-        if (type != 0) rawPlayers.sort(sType[type], Sort.DESCENDING);
-        return (ArrayList<RawPlayer>) sRealm.copyFromRealm(rawPlayers);
+    public static ArrayList<SimplePlayer> getSimplePlayers(int pos, int type) {
+        RealmResults<SimplePlayer> simplePlayers = "ALL".equals(sPos[pos])
+                ? sRealm.where(SimplePlayer.class).findAllAsync()
+                : sRealm.where(SimplePlayer.class).equalTo("pos1", sPos[pos]).or().equalTo("pos2", sPos[pos]).findAllAsync();
+        if (type != 0) simplePlayers.sort(sType[type], Sort.DESCENDING);
+        return (ArrayList<SimplePlayer>) sRealm.copyFromRealm(simplePlayers);
     }
 
-    public static void setRawPlayers(ArrayList<RawPlayer> rawPlayers) {
-        if (rawPlayers != null) {
+    public static void setSimplePlayers(ArrayList<SimplePlayer> simplePlayers) {
+        if (simplePlayers != null) {
             sRealm.beginTransaction();
-            sRealm.copyToRealmOrUpdate(rawPlayers);
+            sRealm.copyToRealmOrUpdate(simplePlayers);
             sRealm.commitTransaction();
         }
     }

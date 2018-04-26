@@ -6,15 +6,15 @@ import java.util.ArrayList;
 
 import io.reactivex.Observer;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
-import xyz.egoistk21.iFantasy.bean.RawPlayer;
+import xyz.egoistk21.iFantasy.bean.SimplePlayer;
 
 interface GalleryContract {
     interface Model {
-        void getRawPlayers(int pos, int type, LifecycleProvider rxLifecycle, Observer<HttpResult<ArrayList<RawPlayer>>> observer);
+        void getRawPlayers(int pos, int type, LifecycleProvider rxLifecycle, Observer<HttpResult<ArrayList<SimplePlayer>>> observer);
     }
 
     interface View {
-        void setRawPlayers(ArrayList<RawPlayer> rawPlayers);
+        void setRawPlayers(ArrayList<SimplePlayer> simplePlayers);
 
         void showPB();
 

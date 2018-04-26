@@ -20,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import xyz.egoistk21.iFantasy.R;
-import xyz.egoistk21.iFantasy.bean.RawPlayer;
+import xyz.egoistk21.iFantasy.bean.SimplePlayer;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder> {
 
@@ -30,14 +30,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
                     .error(R.mipmap.ic_launcher)
                     .diskCacheStrategy(DiskCacheStrategy.ALL);
     private Context mContext;
-    private List<RawPlayer> mRawPlayers;
+    private List<SimplePlayer> mSimplePlayers;
 
     public GalleryAdapter() {
-        mRawPlayers = new ArrayList<>();
+        mSimplePlayers = new ArrayList<>();
     }
 
-    public void setRawPlayers(List<RawPlayer> rawPlayers) {
-        mRawPlayers = rawPlayers;
+    public void setSimplePlayers(List<SimplePlayer> simplePlayers) {
+        mSimplePlayers = simplePlayers;
     }
 
     @NonNull
@@ -50,12 +50,12 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
 
     @Override
     public void onBindViewHolder(@NonNull GalleryViewHolder holder, int position) {
-        holder.setData(mRawPlayers.get(position));
+        holder.setData(mSimplePlayers.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mRawPlayers.size();
+        return mSimplePlayers.size();
     }
 
     class GalleryViewHolder extends RecyclerView.ViewHolder {
@@ -67,20 +67,20 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
         @BindView(R.id.tv_player)
         TextView tvPlayer;
 
-        private RawPlayer mRawPlayer;
+        private SimplePlayer mSimplePlayer;
 
         GalleryViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        private void setData(RawPlayer rawPlayer) {
-            mRawPlayer = rawPlayer;
+        private void setData(SimplePlayer simplePlayer) {
+            mSimplePlayer = simplePlayer;
             Glide.with(mContext)
-                    .load("file:///android_asset/" + rawPlayer.getId() + "/pic.webp")
+                    .load("file:///android_asset/" + simplePlayer.getId() + "/pic.webp")
                     .apply(sRequestOptions)
                     .into(ivPlayer);
-            tvPlayer.setText(mRawPlayer.getName());
+            tvPlayer.setText(mSimplePlayer.getName());
         }
 
         @OnClick(R.id.item_player)

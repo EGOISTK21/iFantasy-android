@@ -6,17 +6,17 @@ import android.os.Parcelable;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class RawPlayer extends RealmObject implements Parcelable {
+public class SimplePlayer extends RealmObject implements Parcelable {
 
-    public static final Creator<RawPlayer> CREATOR = new Creator<RawPlayer>() {
+    public static final Creator<SimplePlayer> CREATOR = new Creator<SimplePlayer>() {
         @Override
-        public RawPlayer createFromParcel(Parcel in) {
-            return new RawPlayer(in);
+        public SimplePlayer createFromParcel(Parcel in) {
+            return new SimplePlayer(in);
         }
 
         @Override
-        public RawPlayer[] newArray(int size) {
-            return new RawPlayer[size];
+        public SimplePlayer[] newArray(int size) {
+            return new SimplePlayer[size];
         }
     };
     @PrimaryKey
@@ -27,11 +27,12 @@ public class RawPlayer extends RealmObject implements Parcelable {
     private int score;
     private int price;
 
-    public RawPlayer() {
+
+    public SimplePlayer() {
 
     }
 
-    private RawPlayer(Parcel in) {
+    private SimplePlayer(Parcel in) {
         id = in.readInt();
         name = in.readString();
         pos1 = in.readString();
@@ -81,7 +82,7 @@ public class RawPlayer extends RealmObject implements Parcelable {
 
     @Override
     public String toString() {
-        return "RawPlayer{" +
+        return "SimplePlayer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", pos1='" + pos1 + '\'' +

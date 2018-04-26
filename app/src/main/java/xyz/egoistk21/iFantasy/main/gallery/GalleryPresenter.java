@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
-import xyz.egoistk21.iFantasy.bean.RawPlayer;
+import xyz.egoistk21.iFantasy.bean.SimplePlayer;
 import xyz.egoistk21.iFantasy.util.DBUtil;
 
 public class GalleryPresenter implements GalleryContract.Presenter {
@@ -44,18 +44,18 @@ public class GalleryPresenter implements GalleryContract.Presenter {
     @Override
     public void getRawPlayers(final int pos, final int type, LifecycleProvider rxLifecycle) {
         if (DBUtil.isRawPlayersNull()) {
-            mModel.getRawPlayers(0, 0, rxLifecycle, new Observer<HttpResult<ArrayList<RawPlayer>>>() {
+            mModel.getRawPlayers(0, 0, rxLifecycle, new Observer<HttpResult<ArrayList<SimplePlayer>>>() {
             @Override
             public void onSubscribe(Disposable d) {
                 Log.d(TAG, "onSubscribe");
             }
 
             @Override
-            public void onNext(HttpResult<ArrayList<RawPlayer>> listHttpResult) {
+            public void onNext(HttpResult<ArrayList<SimplePlayer>> listHttpResult) {
                 Log.d(TAG, "onNext: " + listHttpResult.toString());
                 if (0 == listHttpResult.getState()) {
-                    DBUtil.setRawPlayers(listHttpResult.getResult());
-                    mViews[pos].setRawPlayers(DBUtil.getRawPlayers(pos, type));
+                    DBUtil.setSimplePlayers(listHttpResult.getResult());
+                    mViews[pos].setRawPlayers(DBUtil.getSimplePlayers(pos, type));
                 }
             }
 
@@ -70,7 +70,7 @@ public class GalleryPresenter implements GalleryContract.Presenter {
             }
         });
         } else {
-            mViews[pos].setRawPlayers(DBUtil.getRawPlayers(pos, type));
+            mViews[pos].setRawPlayers(DBUtil.getSimplePlayers(pos, type));
         }
     }
 

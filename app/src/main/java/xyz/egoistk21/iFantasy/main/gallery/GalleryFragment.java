@@ -10,7 +10,7 @@ import butterknife.BindView;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.adapter.GalleryAdapter;
 import xyz.egoistk21.iFantasy.base.BaseFragment;
-import xyz.egoistk21.iFantasy.bean.RawPlayer;
+import xyz.egoistk21.iFantasy.bean.SimplePlayer;
 
 public class GalleryFragment extends BaseFragment implements GalleryContract.View {
 
@@ -68,8 +68,8 @@ public class GalleryFragment extends BaseFragment implements GalleryContract.Vie
     }
 
     @Override
-    public void setRawPlayers(ArrayList<RawPlayer> rawPlayers) {
-        mGalleryAdapter.setRawPlayers(rawPlayers);
+    public void setRawPlayers(ArrayList<SimplePlayer> simplePlayers) {
+        mGalleryAdapter.setSimplePlayers(simplePlayers);
     }
 
     @Override

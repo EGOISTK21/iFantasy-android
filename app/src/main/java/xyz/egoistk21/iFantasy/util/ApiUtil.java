@@ -15,11 +15,12 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import xyz.egoistk21.iFantasy.bean.DetailPlayer;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
-import xyz.egoistk21.iFantasy.bean.RawPlayer;
 import xyz.egoistk21.iFantasy.bean.RecruitInfo;
 import xyz.egoistk21.iFantasy.bean.RecruitResult;
 import xyz.egoistk21.iFantasy.bean.RecruitedPlayer;
+import xyz.egoistk21.iFantasy.bean.SimplePlayer;
 import xyz.egoistk21.iFantasy.bean.User;
 
 /**
@@ -71,8 +72,8 @@ public class ApiUtil {
         return sRetrofit.create(PentaLuckyRecruitApi.class);
     }
 
-    public static RecruitShowRawPlayerApi getRecruitShowRawPlayerApi() {
-        return sRetrofit.create(RecruitShowRawPlayerApi.class);
+    public static RecruitSimplePlayersApi getRecruitSimplePlayersApi() {
+        return sRetrofit.create(RecruitSimplePlayersApi.class);
     }
 
     public static DirectRecruitApi getDirectRecruitApi() {
@@ -81,6 +82,10 @@ public class ApiUtil {
 
     public static TripleDirectRecruitApi getTripleDirectRecruitApi() {
         return sRetrofit.create(TripleDirectRecruitApi.class);
+    }
+
+    public static DetailPlayerApi getDetailPlayerApi() {
+        return sRetrofit.create(DetailPlayerApi.class);
     }
 
     public interface VerificationApi {
@@ -129,11 +134,11 @@ public class ApiUtil {
         Observable<HttpResult<ArrayList<RecruitResult>>> recruit(@Field("user_id") int userId);
     }
 
-    public interface RecruitShowRawPlayerApi {
+    public interface RecruitSimplePlayersApi {
         @Headers("User-Agent:iFantasy-android")
         @GET("recruit/show_all_payer")
-        Observable<HttpResult<ArrayList<RawPlayer>>> showPlayer(@Query("pos") int position,
-                                                                @Query("type") int type);
+        Observable<HttpResult<ArrayList<SimplePlayer>>> showPlayer(@Query("pos") int position,
+                                                                   @Query("type") int type);
     }
 
     public interface DirectRecruitApi {
@@ -150,6 +155,12 @@ public class ApiUtil {
         @FormUrlEncoded
         Observable<HttpResult<ArrayList<RecruitedPlayer>>> recruit(@Field("user_id") int userId,
                                                                    @Field("theme_id") int themeId);
+    }
+
+    public interface DetailPlayerApi {
+        @Headers("User-Agent:iFantasy-android")
+        @GET("team/per/player")
+        Observable<HttpResult<DetailPlayer>> query(@Query("player_id") int playerId);
     }
 
 }
