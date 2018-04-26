@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.bean.SimplePlayer;
+import xyz.egoistk21.iFantasy.main.gallery.GalleryContract;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder> {
 
@@ -31,9 +32,11 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
                     .diskCacheStrategy(DiskCacheStrategy.ALL);
     private Context mContext;
     private List<SimplePlayer> mSimplePlayers;
+    private GalleryContract.View mView;
 
-    public GalleryAdapter() {
+    public GalleryAdapter(GalleryContract.View view) {
         mSimplePlayers = new ArrayList<>();
+        mView = view;
     }
 
     public void setSimplePlayers(List<SimplePlayer> simplePlayers) {
@@ -44,7 +47,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
     @Override
     public GalleryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         mContext = parent.getContext();
-        View view = LayoutInflater.from(mContext).inflate(R.layout.gallery_item, parent, false);
+        View view = ((LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.gallery_item, parent, false);
         return new GalleryViewHolder(view);
     }
 
@@ -86,6 +89,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
         @OnClick(R.id.item_player)
         void showDetail() {
             // todo 根据mRawPlayer.getId()加载detail页面
+            mView.go2PlayerDetail(mSimplePlayer.getId());
         }
     }
 }

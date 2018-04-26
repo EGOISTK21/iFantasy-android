@@ -42,9 +42,9 @@ public class GalleryPresenter implements GalleryContract.Presenter {
     }
 
     @Override
-    public void getRawPlayers(final int pos, final int type, LifecycleProvider rxLifecycle) {
+    public void getSimplePlayers(final int pos, final int type, LifecycleProvider rxLifecycle) {
         if (DBUtil.isRawPlayersNull()) {
-            mModel.getRawPlayers(0, 0, rxLifecycle, new Observer<HttpResult<ArrayList<SimplePlayer>>>() {
+            mModel.getSimplePlayers(0, 0, rxLifecycle, new Observer<HttpResult<ArrayList<SimplePlayer>>>() {
             @Override
             public void onSubscribe(Disposable d) {
                 Log.d(TAG, "onSubscribe");
@@ -55,7 +55,7 @@ public class GalleryPresenter implements GalleryContract.Presenter {
                 Log.d(TAG, "onNext: " + listHttpResult.toString());
                 if (0 == listHttpResult.getState()) {
                     DBUtil.setSimplePlayers(listHttpResult.getResult());
-                    mViews[pos].setRawPlayers(DBUtil.getSimplePlayers(pos, type));
+                    mViews[pos].setSimplePlayers(DBUtil.getSimplePlayers(pos, type));
                 }
             }
 
@@ -70,7 +70,7 @@ public class GalleryPresenter implements GalleryContract.Presenter {
             }
         });
         } else {
-            mViews[pos].setRawPlayers(DBUtil.getSimplePlayers(pos, type));
+            mViews[pos].setSimplePlayers(DBUtil.getSimplePlayers(pos, type));
         }
     }
 

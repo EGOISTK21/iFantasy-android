@@ -17,7 +17,7 @@ import static xyz.egoistk21.iFantasy.util.ApiUtil.FILTER_TIMEOUT;
 
 class GalleryModel implements GalleryContract.Model {
     @Override
-    public void getRawPlayers(int pos, int type, LifecycleProvider rxLifecycle, Observer<HttpResult<ArrayList<SimplePlayer>>> observer) {
+    public void getSimplePlayers(int pos, int type, LifecycleProvider rxLifecycle, Observer<HttpResult<ArrayList<SimplePlayer>>> observer) {
         ApiUtil.getRecruitSimplePlayersApi().showPlayer(pos, type)
                 .debounce(FILTER_TIMEOUT, TimeUnit.SECONDS)
                 .compose(rxLifecycle.<HttpResult<User>>bindToLifecycle())

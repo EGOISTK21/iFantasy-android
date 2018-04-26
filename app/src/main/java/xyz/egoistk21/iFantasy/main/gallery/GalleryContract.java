@@ -8,13 +8,15 @@ import io.reactivex.Observer;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
 import xyz.egoistk21.iFantasy.bean.SimplePlayer;
 
-interface GalleryContract {
+public interface GalleryContract {
     interface Model {
-        void getRawPlayers(int pos, int type, LifecycleProvider rxLifecycle, Observer<HttpResult<ArrayList<SimplePlayer>>> observer);
+        void getSimplePlayers(int pos, int type, LifecycleProvider rxLifecycle, Observer<HttpResult<ArrayList<SimplePlayer>>> observer);
     }
 
     interface View {
-        void setRawPlayers(ArrayList<SimplePlayer> simplePlayers);
+        void setSimplePlayers(ArrayList<SimplePlayer> simplePlayers);
+
+        void go2PlayerDetail(int playerId);
 
         void showPB();
 
@@ -26,6 +28,6 @@ interface GalleryContract {
 
         void detachMV(int pos);
 
-        void getRawPlayers(int pos, int type, LifecycleProvider rxLifecycle);
+        void getSimplePlayers(int pos, int type, LifecycleProvider rxLifecycle);
     }
 }

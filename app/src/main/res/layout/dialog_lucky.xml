@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:gravity="center"
-        android:divider="@drawable/divider"
+        android:divider="@drawable/divider_12_60"
         android:orientation="horizontal"
         android:showDividers="middle">
 

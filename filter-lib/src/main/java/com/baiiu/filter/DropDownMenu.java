@@ -105,6 +105,7 @@ public class DropDownMenu extends RelativeLayout implements View.OnClickListener
      * 此处选择第二种
      */
     public void setPositionView() {
+        frameLayoutContainer.removeAllViews();
         int count = mMenuAdapter.getMenuCount();
         for (int position = 0; position < count; ++position) {
             setPositionView(position, findViewAtPosition(position), mMenuAdapter.getBottomMargin(position));

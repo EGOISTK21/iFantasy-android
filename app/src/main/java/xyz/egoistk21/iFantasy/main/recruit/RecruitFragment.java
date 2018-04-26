@@ -6,7 +6,7 @@ import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -53,7 +53,7 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
     private String[] titles = new String[]{"ALL", "C", "PF", "SF", "SG", "PG",};
     private String[] types = new String[]{"位置", "评分", "薪资",};
     private Fragment[] fragments = new Fragment[titles.length];
-    private MyFragmentStatePagerAdapter mPagerAdapter;
+    private MyFragmentPagerAdapter mPagerAdapter;
     private int mType = 0;
     private RecruitContract.Presenter mPresenter;
 
@@ -75,7 +75,7 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
             fragments[i] = GalleryFragment.newInstance();
             fragments[i].setArguments(bundle);
         }
-        vpRecruit.setAdapter(mPagerAdapter = new MyFragmentStatePagerAdapter());
+        vpRecruit.setAdapter(mPagerAdapter = new MyFragmentPagerAdapter());
 
         ddmRecruit.setMenuAdapter(new DropMenuAdapter(getContext(), new String[]{"位置"}, new OnFilterDoneListener() {
             @Override
@@ -225,11 +225,11 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
         }
     }
 
-    private class MyFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
+    private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
         private GalleryFragment mCurrentFragment;
 
-        MyFragmentStatePagerAdapter() {
+        MyFragmentPagerAdapter() {
             super(RecruitFragment.this.getChildFragmentManager());
         }
 
