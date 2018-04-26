@@ -7,7 +7,11 @@ public class RecruitResult {
     protected String pic;
     protected int num;
 
-    public Class getType() {
+    public String getType() {
+        return type;
+    }
+
+    public Class getClazz() {
         switch (type) {
             case "player":
                 return RecruitedPlayer.class;

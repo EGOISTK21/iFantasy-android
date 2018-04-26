@@ -1,5 +1,6 @@
 package xyz.egoistk21.iFantasy.main.recruit;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
@@ -156,12 +157,35 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
     public void showLuckyRecruitResult(RecruitResult recruitResult) {
         if (!luckyFree) setMoney(-100);
         mPresenter.getRecruitInfo(DBUtil.getUser().getId(), this);
+        new LuckyDialog
+                .Builder(getActivity(), R.layout.dialog_lucky)
+                .setTitle(R.string.lucky_recruit)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setRecruitResult(recruitResult)
+                .create()
+                .show();
     }
 
     @Override
     public void showPentaLuckyRecruitResult(ArrayList<RecruitResult> recruitResults) {
         setMoney(-400);
-        new LuckyDialog.Builder(getActivity(), R.layout.dialog_lucky).create().show();
+        new LuckyDialog
+                .Builder(getActivity(), R.layout.dialog_lucky)
+                .setTitle(R.string.lucky_recruit)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setRecruitResults(recruitResults)
+                .create()
+                .show();
     }
 
     @Override

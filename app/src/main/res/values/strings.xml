@@ -16,4 +16,6 @@
     <string name="money">%d万</string>
     <string name="one_recruit_time">%s之后免费</string>
     <string name="one_lucky_recruit_price">100万</string>
+    <string name="lucky_recruit">幸运招募</string>
+    <string name="yes">确定</string>
 </resources>
