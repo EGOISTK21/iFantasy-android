@@ -125,14 +125,14 @@ public class ApiUtil {
 
     public interface LogoutApi {
         @Headers("User-Agent:iFantasy-android")
-        @DELETE("user/logout")
+        @DELETE("user/query")
         Observable<HttpResult<User>> logout(@Query("user_id") int userId);
     }
 
     public interface QueryUserApi {
         @Headers("User-Agent:iFantasy-android")
         @GET("user/query")
-        Observable<HttpResult<User>> logout(@Query("nickname") int nickname);
+        Observable<HttpResult<User>> query(@Query("nickname") int nickname);
     }
 
     public interface RecruitInfoApi {
