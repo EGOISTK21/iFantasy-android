@@ -8,6 +8,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -58,6 +59,14 @@ public class ApiUtil {
 
     public static LoginApi getLoginApi() {
         return sRetrofit.create(LoginApi.class);
+    }
+
+    public static LogoutApi getLogoutApi() {
+        return sRetrofit.create(LogoutApi.class);
+    }
+
+    public static QueryUserApi getQueryUserApi() {
+        return sRetrofit.create(QueryUserApi.class);
     }
 
     public static RecruitInfoApi getRecruitInfoApi() {
@@ -114,17 +123,29 @@ public class ApiUtil {
                                            @Field("phone") String phone);
     }
 
+    public interface LogoutApi {
+        @Headers("User-Agent:iFantasy-android")
+        @DELETE("user/logout")
+        Observable<HttpResult<User>> logout(@Query("user_id") int userId);
+    }
+
+    public interface QueryUserApi {
+        @Headers("User-Agent:iFantasy-android")
+        @GET("user/query")
+        Observable<HttpResult<User>> logout(@Query("nickname") int nickname);
+    }
+
     public interface RecruitInfoApi {
         @Headers("User-Agent:iFantasy-android")
         @GET("recruit/get_recruit_info")
-        Observable<HttpResult<RecruitInfo>> getRecruitInfo(@Query("user_id") int user_id);
+        Observable<HttpResult<RecruitInfo>> getRecruitInfo(@Query("user_id") int userId);
     }
 
     public interface LuckyRecruitApi {
         @Headers("User-Agent:iFantasy-android")
         @POST("recruit/one_recruit")
         @FormUrlEncoded
-        Observable<HttpResult<RecruitResult>> recruit(@Field("user_id") int user_id);
+        Observable<HttpResult<RecruitResult>> recruit(@Field("user_id") int userId);
     }
 
     public interface PentaLuckyRecruitApi {
@@ -160,7 +181,8 @@ public class ApiUtil {
     public interface DetailPlayerApi {
         @Headers("User-Agent:iFantasy-android")
         @GET("team/per/player")
-        Observable<HttpResult<DetailPlayer>> query(@Query("player_id") int playerId);
+        Observable<HttpResult<DetailPlayer>> query(@Query("player_id") int playerId,
+                                                   @Query("bag_player_id") int bagPlayerId);
     }
 
 }

@@ -71,7 +71,7 @@ public class GalleryFragment extends BaseFragment implements GalleryContract.Vie
         mPresenter.getSimplePlayers(mPos, mType, this);
     }
 
-    public void refreshRawPlayers(int type) {
+    public void refreshSimplePlayers(int type) {
         mPresenter.getSimplePlayers(mPos, mType = type, this);
     }
 

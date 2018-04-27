@@ -122,6 +122,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     @Override
     protected void initData() {
         mPresenter = new HomePresenter(HomeFragment.this);
+        civAvatar.setImageResource(R.drawable.avatar);
         Glide.with(getContext()).load(R.drawable.avatar).into(civAvatar);
         tvNickname.setText(DBUtil.getUser().getNickname());
         tvLevel.setText(String.format(getResources().getString(R.string.level), DBUtil.getUser().getLevel()));

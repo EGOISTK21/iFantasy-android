@@ -36,6 +36,8 @@
         <service android:name=".service.BGMService"/>
 
         <activity
+            android:launchMode="singleInstance"
+            android:theme="@style/iFantasyTheme"
             android:name=".welcome.WelcomeActivity"
             android:screenOrientation="landscape">
 
@@ -47,21 +49,16 @@
 
         </activity>
         <activity
+            android:launchMode="singleInstance"
             android:name=".verify.VerifyActivity"
             android:screenOrientation="portrait"
             android:theme="@style/loginTheme"/>
 
         <activity
+            android:launchMode="singleInstance"
+            android:screenOrientation="landscape"
             android:name=".main.MainContainerActivity"
-            android:screenOrientation="landscape">
-
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-
-        </activity>
+            android:theme="@style/iFantasyTheme" />
 
         <!-- Required SDK 核心功能-->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->

@@ -18,4 +18,9 @@
     <string name="one_lucky_recruit_price">100万</string>
     <string name="lucky_recruit">幸运招募</string>
     <string name="yes">确定</string>
+    <string name="team_name">球队/%s</string>
+    <string name="cloth_num">球衣号/%d号</string>
+    <string name="pos">位置/%s</string>
+    <string name="score">评分/%d</string>
+    <string name="salary">薪资/%d万</string>
 </resources>
