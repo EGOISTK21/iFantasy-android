@@ -23,4 +23,5 @@
     <string name="pos">位置/%s</string>
     <string name="score">评分/%d</string>
     <string name="salary">薪资/%d万</string>
+    <string name="body_measure">身高/%.2fm&#160;&#160;臂展/%.2fm&#160;&#160;站立摸高/%.2fm&#160;&#160;体重/%dkg</string>
 </resources>

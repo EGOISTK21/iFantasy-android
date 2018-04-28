@@ -91,7 +91,7 @@ public class LuckyDialog extends Dialog {
         public LuckyDialog create() {
             LayoutInflater inflater = ((LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE));
             View rootView = inflater.inflate(mThemeResId, null);
-            mLuckyDialog = new LuckyDialog(mContext, R.style.dialogTheme);
+            mLuckyDialog = new LuckyDialog(mContext, R.style.luckyDialogTheme);
             mLuckyDialog.setContentView(rootView);
             ((TextView) rootView.findViewById(R.id.tv_dialog_title)).setText(mTitle);
             TextView positiveButton = rootView.findViewById(R.id.tv_dialog_positive);

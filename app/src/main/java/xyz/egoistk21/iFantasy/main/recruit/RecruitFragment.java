@@ -6,6 +6,7 @@ import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 import android.view.ViewGroup;
@@ -50,9 +51,9 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
 
     private boolean luckyFree;
     private TimeCounter timeCounter;
-    private String[] titles = new String[]{"ALL", "C", "PF", "SF", "SG", "PG",};
-    private String[] types = new String[]{"位置", "评分", "薪资",};
-    private Fragment[] fragments = new Fragment[titles.length];
+    private String[] mTitles = new String[]{"ALL", "C", "PF", "SF", "SG", "PG",};
+    private String[] mTypes = new String[]{"位置", "评分", "薪资",};
+    private BaseFragment[] mFragments = new GalleryFragment[mTitles.length];
     private MyFragmentPagerAdapter mPagerAdapter;
     private int mType = 0;
     private RecruitContract.Presenter mPresenter;
@@ -68,14 +69,14 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
 
     @Override
     protected void initView() {
-        for (int i = 0; i < fragments.length; i++) {
+        for (int i = 0; i < mFragments.length; i++) {
             Bundle bundle = new Bundle();
             bundle.putInt("pos", i);
             bundle.putInt("type", mType);
-            fragments[i] = GalleryFragment.newInstance();
-            fragments[i].setArguments(bundle);
+            mFragments[i] = GalleryFragment.newInstance();
+            mFragments[i].setArguments(bundle);
         }
-        vpRecruit.setAdapter(mPagerAdapter = new MyFragmentPagerAdapter());
+        vpRecruit.setAdapter(mPagerAdapter = new MyFragmentPagerAdapter(getChildFragmentManager()));
 
         ddmRecruit.setMenuAdapter(new DropMenuAdapter(getContext(), new String[]{"位置"}, new OnFilterDoneListener() {
             @Override
@@ -229,8 +230,8 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
 
         private GalleryFragment mCurrentFragment;
 
-        MyFragmentPagerAdapter() {
-            super(RecruitFragment.this.getChildFragmentManager());
+        MyFragmentPagerAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
         }
 
         @Override
@@ -245,18 +246,18 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
 
         @Override
         public Fragment getItem(int position) {
-            return fragments[position];
+            return mFragments[position];
         }
 
         @Override
         public int getCount() {
-            return fragments.length;
+            return mFragments.length;
         }
 
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
-            return titles[position];
+            return mTitles[position];
         }
     }
 }

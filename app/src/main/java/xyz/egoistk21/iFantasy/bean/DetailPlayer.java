@@ -30,6 +30,7 @@ public class DetailPlayer implements Parcelable {
     private int score;
     private String team_name;
     private int weight;
+    private String contract;
 
     public DetailPlayer() {
     }
@@ -49,6 +50,7 @@ public class DetailPlayer implements Parcelable {
         score = in.readInt();
         team_name = in.readString();
         weight = in.readInt();
+        contract = in.readString();
     }
 
     public double getArmspan() {
@@ -107,6 +109,10 @@ public class DetailPlayer implements Parcelable {
         return weight;
     }
 
+    public String getContract() {
+        return contract;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -128,6 +134,7 @@ public class DetailPlayer implements Parcelable {
         dest.writeInt(score);
         dest.writeString(team_name);
         dest.writeInt(weight);
+        dest.writeString(contract);
     }
 
     @Override
@@ -147,6 +154,7 @@ public class DetailPlayer implements Parcelable {
                 ", score=" + score +
                 ", team_name='" + team_name + '\'' +
                 ", weight=" + weight +
+                ", contract='" + contract + '\'' +
                 '}';
     }
 }

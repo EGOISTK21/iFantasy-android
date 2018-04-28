@@ -21,7 +21,7 @@
         <item name="android:windowBackground">@android:color/black</item>
     </style>
 
-    <style name="dialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="luckyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowIsTranslucent">false</item>
@@ -29,6 +29,16 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
+
+    <style name="playerDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
 
 </resources>

@@ -16,9 +16,6 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.bean.SimplePlayer;
 import xyz.egoistk21.iFantasy.main.gallery.GalleryContract;
@@ -63,18 +60,22 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
 
     class GalleryViewHolder extends RecyclerView.ViewHolder {
 
-        //        @BindView(R.id.iv_major)
-//        ImageView ivMajor;
-        @BindView(R.id.iv_player)
-        ImageView ivPlayer;
-        @BindView(R.id.tv_player)
-        TextView tvPlayer;
+        //      private ImageView ivMajor;
+        private ImageView ivPlayer;
+        private TextView tvPlayer;
 
         private SimplePlayer mSimplePlayer;
 
         GalleryViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            ivPlayer = itemView.findViewById(R.id.iv_player);
+            tvPlayer = itemView.findViewById(R.id.tv_player);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mView.go2PlayerDetail(mSimplePlayer.getId());
+                }
+            });
         }
 
         private void setData(SimplePlayer simplePlayer) {
@@ -84,12 +85,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
                     .apply(sRequestOptions)
                     .into(ivPlayer);
             tvPlayer.setText(mSimplePlayer.getName());
-        }
-
-        @OnClick(R.id.item_player)
-        void showDetail() {
-            // todo 根据mRawPlayer.getId()加载detail页面
-            mView.go2PlayerDetail(mSimplePlayer.getId());
         }
     }
 }

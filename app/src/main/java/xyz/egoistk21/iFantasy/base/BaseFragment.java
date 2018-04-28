@@ -12,11 +12,13 @@ import android.view.ViewGroup;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public abstract class BaseFragment extends RxFragment {
 
     protected String TAG = getClass().getName();
 
+    protected Unbinder mUnbinder;
     protected View rootView;
     private boolean isViewPrepared; // 标识fragment视图已经初始化完毕
     private boolean hasFetchData; // 标识已经触发过懒加载数据
@@ -60,8 +62,10 @@ public abstract class BaseFragment extends RxFragment {
         if (rootView == null) {
             rootView = inflater.inflate(getLayoutId(), container, false);
         }
-        ButterKnife.bind(this, rootView);
+        mUnbinder = ButterKnife.bind(this, rootView);
         initView();
+        initEvent();
+        initData();
         return rootView;
     }
 
@@ -70,7 +74,6 @@ public abstract class BaseFragment extends RxFragment {
         Log.d(TAG, "onViewCreated");
         super.onViewCreated(view, savedInstanceState);
         isViewPrepared = true;
-        initData();
         lazyFetchDataIfPrepared();
     }
 
@@ -78,7 +81,6 @@ public abstract class BaseFragment extends RxFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         Log.d(TAG, "onActivityCreated");
         super.onActivityCreated(savedInstanceState);
-        initEvent();
     }
 
     @Override
@@ -133,6 +135,7 @@ public abstract class BaseFragment extends RxFragment {
         isViewPrepared = false;
         hasFetchData = false;
         onDetachP();
+        mUnbinder.unbind();
     }
 
     @Override

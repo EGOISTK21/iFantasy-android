@@ -7,6 +7,7 @@ import android.util.Log;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * 基类Activity
@@ -16,6 +17,8 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends RxAppCompatActivity {
 
     protected String TAG = getClass().getName();
+
+    protected Unbinder mUnbinder;
 
     protected abstract int getLayoutId();
 
@@ -32,7 +35,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         Log.i(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        ButterKnife.bind(this);
+        mUnbinder = ButterKnife.bind(this);
         initView();
         initEvent();
         initData();
@@ -85,5 +88,6 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         Log.i(TAG, "onDestroy");
         super.onDestroy();
         onDetachP();
+        mUnbinder.unbind();
     }
 }

@@ -1,6 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:divider="@drawable/divider"
+    android:orientation="vertical"
+    android:showDividers="middle">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="1dp"
+            android:gravity="center"
+            android:text="生日"
+            android:textColor="@color/smssdk_white" />
+
+        <TextView
+            android:id="@+id/tv_birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="48dp"
+            android:gravity="center"
+            android:text="1984年12月30日"
+            android:textColor="@color/smssdk_white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="国籍"
+            android:textColor="@color/smssdk_white" />
+
+        <TextView
+            android:id="@+id/tv_country"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="48dp"
+            android:gravity="center"
+            android:text="美国"
+            android:textColor="@color/smssdk_white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="体测"
+            android:textColor="@color/smssdk_white" />
+
+        <TextView
+            android:id="@+id/tv_body_measure"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="48dp"
+            android:gravity="center"
+            android:text="@string/body_measure"
+            android:textColor="@color/smssdk_white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="选秀"
+            android:textColor="@color/smssdk_white" />
+
+        <TextView
+            android:id="@+id/tv_draft"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="48dp"
+            android:gravity="center"
+            android:text="2003年第1轮第1顺位被克利夫兰骑士选中"
+            android:textColor="@color/smssdk_white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_contract"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="合同"
+            android:textColor="@color/smssdk_white" />
+
+        <TextView
+            android:id="@+id/tv_contract"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="48dp"
+            android:gravity="center_vertical|start"
+            android:text="3年9986万，2016年夏天签约，2019年夏天到期，2018-2019赛季球员选项，有交易否决权"
+            android:textColor="@color/smssdk_white" />
+
+    </LinearLayout>
 
 </LinearLayout>
