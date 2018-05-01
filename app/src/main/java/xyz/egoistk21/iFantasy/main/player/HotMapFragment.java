@@ -30,7 +30,6 @@ public class HotMapFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-
     }
 
     @Override

@@ -3,17 +3,17 @@ package xyz.egoistk21.iFantasy.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class DetailPlayer implements Parcelable {
+public class PlayerDetail implements Parcelable {
 
-    public static final Creator<DetailPlayer> CREATOR = new Creator<DetailPlayer>() {
+    public static final Creator<PlayerDetail> CREATOR = new Creator<PlayerDetail>() {
         @Override
-        public DetailPlayer createFromParcel(Parcel in) {
-            return new DetailPlayer(in);
+        public PlayerDetail createFromParcel(Parcel in) {
+            return new PlayerDetail(in);
         }
 
         @Override
-        public DetailPlayer[] newArray(int size) {
-            return new DetailPlayer[size];
+        public PlayerDetail[] newArray(int size) {
+            return new PlayerDetail[size];
         }
     };
     private double armspan;
@@ -32,10 +32,10 @@ public class DetailPlayer implements Parcelable {
     private int weight;
     private String contract;
 
-    public DetailPlayer() {
+    public PlayerDetail() {
     }
 
-    private DetailPlayer(Parcel in) {
+    private PlayerDetail(Parcel in) {
         armspan = in.readDouble();
         birthday = in.readString();
         cloth_num = in.readInt();
@@ -139,7 +139,7 @@ public class DetailPlayer implements Parcelable {
 
     @Override
     public String toString() {
-        return "DetailPlayer{" +
+        return "PlayerDetail{" +
                 "armspan=" + armspan +
                 ", birthday='" + birthday + '\'' +
                 ", cloth_num=" + cloth_num +

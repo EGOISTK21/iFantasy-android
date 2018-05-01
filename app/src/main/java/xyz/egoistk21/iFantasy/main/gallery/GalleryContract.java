@@ -2,7 +2,7 @@ package xyz.egoistk21.iFantasy.main.gallery;
 
 import com.trello.rxlifecycle2.LifecycleProvider;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.Observer;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
@@ -10,11 +10,11 @@ import xyz.egoistk21.iFantasy.bean.SimplePlayer;
 
 public interface GalleryContract {
     interface Model {
-        void getSimplePlayers(int pos, int type, LifecycleProvider rxLifecycle, Observer<HttpResult<ArrayList<SimplePlayer>>> observer);
+        void getSimplePlayers(int pos, int type, LifecycleProvider rxLifecycle, Observer<HttpResult<List<SimplePlayer>>> observer);
     }
 
     interface View {
-        void setSimplePlayers(ArrayList<SimplePlayer> simplePlayers);
+        void setSimplePlayers(List<SimplePlayer> simplePlayers);
 
         void go2PlayerDetail(int playerId);
 

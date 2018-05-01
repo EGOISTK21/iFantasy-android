@@ -36,6 +36,11 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
         mView = view;
     }
 
+    public GalleryAdapter(List<SimplePlayer> simplePlayers, GalleryContract.View view) {
+        mSimplePlayers = simplePlayers;
+        mView = view;
+    }
+
     public void setSimplePlayers(List<SimplePlayer> simplePlayers) {
         mSimplePlayers = simplePlayers;
     }
@@ -44,7 +49,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
     @Override
     public GalleryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         mContext = parent.getContext();
-        View view = ((LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.gallery_item, parent, false);
+        View view = ((LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_gallery, parent, false);
         return new GalleryViewHolder(view);
     }
 

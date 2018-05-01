@@ -2,10 +2,20 @@ package xyz.egoistk21.iFantasy.widget;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.ViewTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.util.UIUtil;
@@ -42,6 +52,9 @@ public class PlayerDialog extends Dialog {
         private Context mContext;
         private int mThemeResId;
         private String mImageUrl;
+        private Point mPoint;
+        private ViewGroup.LayoutParams params;
+        private ImageView mImageView;
         private PlayerDialog mPlayerDialog;
 
         public Builder(Context context, int themeResId) {
@@ -59,10 +72,23 @@ public class PlayerDialog extends Dialog {
             View rootView = inflater.inflate(mThemeResId, null);
             mPlayerDialog = new PlayerDialog(mContext, R.style.playerDialogTheme);
             mPlayerDialog.setContentView(rootView);
-//            ImageView imageView = rootView.findViewById(R.id.image_view);
-//            Glide.with(mContext)
-//                    .load(mImageUrl)
-//                    .into(imageView);
+            mPlayerDialog.getWindow().getWindowManager().getDefaultDisplay().getSize(mPoint = new Point());
+            mImageView = rootView.findViewById(R.id.image_view);
+            params = mImageView.getLayoutParams();
+            Glide.with(mContext)
+                    .asBitmap()
+                    .load(mImageUrl)
+                    .into(new ViewTarget<ImageView, Bitmap>(mImageView) {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                            int bWidth = resource.getWidth();
+                            int bHeight = resource.getHeight();
+                            params.height = mPoint.y;
+                            params.width = mPoint.y * bWidth / bHeight;
+                            mImageView.setLayoutParams(params);
+                            mImageView.setImageBitmap(resource);
+                        }
+                    });
             return mPlayerDialog;
         }
     }

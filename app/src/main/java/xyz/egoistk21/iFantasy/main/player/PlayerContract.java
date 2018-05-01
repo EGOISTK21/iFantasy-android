@@ -3,16 +3,16 @@ package xyz.egoistk21.iFantasy.main.player;
 import com.trello.rxlifecycle2.LifecycleProvider;
 
 import io.reactivex.Observer;
-import xyz.egoistk21.iFantasy.bean.DetailPlayer;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
+import xyz.egoistk21.iFantasy.bean.PlayerDetail;
 
 interface PlayerContract {
     interface Model {
-        void loadDetailPlayer(int playerId, int bagPlayerId, LifecycleProvider rxLifecycle, Observer<HttpResult<DetailPlayer>> observer);
+        void loadPlayerDetail(int playerId, int bagPlayerId, LifecycleProvider rxLifecycle, Observer<HttpResult<PlayerDetail>> observer);
     }
 
     interface View {
-        void setDetailPlayer(DetailPlayer detailPlayer);
+        void setPlayerDetail(PlayerDetail playerDetail);
 
         void showPB();
 
@@ -24,6 +24,6 @@ interface PlayerContract {
 
         void detachMV();
 
-        void getDetailPlayer(int playerId, int bagPlayerId, LifecycleProvider rxLifecycle);
+        void getPlayerDetail(int playerId, int bagPlayerId, LifecycleProvider rxLifecycle);
     }
 }

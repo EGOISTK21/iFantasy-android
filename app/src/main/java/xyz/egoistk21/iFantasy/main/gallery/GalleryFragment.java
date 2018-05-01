@@ -6,7 +6,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import xyz.egoistk21.iFantasy.R;
@@ -23,7 +23,7 @@ public class GalleryFragment extends BaseFragment implements GalleryContract.Vie
     private int mPos = 0;
     private int mType = 0;
 
-    private FragmentManager mFragmentManager;
+    private FragmentManager mParentFragmentManager;
     private GalleryAdapter mGalleryAdapter;
     private GridLayoutManager mGridLayoutManager;
     private GalleryContract.Presenter mPresenter;
@@ -39,10 +39,9 @@ public class GalleryFragment extends BaseFragment implements GalleryContract.Vie
 
     @Override
     protected void initView() {
-        mFragmentManager = getParentFragment().getFragmentManager();
+        mParentFragmentManager = getParentFragment().getFragmentManager();
         if (mGalleryAdapter == null) {
             mGalleryAdapter = new GalleryAdapter(this);
-            rvGallery.setAdapter(mGalleryAdapter);
         }
         if (mGridLayoutManager == null) {
             mGridLayoutManager = new GridLayoutManager(getContext(), 6);
@@ -76,8 +75,9 @@ public class GalleryFragment extends BaseFragment implements GalleryContract.Vie
     }
 
     @Override
-    public void setSimplePlayers(ArrayList<SimplePlayer> simplePlayers) {
+    public void setSimplePlayers(List<SimplePlayer> simplePlayers) {
         mGalleryAdapter.setSimplePlayers(simplePlayers);
+        rvGallery.setAdapter(mGalleryAdapter);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class GalleryFragment extends BaseFragment implements GalleryContract.Vie
         Bundle bundle = new Bundle();
         bundle.putInt("player_id", playerId);
         fragment.setArguments(bundle);
-        mFragmentManager.beginTransaction()
+        mParentFragmentManager.beginTransaction()
                 .replace(R.id.container_main, fragment)
                 .addToBackStack("recruit")
                 .commit();

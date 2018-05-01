@@ -6,8 +6,8 @@ import com.trello.rxlifecycle2.LifecycleProvider;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import xyz.egoistk21.iFantasy.bean.DetailPlayer;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
+import xyz.egoistk21.iFantasy.bean.PlayerDetail;
 
 class PlayerPresenter implements PlayerContract.Presenter {
 
@@ -33,18 +33,18 @@ class PlayerPresenter implements PlayerContract.Presenter {
     }
 
     @Override
-    public void getDetailPlayer(int playerId, int bagPlayerId, LifecycleProvider rxLifecycle) {
-        mModel.loadDetailPlayer(playerId, bagPlayerId, rxLifecycle, new Observer<HttpResult<DetailPlayer>>() {
+    public void getPlayerDetail(int playerId, int bagPlayerId, LifecycleProvider rxLifecycle) {
+        mModel.loadPlayerDetail(playerId, bagPlayerId, rxLifecycle, new Observer<HttpResult<PlayerDetail>>() {
             @Override
             public void onSubscribe(Disposable d) {
                 Log.d(TAG, "onSubscribe");
             }
 
             @Override
-            public void onNext(HttpResult<DetailPlayer> detailPlayerHttpResult) {
+            public void onNext(HttpResult<PlayerDetail> detailPlayerHttpResult) {
                 Log.d(TAG, "onNext: " + detailPlayerHttpResult);
                 if (0 == detailPlayerHttpResult.getState()) {
-                    mView.setDetailPlayer(detailPlayerHttpResult.getResult());
+                    mView.setPlayerDetail(detailPlayerHttpResult.getResult());
                 }
             }
 

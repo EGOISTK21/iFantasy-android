@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/background"
+              android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:layout_alignParentTop="true"
             android:padding="16dp"
             android:text="返回"
-            android:textColor="@color/smssdk_white" />
+            android:textColor="@color/smssdk_white"/>
 
         <ImageView
             android:id="@+id/iv_avatar"
@@ -29,7 +29,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_toEndOf="@id/tv_back"
-            android:src="@drawable/avatar" />
+            android:src="@drawable/avatar"/>
 
         <TextView
             android:id="@+id/tv_name"
@@ -39,7 +39,7 @@
             android:layout_toEndOf="@id/iv_avatar"
             android:text="J.詹姆斯"
             android:textColor="@color/smssdk_white"
-            android:textSize="22sp" />
+            android:textSize="22sp"/>
 
         <LinearLayout
             android:id="@+id/ll"
@@ -58,7 +58,7 @@
                 android:gravity="start"
                 android:text="球队/骑士"
                 android:textColor="@color/smssdk_white"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_cloth"
@@ -68,7 +68,7 @@
                 android:gravity="center"
                 android:text="球衣号/23号"
                 android:textColor="@color/smssdk_white"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_pos"
@@ -78,7 +78,7 @@
                 android:gravity="center"
                 android:text="位置/SF"
                 android:textColor="@color/smssdk_white"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_score"
@@ -88,7 +88,7 @@
                 android:gravity="center"
                 android:text="评分/99"
                 android:textColor="@color/smssdk_white"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_salary"
@@ -99,7 +99,7 @@
                 android:paddingEnd="4dp"
                 android:text="薪资/3329万"
                 android:textColor="@color/smssdk_white"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
         </LinearLayout>
 
@@ -111,7 +111,7 @@
             android:layout_toStartOf="@id/btn_dismissal"
             android:minHeight="0dp"
             android:minWidth="0dp"
-            android:text="出战" />
+            android:text="出战"/>
 
         <Button
             android:id="@+id/btn_dismissal"
@@ -121,7 +121,7 @@
             android:layout_alignTop="@id/iv_avatar"
             android:minHeight="0dp"
             android:minWidth="0dp"
-            android:text="解约" />
+            android:text="解约"/>
 
     </RelativeLayout>
 
@@ -129,15 +129,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="24dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginStart="64dp"
-        android:background="@drawable/container_frame"
         android:orientation="vertical">
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tbl_player"
             android:layout_width="match_parent"
             android:layout_height="36dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginStart="64dp"
             app:tabGravity="fill"
             app:tabSelectedTextColor="@color/smssdk_white"
             app:tabTextColor="@color/smssdk_white">
@@ -145,24 +144,24 @@
             <android.support.design.widget.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="资料" />
+                android:text="资料"/>
 
             <android.support.design.widget.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="投篮热图" />
+                android:text="投篮热图"/>
 
             <android.support.design.widget.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="数据" />
+                android:text="数据"/>
 
         </android.support.design.widget.TabLayout>
 
         <xyz.egoistk21.iFantasy.widget.NoScrollViewPager
             android:id="@+id/vp_player"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 

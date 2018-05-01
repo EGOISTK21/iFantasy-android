@@ -1,6 +1,6 @@
 package xyz.egoistk21.iFantasy.util;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -16,8 +16,9 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-import xyz.egoistk21.iFantasy.bean.DetailPlayer;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
+import xyz.egoistk21.iFantasy.bean.PlayerDetail;
+import xyz.egoistk21.iFantasy.bean.PlayerSeasonData;
 import xyz.egoistk21.iFantasy.bean.RecruitInfo;
 import xyz.egoistk21.iFantasy.bean.RecruitResult;
 import xyz.egoistk21.iFantasy.bean.RecruitedPlayer;
@@ -93,8 +94,12 @@ public class ApiUtil {
         return sRetrofit.create(TripleDirectRecruitApi.class);
     }
 
-    public static DetailPlayerApi getDetailPlayerApi() {
-        return sRetrofit.create(DetailPlayerApi.class);
+    public static PlayerDetailApi getPlayerDetailApi() {
+        return sRetrofit.create(PlayerDetailApi.class);
+    }
+
+    public static PlayerSeasonDataApi getPlayerSeasonDataApi() {
+        return sRetrofit.create(PlayerSeasonDataApi.class);
     }
 
     public interface VerificationApi {
@@ -152,14 +157,14 @@ public class ApiUtil {
         @Headers("User-Agent:iFantasy-android")
         @POST("recruit/five_recruit")
         @FormUrlEncoded
-        Observable<HttpResult<ArrayList<RecruitResult>>> recruit(@Field("user_id") int userId);
+        Observable<HttpResult<List<RecruitResult>>> recruit(@Field("user_id") int userId);
     }
 
     public interface RecruitSimplePlayersApi {
         @Headers("User-Agent:iFantasy-android")
         @GET("recruit/show_all_payer")
-        Observable<HttpResult<ArrayList<SimplePlayer>>> showPlayer(@Query("pos") int position,
-                                                                   @Query("type") int type);
+        Observable<HttpResult<List<SimplePlayer>>> showPlayer(@Query("pos") int position,
+                                                              @Query("type") int type);
     }
 
     public interface DirectRecruitApi {
@@ -174,15 +179,23 @@ public class ApiUtil {
         @Headers("User-Agent:iFantasy-android")
         @POST("recruit/buy_theme")
         @FormUrlEncoded
-        Observable<HttpResult<ArrayList<RecruitedPlayer>>> recruit(@Field("user_id") int userId,
-                                                                   @Field("theme_id") int themeId);
+        Observable<HttpResult<List<RecruitedPlayer>>> recruit(@Field("user_id") int userId,
+                                                              @Field("theme_id") int themeId);
     }
 
-    public interface DetailPlayerApi {
+    public interface PlayerDetailApi {
         @Headers("User-Agent:iFantasy-android")
         @GET("team/per/player")
-        Observable<HttpResult<DetailPlayer>> query(@Query("player_id") int playerId,
+        Observable<HttpResult<PlayerDetail>> query(@Query("player_id") int playerId,
                                                    @Query("bag_player_id") int bagPlayerId);
+    }
+
+    public interface PlayerSeasonDataApi {
+        @Headers("User-Agent:iFantasy-android")
+        @GET("team/season")
+        Observable<HttpResult<List<PlayerSeasonData>>> query(@Query("player_id") int playerId,
+                                                             @Query("bag_player_id") int bagPlayerId,
+                                                             @Query("type") int type);
     }
 
 }

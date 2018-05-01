@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_season"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="17-18"
+        android:textColor="@color/smssdk_white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_team_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="骑士"
+        android:textColor="@color/smssdk_white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_gp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="67"
+        android:textColor="@color/smssdk_white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_start"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="67"
+        android:textColor="@color/smssdk_white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_min"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="37.0"
+        android:textColor="@color/smssdk_white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_pts"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="26.9"
+        android:textColor="@color/smssdk_white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_reb"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="8.5"
+        android:textColor="@color/smssdk_white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_ast"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="9.0"
+        android:textColor="@color/smssdk_white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_stl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="1.52"
+        android:textColor="@color/smssdk_white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_blk"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="0.94"
+        android:textColor="@color/smssdk_white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_tov"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="4.24"
+        android:textColor="@color/smssdk_white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_fg_pct"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="54.3%"
+        android:textColor="@color/smssdk_white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_fg3_pct"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="37.2%"
+        android:textColor="@color/smssdk_white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_ft_pct"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="73.3%"
+        android:textColor="@color/smssdk_white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_efg_pct"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="59.1%"
+        android:textColor="@color/smssdk_white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_ts_pct"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="62.1%"
+        android:textColor="@color/smssdk_white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_ortg"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="141.6"
+        android:textColor="@color/smssdk_white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_drtg"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="141.5"
+        android:textColor="@color/smssdk_white"
+        android:textSize="13sp"/>
+
+</LinearLayout>

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -113,7 +114,7 @@ public class DBUtil {
         return (ArrayList<SimplePlayer>) sRealm.copyFromRealm(simplePlayers);
     }
 
-    public static void setSimplePlayers(ArrayList<SimplePlayer> simplePlayers) {
+    public static void setSimplePlayers(List<SimplePlayer> simplePlayers) {
         if (simplePlayers != null) {
             sRealm.beginTransaction();
             sRealm.copyToRealmOrUpdate(simplePlayers);

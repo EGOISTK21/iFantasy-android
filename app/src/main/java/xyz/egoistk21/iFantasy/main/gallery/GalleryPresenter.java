@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.trello.rxlifecycle2.LifecycleProvider;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -44,14 +44,14 @@ public class GalleryPresenter implements GalleryContract.Presenter {
     @Override
     public void getSimplePlayers(final int pos, final int type, LifecycleProvider rxLifecycle) {
         if (DBUtil.isRawPlayersNull()) {
-            mModel.getSimplePlayers(0, 0, rxLifecycle, new Observer<HttpResult<ArrayList<SimplePlayer>>>() {
+            mModel.getSimplePlayers(0, 0, rxLifecycle, new Observer<HttpResult<List<SimplePlayer>>>() {
             @Override
             public void onSubscribe(Disposable d) {
                 Log.d(TAG, "onSubscribe");
             }
 
             @Override
-            public void onNext(HttpResult<ArrayList<SimplePlayer>> listHttpResult) {
+            public void onNext(HttpResult<List<SimplePlayer>> listHttpResult) {
                 Log.d(TAG, "onNext: " + listHttpResult.toString());
                 if (0 == listHttpResult.getState()) {
                     DBUtil.setSimplePlayers(listHttpResult.getResult());

@@ -9,7 +9,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseFragment;
-import xyz.egoistk21.iFantasy.bean.DetailPlayer;
+import xyz.egoistk21.iFantasy.bean.PlayerDetail;
 
 public class DetailFragment extends BaseFragment {
 
@@ -25,7 +25,7 @@ public class DetailFragment extends BaseFragment {
     TextView tvContract;
     @BindView(R.id.ll_contract)
     LinearLayout llContract;
-    private DetailPlayer mDetailPlayer;
+    private PlayerDetail mPlayerDetail;
 
     public static DetailFragment newInstance() {
         return new DetailFragment();
@@ -50,18 +50,18 @@ public class DetailFragment extends BaseFragment {
     protected void initData() {
         Bundle bundle = getArguments();
         if (bundle != null) {
-            mDetailPlayer = bundle.getParcelable("detail_player");
+            mPlayerDetail = bundle.getParcelable("detail_player");
         }
-        if (mDetailPlayer != null) {
-            tvBirthday.setText(mDetailPlayer.getBirthday());
-            tvCountry.setText(mDetailPlayer.getCountry());
-            tvBodyMeasure.setText(String.format(getResources().getString(R.string.body_measure), mDetailPlayer.getHeight(), mDetailPlayer.getArmspan(),
-                    mDetailPlayer.getReach_height(), mDetailPlayer.getWeight()));
-            tvDraft.setText(mDetailPlayer.getDraft());
-            if (TextUtils.isEmpty(mDetailPlayer.getContract())) {
+        if (mPlayerDetail != null) {
+            tvBirthday.setText(mPlayerDetail.getBirthday());
+            tvCountry.setText(mPlayerDetail.getCountry());
+            tvBodyMeasure.setText(String.format(getResources().getString(R.string.body_measure), mPlayerDetail.getHeight(), mPlayerDetail.getArmspan(),
+                    mPlayerDetail.getReach_height(), mPlayerDetail.getWeight()));
+            tvDraft.setText(mPlayerDetail.getDraft());
+            if (TextUtils.isEmpty(mPlayerDetail.getContract())) {
                 llContract.setVisibility(View.INVISIBLE);
             } else {
-                tvContract.setText(mDetailPlayer.getContract());
+                tvContract.setText(mPlayerDetail.getContract());
             }
         }
     }
