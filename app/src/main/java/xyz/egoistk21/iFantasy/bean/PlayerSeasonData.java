@@ -5,10 +5,10 @@ public class PlayerSeasonData {
     private double ast;
     private double blk;
     private double drtg;
-    private double efg_pct;
-    private double fg3_pct;
-    private double fg_pct;
-    private double ft_pct;
+    private String efg_pct;
+    private String fg3_pct;
+    private String fg_pct;
+    private String ft_pct;
     private int gp;
     private double min;
     private double ortg;
@@ -18,7 +18,7 @@ public class PlayerSeasonData {
     private double stl;
     private String team_name;
     private double tov;
-    private double ts_pct;
+    private String ts_pct;
 
     public double getAst() {
         return ast;
@@ -32,19 +32,19 @@ public class PlayerSeasonData {
         return drtg;
     }
 
-    public double getEfg_pct() {
+    public String getEfg_pct() {
         return efg_pct;
     }
 
-    public double getFg3_pct() {
+    public String getFg3_pct() {
         return fg3_pct;
     }
 
-    public double getFg_pct() {
+    public String getFg_pct() {
         return fg_pct;
     }
 
-    public double getFt_pct() {
+    public String getFt_pct() {
         return ft_pct;
     }
 
@@ -84,7 +84,7 @@ public class PlayerSeasonData {
         return tov;
     }
 
-    public double getTs_pct() {
+    public String getTs_pct() {
         return ts_pct;
     }
 

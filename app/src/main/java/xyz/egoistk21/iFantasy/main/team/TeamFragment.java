@@ -1,11 +1,19 @@
 package xyz.egoistk21.iFantasy.main.team;
 
+import android.widget.TextView;
+
+import butterknife.BindView;
 import butterknife.OnClick;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.base.BaseFragment;
+import xyz.egoistk21.iFantasy.util.DBUtil;
 
 public class TeamFragment extends BaseFragment implements TeamContract.View {
 
+    @BindView(R.id.tv_score)
+    TextView tvScore;
+    @BindView(R.id.tv_money)
+    TextView tvMoney;
 
     public static TeamFragment newInstance() {
         return new TeamFragment();
@@ -33,7 +41,7 @@ public class TeamFragment extends BaseFragment implements TeamContract.View {
 
     @Override
     protected void initData() {
-
+        tvMoney.setText(String.format(getResources().getString(R.string.money), DBUtil.getUser().getMoney()));
     }
 
     @Override

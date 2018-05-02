@@ -106,11 +106,11 @@ public class PlayerSeasonDataAdapter extends RecyclerView.Adapter<PlayerSeasonDa
             tvStl.setText(String.valueOf(mPlayerSeasonData.getStl()));
             tvBlk.setText(String.valueOf(mPlayerSeasonData.getBlk()));
             tvTov.setText(String.valueOf(mPlayerSeasonData.getTov()));
-            tvFgPct.setText(String.valueOf(mPlayerSeasonData.getFg_pct()));
-            tvFg3Pct.setText(String.valueOf(mPlayerSeasonData.getFg3_pct()));
-            tvFtPct.setText(String.valueOf(mPlayerSeasonData.getFt_pct()));
-            tvEfgPct.setText(String.valueOf(mPlayerSeasonData.getEfg_pct()));
-            tvTsPct.setText(String.valueOf(mPlayerSeasonData.getTs_pct()));
+            tvFgPct.setText(mPlayerSeasonData.getFg_pct());
+            tvFg3Pct.setText(mPlayerSeasonData.getFg3_pct());
+            tvFtPct.setText(mPlayerSeasonData.getFt_pct());
+            tvEfgPct.setText(mPlayerSeasonData.getEfg_pct());
+            tvTsPct.setText(mPlayerSeasonData.getTs_pct());
             tvOrtg.setText(String.valueOf(mPlayerSeasonData.getOrtg()));
             tvDrtg.setText(String.valueOf(mPlayerSeasonData.getDrtg()));
         }
