@@ -237,7 +237,7 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/tbl_recruit"/>
 
-            <com.baiiu.filter.DropDownMenu
+            <xyz.egoistk21.iFantasy.widget.DropDownMenu
                 android:id="@+id/ddm_recruit"
                 android:layout_width="64dp"
                 android:layout_height="wrap_content"

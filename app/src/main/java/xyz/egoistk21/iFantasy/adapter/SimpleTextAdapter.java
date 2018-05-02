@@ -1,14 +1,14 @@
-package com.baiiu.filter.adapter;
+package xyz.egoistk21.iFantasy.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.baiiu.filter.R;
-import com.baiiu.filter.view.FilterCheckedTextView;
-
 import java.util.List;
+
+import xyz.egoistk21.iFantasy.R;
+import xyz.egoistk21.iFantasy.widget.FilterCheckedTextView;
 
 /**
  * Created by baiiu on 15/12/23.
@@ -21,10 +21,6 @@ public abstract class SimpleTextAdapter<T> extends BaseBaseAdapter<T> {
     public SimpleTextAdapter(List<T> list, Context context) {
         super(list, context);
         inflater = LayoutInflater.from(context);
-    }
-
-    public static class FilterItemHolder {
-        FilterCheckedTextView checkedTextView;
     }
 
     @Override
@@ -52,6 +48,10 @@ public abstract class SimpleTextAdapter<T> extends BaseBaseAdapter<T> {
     public abstract String provideText(T t);
 
     protected void initCheckedTextView(FilterCheckedTextView checkedTextView) {
+    }
+
+    public static class FilterItemHolder {
+        FilterCheckedTextView checkedTextView;
     }
 
 

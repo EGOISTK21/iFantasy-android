@@ -1,4 +1,4 @@
-package com.baiiu.filter.util;
+package xyz.egoistk21.iFantasy.widget;
 
 import android.view.animation.Animation;
 

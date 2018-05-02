@@ -1,4 +1,4 @@
-package com.baiiu.filter.typeview;
+package xyz.egoistk21.iFantasy.widget;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -8,11 +8,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.baiiu.filter.adapter.BaseBaseAdapter;
-import com.baiiu.filter.interfaces.OnFilterItemClickListener;
-import com.baiiu.filter.util.CommonUtil;
-
 import java.util.List;
+
+import xyz.egoistk21.iFantasy.adapter.BaseBaseAdapter;
 
 /**
  * Created by baiiu on 15/12/17.
@@ -69,10 +67,6 @@ public class SingleListView<DATA> extends ListView implements AdapterView.OnItem
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (CommonUtil.isFastDoubleClick()) {
-            return;
-        }
-
         DATA item = mAdapter.getItem(position);
         if (mOnItemClickListener != null) {
             mOnItemClickListener.onItemClick(item);

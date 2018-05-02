@@ -1,4 +1,4 @@
-package com.baiiu.filter.view;
+package xyz.egoistk21.iFantasy.widget;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatTextView;
@@ -12,6 +12,9 @@ import android.widget.Checkable;
  */
 
 public class FilterCheckedTextView extends AppCompatTextView implements Checkable {
+    private static final int[] CHECKED_STATE_SET = {
+            android.R.attr.state_checked
+    };
     private boolean mChecked;
 
     public FilterCheckedTextView(Context context) {
@@ -27,6 +30,11 @@ public class FilterCheckedTextView extends AppCompatTextView implements Checkabl
     }
 
     @Override
+    public boolean isChecked() {
+        return mChecked;
+    }
+
+    @Override
     public void setChecked(boolean checked) {
         if (checked != mChecked) {
             mChecked = checked;
@@ -35,18 +43,9 @@ public class FilterCheckedTextView extends AppCompatTextView implements Checkabl
     }
 
     @Override
-    public boolean isChecked() {
-        return mChecked;
-    }
-
-    @Override
     public void toggle() {
         setChecked(!mChecked);
     }
-
-    private static final int[] CHECKED_STATE_SET = {
-            android.R.attr.state_checked
-    };
 
     @Override
     protected int[] onCreateDrawableState(int extraSpace) {

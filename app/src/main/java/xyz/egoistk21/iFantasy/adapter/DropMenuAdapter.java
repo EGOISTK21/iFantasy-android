@@ -6,14 +6,11 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-import com.baiiu.filter.adapter.MenuAdapter;
-import com.baiiu.filter.adapter.SimpleTextAdapter;
-import com.baiiu.filter.interfaces.OnFilterDoneListener;
-import com.baiiu.filter.interfaces.OnFilterItemClickListener;
-import com.baiiu.filter.typeview.SingleListView;
-import com.baiiu.filter.view.FilterCheckedTextView;
-
 import java.util.Arrays;
+
+import xyz.egoistk21.iFantasy.widget.FilterCheckedTextView;
+import xyz.egoistk21.iFantasy.widget.OnFilterItemClickListener;
+import xyz.egoistk21.iFantasy.widget.SingleListView;
 
 import static android.view.Gravity.CENTER;
 
@@ -81,7 +78,7 @@ public class DropMenuAdapter implements MenuAdapter {
 
     private void onFilterDone(String item) {
         if (onFilterDoneListener != null) {
-            onFilterDoneListener.onFilterDone(0, "", "");
+            onFilterDoneListener.onFilterDone(0, "", item);
         }
     }
 

@@ -1,8 +1,7 @@
-package com.baiiu.filter.view;
+package xyz.egoistk21.iFantasy.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
@@ -15,12 +14,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.baiiu.filter.R;
-import com.baiiu.filter.adapter.MenuAdapter;
-import com.baiiu.filter.util.UIUtil;
-
 import java.util.Arrays;
 import java.util.List;
+
+import xyz.egoistk21.iFantasy.R;
+import xyz.egoistk21.iFantasy.adapter.MenuAdapter;
+import xyz.egoistk21.iFantasy.util.UIUtil;
 
 public class FixedTabIndicator extends LinearLayout {
 
@@ -62,21 +61,6 @@ public class FixedTabIndicator extends LinearLayout {
         init(context);
     }
 
-
-    /**
-     * 条目点击事件
-     */
-    public interface OnItemClickListener {
-        /**
-         * 回调方法
-         *
-         * @param v        当前点击的view
-         * @param position 当前点击的position
-         * @param open     当前的状态，蓝色为open,筛选器为打开状态
-         */
-        void onItemClick(View v, int position, boolean open);
-    }
-
     public void setOnItemClickListener(OnItemClickListener itemClickListenner) {
         this.mOnItemClickListener = itemClickListenner;
     }
@@ -91,10 +75,9 @@ public class FixedTabIndicator extends LinearLayout {
         mDividerPaint.setAntiAlias(true);
         mDividerPaint.setColor(mDividerColor);
 
-        mDividerPadding = UIUtil.dp(context, mDividerPadding);
-        drawableRight = UIUtil.dp(context, drawableRight);
+        mDividerPadding = UIUtil.dip2px(context, mDividerPadding);
+        drawableRight = UIUtil.dip2px(context, drawableRight);
     }
-
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -151,7 +134,6 @@ public class FixedTabIndicator extends LinearLayout {
         }
         postInvalidate();
     }
-
 
     private void switchTab(int pos) {
         TextView tv = getChildAtCurPos(pos);
@@ -274,5 +256,19 @@ public class FixedTabIndicator extends LinearLayout {
 
     public int getLastIndicatorPosition() {
         return mLastIndicatorPosition;
+    }
+
+    /**
+     * 条目点击事件
+     */
+    public interface OnItemClickListener {
+        /**
+         * 回调方法
+         *
+         * @param v        当前点击的view
+         * @param position 当前点击的position
+         * @param open     当前的状态，蓝色为open,筛选器为打开状态
+         */
+        void onItemClick(View v, int position, boolean open);
     }
 }

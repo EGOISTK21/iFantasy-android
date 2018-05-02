@@ -1,4 +1,4 @@
-package com.baiiu.filter;
+package xyz.egoistk21.iFantasy.widget;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,10 +10,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-import com.baiiu.filter.adapter.MenuAdapter;
-import com.baiiu.filter.util.SimpleAnimationListener;
-import com.baiiu.filter.util.UIUtil;
-import com.baiiu.filter.view.FixedTabIndicator;
+import xyz.egoistk21.iFantasy.R;
+import xyz.egoistk21.iFantasy.adapter.MenuAdapter;
+import xyz.egoistk21.iFantasy.util.UIUtil;
 
 
 /**
@@ -65,11 +64,11 @@ public class DropDownMenu extends RelativeLayout implements View.OnClickListener
          * 1.顶部筛选条
          */
         fixedTabIndicator = new FixedTabIndicator(getContext());
-        fixedTabIndicator.setId(R.id.fixedTabIndicator);
-        addView(fixedTabIndicator, -1, UIUtil.dp(getContext(), 48));
+        fixedTabIndicator.setId(xyz.egoistk21.iFantasy.R.id.fixedTabIndicator);
+        addView(fixedTabIndicator, -1, UIUtil.dip2px(getContext(), 48));
 
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.addRule(BELOW, R.id.fixedTabIndicator);
+        params.addRule(BELOW, xyz.egoistk21.iFantasy.R.id.fixedTabIndicator);
 
 
         /*

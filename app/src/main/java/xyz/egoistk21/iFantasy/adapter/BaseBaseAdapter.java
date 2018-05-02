@@ -1,4 +1,4 @@
-package com.baiiu.filter.adapter;
+package xyz.egoistk21.iFantasy.adapter;
 
 import android.content.Context;
 import android.view.View;
@@ -20,6 +20,10 @@ public abstract class BaseBaseAdapter<T> extends BaseAdapter {
         this.context = context;
     }
 
+    public List<T> getList() {
+        return list;
+    }
+
     /**
      * 设置数据。<BR>
      * 会清空原集合所有数据,后添加。
@@ -35,10 +39,6 @@ public abstract class BaseBaseAdapter<T> extends BaseAdapter {
         this.list = list;
 
         notifyDataSetChanged();
-    }
-
-    public List<T> getList() {
-        return list;
     }
 
     /**

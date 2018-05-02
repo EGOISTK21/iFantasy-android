@@ -21,7 +21,7 @@ public class GalleryFragment extends BaseFragment implements GalleryContract.Vie
     RecyclerView rvGallery;
 
     private int mPos = 0;
-    private int mType = 0;
+    private static int mType = 0;
 
     private FragmentManager mParentFragmentManager;
     private GalleryAdapter mGalleryAdapter;
@@ -42,6 +42,7 @@ public class GalleryFragment extends BaseFragment implements GalleryContract.Vie
         mParentFragmentManager = getParentFragment().getFragmentManager();
         if (mGalleryAdapter == null) {
             mGalleryAdapter = new GalleryAdapter(this);
+            rvGallery.setAdapter(mGalleryAdapter);
         }
         if (mGridLayoutManager == null) {
             mGridLayoutManager = new GridLayoutManager(getContext(), 6);
@@ -59,7 +60,6 @@ public class GalleryFragment extends BaseFragment implements GalleryContract.Vie
         Bundle bundle = getArguments();
         if (bundle != null) {
             mPos = bundle.getInt("pos");
-            mType = bundle.getInt("type");
         }
         mPresenter = GalleryPresenter.getInstance(mPos, this);
         Log.d(TAG, "initData: " + mPos + " " + mType);
@@ -72,12 +72,13 @@ public class GalleryFragment extends BaseFragment implements GalleryContract.Vie
 
     public void refreshSimplePlayers(int type) {
         mPresenter.getSimplePlayers(mPos, mType = type, this);
+        mGalleryAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void setSimplePlayers(List<SimplePlayer> simplePlayers) {
         mGalleryAdapter.setSimplePlayers(simplePlayers);
-        rvGallery.setAdapter(mGalleryAdapter);
+        mGalleryAdapter.notifyDataSetChanged();
     }
 
     @Override

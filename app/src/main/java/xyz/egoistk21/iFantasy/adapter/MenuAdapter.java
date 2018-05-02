@@ -1,4 +1,4 @@
-package com.baiiu.filter.adapter;
+package xyz.egoistk21.iFantasy.adapter;
 
 import android.view.View;
 import android.widget.FrameLayout;

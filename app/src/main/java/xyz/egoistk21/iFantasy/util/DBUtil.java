@@ -3,6 +3,7 @@ package xyz.egoistk21.iFantasy.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +103,7 @@ public class DBUtil {
         }
     }
 
-    public static boolean isRawPlayersNull() {
+    public static boolean isSimplePlayerNull() {
         return sRealm.where(SimplePlayer.class).count() == 0;
     }
 
@@ -111,6 +112,7 @@ public class DBUtil {
                 ? sRealm.where(SimplePlayer.class).findAllAsync()
                 : sRealm.where(SimplePlayer.class).equalTo("pos1", sPos[pos]).or().equalTo("pos2", sPos[pos]).findAllAsync();
         if (type != 0) simplePlayers.sort(sType[type], Sort.DESCENDING);
+        Log.d(TAG, "getSimplePlayers: " + type + " " + simplePlayers);
         return (ArrayList<SimplePlayer>) sRealm.copyFromRealm(simplePlayers);
     }
 

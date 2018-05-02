@@ -1,4 +1,4 @@
-package com.baiiu.filter.interfaces;
+package xyz.egoistk21.iFantasy.widget;
 
 /**
  * author: baiiu
