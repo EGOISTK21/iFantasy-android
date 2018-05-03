@@ -2,33 +2,33 @@ package xyz.egoistk21.iFantasy.bean;
 
 public class PlayerSeasonData {
 
-    private double ast;
-    private double blk;
-    private double drtg;
+    private float ast;
+    private float blk;
+    private float drtg;
     private String efg_pct;
     private String fg3_pct;
     private String fg_pct;
     private String ft_pct;
     private int gp;
-    private double min;
-    private double ortg;
-    private double pts;
-    private int reb;
+    private float min;
+    private float ortg;
+    private float pts;
+    private float reb;
     private String season;
-    private double stl;
+    private float stl;
     private String team_name;
-    private double tov;
+    private float tov;
     private String ts_pct;
 
-    public double getAst() {
+    public float getAst() {
         return ast;
     }
 
-    public double getBlk() {
+    public float getBlk() {
         return blk;
     }
 
-    public double getDrtg() {
+    public float getDrtg() {
         return drtg;
     }
 
@@ -52,19 +52,19 @@ public class PlayerSeasonData {
         return gp;
     }
 
-    public double getMin() {
+    public float getMin() {
         return min;
     }
 
-    public double getOrtg() {
+    public float getOrtg() {
         return ortg;
     }
 
-    public double getPts() {
+    public float getPts() {
         return pts;
     }
 
-    public int getReb() {
+    public float getReb() {
         return reb;
     }
 
@@ -72,7 +72,7 @@ public class PlayerSeasonData {
         return season;
     }
 
-    public double getStl() {
+    public float getStl() {
         return stl;
     }
 
@@ -80,7 +80,7 @@ public class PlayerSeasonData {
         return team_name;
     }
 
-    public double getTov() {
+    public float getTov() {
         return tov;
     }
 

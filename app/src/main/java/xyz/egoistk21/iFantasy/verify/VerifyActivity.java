@@ -160,6 +160,7 @@ public class VerifyActivity extends BaseActivity implements VerifyContract.View 
 
     @Override
     protected void onDetachP() {
+        timeCounter.cancel();
         mPresenter.detachMV();
     }
 

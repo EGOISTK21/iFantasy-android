@@ -130,7 +130,7 @@ public class ApiUtil {
 
     public interface LogoutApi {
         @Headers("User-Agent:iFantasy-android")
-        @DELETE("user/query")
+        @DELETE("user/logout")
         Observable<HttpResult<User>> logout(@Query("user_id") int userId);
     }
 
@@ -196,6 +196,14 @@ public class ApiUtil {
         Observable<HttpResult<List<PlayerSeasonData>>> query(@Query("player_id") int playerId,
                                                              @Query("bag_player_id") int bagPlayerId,
                                                              @Query("type") int type);
+    }
+
+    public interface TeamPlayerApi {
+        @Headers("User-Agent:iFantasy-android")
+        @GET("team/all/player")
+        Observable<HttpResult<SimplePlayer>> showPlayer(@Query("user_id") int userId,
+                                                        @Query("pos") int pos,
+                                                        @Query("order") int order);
     }
 
 }

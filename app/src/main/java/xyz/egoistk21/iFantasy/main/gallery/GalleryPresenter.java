@@ -44,7 +44,7 @@ public class GalleryPresenter implements GalleryContract.Presenter {
     @Override
     public void getSimplePlayers(final int pos, final int type, LifecycleProvider rxLifecycle) {
         if (DBUtil.isSimplePlayerNull()) {
-            mModel.getSimplePlayers(0, 0, rxLifecycle, new Observer<HttpResult<List<SimplePlayer>>>() {
+            mModel.getSimplePlayers(0, 1, rxLifecycle, new Observer<HttpResult<List<SimplePlayer>>>() {
                 @Override
                 public void onSubscribe(Disposable d) {
                     Log.d(TAG, "onSubscribe");

@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-import java.util.Arrays;
+import java.util.List;
 
 import xyz.egoistk21.iFantasy.widget.FilterCheckedTextView;
 import xyz.egoistk21.iFantasy.widget.OnFilterItemClickListener;
@@ -21,23 +21,25 @@ import static android.view.Gravity.CENTER;
  */
 public class DropMenuAdapter implements MenuAdapter {
     private final Context mContext;
-    private OnFilterDoneListener onFilterDoneListener;
-    private String[] titles;
+    private OnFilterDoneListener mOnFilterDoneListener;
+    private String[] mTitles;
+    private List<String> mTypes;
 
-    public DropMenuAdapter(Context context, String[] titles, OnFilterDoneListener onFilterDoneListener) {
-        this.mContext = context;
-        this.titles = titles;
-        this.onFilterDoneListener = onFilterDoneListener;
+    public DropMenuAdapter(Context context, String[] titles, List<String> types, OnFilterDoneListener onFilterDoneListener) {
+        mContext = context;
+        mTitles = titles;
+        mTypes = types;
+        mOnFilterDoneListener = onFilterDoneListener;
     }
 
     @Override
     public int getMenuCount() {
-        return titles.length;
+        return mTitles.length;
     }
 
     @Override
     public String getMenuTitle(int position) {
-        return titles[position];
+        return mTitles[position];
     }
 
     @Override
@@ -69,7 +71,7 @@ public class DropMenuAdapter implements MenuAdapter {
                         onFilterDone(item);
                     }
                 });
-        singleListView.setList(Arrays.asList("位置", "评分", "薪资"), -1);
+        singleListView.setList(mTypes, -1);
         RelativeLayout.LayoutParams mParam = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 200);
         singleListView.setLayoutParams(mParam);
         return singleListView;
@@ -77,8 +79,8 @@ public class DropMenuAdapter implements MenuAdapter {
 
 
     private void onFilterDone(String item) {
-        if (onFilterDoneListener != null) {
-            onFilterDoneListener.onFilterDone(0, "", item);
+        if (mOnFilterDoneListener != null) {
+            mOnFilterDoneListener.onFilterDone(0, "", item);
         }
     }
 

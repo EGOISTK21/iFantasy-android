@@ -1,5 +1,6 @@
 package xyz.egoistk21.iFantasy.main.team;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.widget.TextView;
 
@@ -13,8 +14,10 @@ import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.adapter.DropMenuAdapter;
 import xyz.egoistk21.iFantasy.adapter.OnFilterDoneListener;
 import xyz.egoistk21.iFantasy.base.BaseFragment;
+import xyz.egoistk21.iFantasy.main.gallery.GalleryFragment;
 import xyz.egoistk21.iFantasy.util.DBUtil;
 import xyz.egoistk21.iFantasy.widget.DropDownMenu;
+import xyz.egoistk21.iFantasy.widget.MyFragmentPagerAdapter;
 import xyz.egoistk21.iFantasy.widget.NoScrollViewPager;
 
 public class TeamFragment extends BaseFragment implements TeamContract.View {
@@ -30,9 +33,11 @@ public class TeamFragment extends BaseFragment implements TeamContract.View {
     @BindView(R.id.vp_team)
     NoScrollViewPager vpTeam;
 
+    private int mType;
     private String[] mTitles = new String[]{"ALL", "C", "PF", "SF", "SG", "PG",};
-    private List<String> mTypes = new ArrayList<>(Arrays.asList("位置", "评分", "薪资"));
-
+    private List<String> mTypes = new ArrayList<>(Arrays.asList("默认", "评分", "薪资"));
+    private BaseFragment[] mFragments = new GalleryFragment[mTitles.length];
+    private MyFragmentPagerAdapter mPagerAdapter;
 
     public static TeamFragment newInstance() {
         return new TeamFragment();
@@ -45,11 +50,18 @@ public class TeamFragment extends BaseFragment implements TeamContract.View {
 
     @Override
     protected void initView() {
-        ddmTeam.setMenuAdapter(new DropMenuAdapter(getContext(), new String[]{"位置"}, new OnFilterDoneListener() {
+        for (int i = 0; i < mFragments.length; i++) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("pos", i);
+            mFragments[i] = GalleryFragment.newInstance();
+            mFragments[i].setArguments(bundle);
+        }
+        vpTeam.setAdapter(mPagerAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), mTitles, mFragments));
+        ddmTeam.setMenuAdapter(new DropMenuAdapter(getContext(), new String[]{"默认"}, mTypes, new OnFilterDoneListener() {
             @Override
             public void onFilterDone(int i, String s, String s1) {
-//                mType = mTypes.indexOf(s1);
-//                mPagerAdapter.getCurrentFragment().refreshSimplePlayers(mType);
+                mType = mTypes.indexOf(s1);
+                mPagerAdapter.getCurrentFragment().refreshSimplePlayers(mType);
                 ddmTeam.setCurrentIndicatorText(s1);
                 ddmTeam.close();
             }
@@ -58,7 +70,7 @@ public class TeamFragment extends BaseFragment implements TeamContract.View {
 
     @Override
     protected void initEvent() {
-
+        tblTeam.setupWithViewPager(vpTeam);
     }
 
     @OnClick(R.id.tv_back)
