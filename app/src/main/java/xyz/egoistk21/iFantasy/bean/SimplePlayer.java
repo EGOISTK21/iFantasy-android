@@ -8,8 +8,6 @@ import io.realm.annotations.PrimaryKey;
 
 public class SimplePlayer extends RealmObject implements Parcelable {
 
-    @PrimaryKey
-    private int id;
     public static final Creator<SimplePlayer> CREATOR = new Creator<SimplePlayer>() {
         @Override
         public SimplePlayer createFromParcel(Parcel in) {
@@ -21,9 +19,13 @@ public class SimplePlayer extends RealmObject implements Parcelable {
             return new SimplePlayer[size];
         }
     };
+
+    @PrimaryKey
+    private int id;
     private int bag_id;
     private int score;
     private int price;
+    private int salary;
     private String name;
     private String pos1;
     private String pos2;
@@ -32,7 +34,6 @@ public class SimplePlayer extends RealmObject implements Parcelable {
 
     }
 
-    private int salary;
 
     protected SimplePlayer(Parcel in) {
         id = in.readInt();

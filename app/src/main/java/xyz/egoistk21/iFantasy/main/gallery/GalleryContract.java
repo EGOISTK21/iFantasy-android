@@ -10,7 +10,7 @@ import xyz.egoistk21.iFantasy.bean.SimplePlayer;
 
 public interface GalleryContract {
     interface Model {
-        void getSimplePlayers(int pos, int type, LifecycleProvider rxLifecycle, Observer<HttpResult<List<SimplePlayer>>> observer);
+        void getSimplePlayers(int pos, int order, LifecycleProvider rxLifecycle, Observer<HttpResult<List<SimplePlayer>>> observer);
     }
 
     interface View {
@@ -28,6 +28,6 @@ public interface GalleryContract {
 
         void detachMV(int pos);
 
-        void getSimplePlayers(int pos, int type, LifecycleProvider rxLifecycle);
+        void getSimplePlayers(int pos, int order, LifecycleProvider rxLifecycle);
     }
 }

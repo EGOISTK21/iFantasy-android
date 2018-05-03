@@ -163,8 +163,8 @@ public class ApiUtil {
     public interface RecruitSimplePlayersApi {
         @Headers("User-Agent:iFantasy-android")
         @GET("recruit/show_all_payer")
-        Observable<HttpResult<List<SimplePlayer>>> showPlayer(@Query("pos") int position,
-                                                              @Query("type") int type);
+        Observable<HttpResult<List<SimplePlayer>>> showPlayer(@Query("pos") int pos,
+                                                              @Query("order") int order);
     }
 
     public interface DirectRecruitApi {
