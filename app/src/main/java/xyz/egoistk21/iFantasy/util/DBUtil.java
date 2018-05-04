@@ -49,7 +49,7 @@ public class DBUtil {
                 .schemaVersion(1)
                 .migration(DBMigration.getInstance())
                 .assetFile("default.realm")
-                .readOnly()
+//                .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(config);
         sRealm = Realm.getDefaultInstance();
