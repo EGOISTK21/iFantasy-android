@@ -17,8 +17,19 @@ import static xyz.egoistk21.iFantasy.util.ApiUtil.FILTER_TIMEOUT;
 
 class GalleryModel implements GalleryContract.Model {
     @Override
-    public void getSimplePlayers(int pos, int order, LifecycleProvider rxLifecycle, Observer<HttpResult<List<SimplePlayer>>> observer) {
-        ApiUtil.getRecruitSimplePlayersApi().showPlayer(pos, order)
+    public void getRecruitSimplePlayers(int userId, int pos, int order, LifecycleProvider rxLifecycle, Observer<HttpResult<List<SimplePlayer>>> observer) {
+        ApiUtil.getRecruitSimplePlayersApi().showPlayer(userId, pos, order)
+                .debounce(FILTER_TIMEOUT, TimeUnit.SECONDS)
+                .compose(rxLifecycle.<HttpResult<User>>bindToLifecycle())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .unsubscribeOn(Schedulers.io())
+                .subscribe(observer);
+    }
+
+    @Override
+    public void getTeamSimplePlayers(int userId, int pos, int order, LifecycleProvider rxLifecycle, Observer<HttpResult<List<SimplePlayer>>> observer) {
+        ApiUtil.getTeamPlayerApi().showPlayer(userId, pos, order)
                 .debounce(FILTER_TIMEOUT, TimeUnit.SECONDS)
                 .compose(rxLifecycle.<HttpResult<User>>bindToLifecycle())
                 .subscribeOn(Schedulers.io())

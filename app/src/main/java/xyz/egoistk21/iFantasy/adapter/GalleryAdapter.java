@@ -18,7 +18,7 @@ import java.util.List;
 
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.bean.SimplePlayer;
-import xyz.egoistk21.iFantasy.main.gallery.GalleryContract;
+import xyz.egoistk21.iFantasy.main.player.PlayerInterface;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder> {
 
@@ -29,16 +29,16 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
                     .diskCacheStrategy(DiskCacheStrategy.ALL);
     private Context mContext;
     private List<SimplePlayer> mSimplePlayers;
-    private GalleryContract.View mView;
+    private PlayerInterface mIPlayer;
 
-    public GalleryAdapter(GalleryContract.View view) {
+    public GalleryAdapter(PlayerInterface iPlayer) {
         mSimplePlayers = new ArrayList<>();
-        mView = view;
+        mIPlayer = iPlayer;
     }
 
-    public GalleryAdapter(List<SimplePlayer> simplePlayers, GalleryContract.View view) {
+    public GalleryAdapter(List<SimplePlayer> simplePlayers, PlayerInterface iPlayer) {
         mSimplePlayers = simplePlayers;
-        mView = view;
+        mIPlayer = iPlayer;
     }
 
     public void setSimplePlayers(List<SimplePlayer> simplePlayers) {
@@ -78,7 +78,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mView.go2PlayerDetail(mSimplePlayer.getId());
+                    mIPlayer.go2PlayerDetail(mSimplePlayer.getId(), mSimplePlayer.getBag_id());
                 }
             });
         }
@@ -86,7 +86,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
         private void setData(SimplePlayer simplePlayer) {
             mSimplePlayer = simplePlayer;
             Glide.with(mContext)
-                    .load("file:///android_asset/" + simplePlayer.getId() + "/pic.webp")
+                    .load("file:///android_asset/" + mSimplePlayer.getId() + "/pic.webp")
                     .apply(sRequestOptions)
                     .into(ivPlayer);
             tvPlayer.setText(mSimplePlayer.getName());

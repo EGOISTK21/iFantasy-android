@@ -47,9 +47,9 @@ public class DBUtil {
         RealmConfiguration config = new RealmConfiguration.Builder()
                 .name("iFantasy-android.realm")
                 .schemaVersion(1)
-                .migration(DBMigration.getInstance())
-                .assetFile("default.realm")
-//                .deleteRealmIfMigrationNeeded()
+//                .migration(DBMigration.getInstance())
+//                .assetFile("default.realm")
+                .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(config);
         sRealm = Realm.getDefaultInstance();

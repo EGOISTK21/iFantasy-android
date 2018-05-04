@@ -67,6 +67,7 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
     protected void initView() {
         for (int i = 0; i < mFragments.length; i++) {
             Bundle bundle = new Bundle();
+            bundle.putBoolean("isRecruit", true);
             bundle.putInt("pos", i);
             mFragments[i] = GalleryFragment.newInstance();
             mFragments[i].setArguments(bundle);

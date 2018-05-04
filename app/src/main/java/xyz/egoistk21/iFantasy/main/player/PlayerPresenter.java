@@ -34,6 +34,7 @@ class PlayerPresenter implements PlayerContract.Presenter {
 
     @Override
     public void getPlayerDetail(int playerId, int bagPlayerId, LifecycleProvider rxLifecycle) {
+        if (bagPlayerId != 0) playerId = 0;
         mModel.loadPlayerDetail(playerId, bagPlayerId, rxLifecycle, new Observer<HttpResult<PlayerDetail>>() {
             @Override
             public void onSubscribe(Disposable d) {

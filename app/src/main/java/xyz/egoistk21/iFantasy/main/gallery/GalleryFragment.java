@@ -14,12 +14,15 @@ import xyz.egoistk21.iFantasy.adapter.GalleryAdapter;
 import xyz.egoistk21.iFantasy.base.BaseFragment;
 import xyz.egoistk21.iFantasy.bean.SimplePlayer;
 import xyz.egoistk21.iFantasy.main.player.PlayerFragment;
+import xyz.egoistk21.iFantasy.main.player.PlayerInterface;
+import xyz.egoistk21.iFantasy.util.DBUtil;
 
-public class GalleryFragment extends BaseFragment implements GalleryContract.View {
+public class GalleryFragment extends BaseFragment implements GalleryContract.View, PlayerInterface {
 
     @BindView(R.id.rv_gallery)
     RecyclerView rvGallery;
 
+    static boolean mIsRecruit;
     private int mPos = 0;
     private static int mType = 0;
 
@@ -59,6 +62,7 @@ public class GalleryFragment extends BaseFragment implements GalleryContract.Vie
     protected void initData() {
         Bundle bundle = getArguments();
         if (bundle != null) {
+            mIsRecruit = bundle.getBoolean("isRecruit");
             mPos = bundle.getInt("pos");
         }
         mPresenter = GalleryPresenter.getInstance(mPos, this);
@@ -67,11 +71,11 @@ public class GalleryFragment extends BaseFragment implements GalleryContract.Vie
 
     @Override
     protected void lazyFetchData() {
-        mPresenter.getSimplePlayers(mPos, mType, this);
+        mPresenter.getSimplePlayers(DBUtil.getUser().getId(), mPos, mType, this);
     }
 
     public void refreshSimplePlayers(int type) {
-        mPresenter.getSimplePlayers(mPos, mType = type, this);
+        mPresenter.getSimplePlayers(DBUtil.getUser().getId(), mPos, mType = type, this);
         mGalleryAdapter.notifyDataSetChanged();
     }
 
@@ -82,14 +86,15 @@ public class GalleryFragment extends BaseFragment implements GalleryContract.Vie
     }
 
     @Override
-    public void go2PlayerDetail(int playerId) {
+    public void go2PlayerDetail(int id, int bagId) {
         PlayerFragment fragment = PlayerFragment.newInstance();
         Bundle bundle = new Bundle();
-        bundle.putInt("player_id", playerId);
+        bundle.putInt("id", id);
+        bundle.putInt("bag_id", bagId);
         fragment.setArguments(bundle);
         mParentFragmentManager.beginTransaction()
                 .replace(R.id.container_main, fragment)
-                .addToBackStack("recruit")
+                .addToBackStack(mIsRecruit ? "recruit" : "team")
                 .commit();
     }
 

@@ -57,13 +57,14 @@ public class SeasonDataFragment extends BaseFragment {
     protected void initData() {
         Bundle bundle = getArguments();
         if (bundle != null) {
-            mPlayerId = bundle.getInt("player_id");
-            mBagPlayerId = bundle.getInt("bag_player_id");
+            mPlayerId = bundle.getInt("id");
+            mBagPlayerId = bundle.getInt("bag_id");
         }
     }
 
     @Override
     protected void lazyFetchData() {
+        if (mBagPlayerId != 0) mPlayerId = 0;
         ApiUtil.getPlayerSeasonDataApi().query(mPlayerId, mBagPlayerId, 1)
                 .debounce(FILTER_TIMEOUT, TimeUnit.SECONDS)
                 .compose(this.<HttpResult<List<PlayerSeasonData>>>bindToLifecycle())

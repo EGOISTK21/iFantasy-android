@@ -52,6 +52,7 @@ public class TeamFragment extends BaseFragment implements TeamContract.View {
     protected void initView() {
         for (int i = 0; i < mFragments.length; i++) {
             Bundle bundle = new Bundle();
+            bundle.putBoolean("isRecruit", false);
             bundle.putInt("pos", i);
             mFragments[i] = GalleryFragment.newInstance();
             mFragments[i].setArguments(bundle);

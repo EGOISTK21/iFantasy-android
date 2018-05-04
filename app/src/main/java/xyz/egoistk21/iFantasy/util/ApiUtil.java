@@ -102,6 +102,10 @@ public class ApiUtil {
         return sRetrofit.create(PlayerSeasonDataApi.class);
     }
 
+    public static TeamPlayerApi getTeamPlayerApi() {
+        return sRetrofit.create(TeamPlayerApi.class);
+    }
+
     public interface VerificationApi {
         @Headers("User-Agent:iFantasy-android")
         @POST("user/verification")
@@ -137,7 +141,7 @@ public class ApiUtil {
     public interface QueryUserApi {
         @Headers("User-Agent:iFantasy-android")
         @GET("user/query")
-        Observable<HttpResult<User>> query(@Query("nickname") int nickname);
+        Observable<HttpResult<User>> query(@Query("nickname") String nickname);
     }
 
     public interface RecruitInfoApi {
@@ -163,7 +167,8 @@ public class ApiUtil {
     public interface RecruitSimplePlayersApi {
         @Headers("User-Agent:iFantasy-android")
         @GET("recruit/show_all_payer")
-        Observable<HttpResult<List<SimplePlayer>>> showPlayer(@Query("pos") int pos,
+        Observable<HttpResult<List<SimplePlayer>>> showPlayer(@Query("user_id") int userId,
+                                                              @Query("pos") int pos,
                                                               @Query("order") int order);
     }
 
@@ -201,9 +206,9 @@ public class ApiUtil {
     public interface TeamPlayerApi {
         @Headers("User-Agent:iFantasy-android")
         @GET("team/all/player")
-        Observable<HttpResult<SimplePlayer>> showPlayer(@Query("user_id") int userId,
-                                                        @Query("pos") int pos,
-                                                        @Query("order") int order);
+        Observable<HttpResult<List<SimplePlayer>>> showPlayer(@Query("user_id") int userId,
+                                                              @Query("pos") int pos,
+                                                              @Query("order") int order);
     }
 
 }
