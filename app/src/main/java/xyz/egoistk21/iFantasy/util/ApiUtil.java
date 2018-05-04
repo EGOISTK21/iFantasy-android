@@ -137,7 +137,7 @@ public class ApiUtil {
     public interface QueryUserApi {
         @Headers("User-Agent:iFantasy-android")
         @GET("user/query")
-        Observable<HttpResult<User>> query(@Query("nickname") int nickname);
+        Observable<HttpResult<User>> query(@Query("nickname") String nickname);
     }
 
     public interface RecruitInfoApi {
