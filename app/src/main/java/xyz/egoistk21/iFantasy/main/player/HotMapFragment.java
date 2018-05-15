@@ -1,7 +1,6 @@
 package xyz.egoistk21.iFantasy.main.player;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -49,11 +48,12 @@ public class HotMapFragment extends BaseFragment {
     @Override
     protected void initData() {
         Bundle bundle = getArguments();
+        int id = -1;
         if (bundle != null) {
-            image_url = bundle.getString("hot_map_player");
+            id = bundle.getInt("hot_map_player");
         }
-        if (!TextUtils.isEmpty(image_url)) {
-            image_url = "file:///android_asset/" + image_url + "/hot_map.webp";
+        if (id != -1) {
+            image_url = "file:///android_asset/" + id + "/hot_map.webp";
             Glide.with(getContext())
                     .load(image_url)
                     .into(ivHotMap);

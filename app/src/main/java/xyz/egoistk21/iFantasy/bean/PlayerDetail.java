@@ -22,10 +22,10 @@ public class PlayerDetail implements Parcelable {
     private String country;
     private String draft;
     private double height;
-    private String image_url;
     private String name;
     private String pos;
     private int price;
+    private int salary;
     private double reach_height;
     private int score;
     private String team_name;
@@ -42,10 +42,10 @@ public class PlayerDetail implements Parcelable {
         country = in.readString();
         draft = in.readString();
         height = in.readDouble();
-        image_url = in.readString();
         name = in.readString();
         pos = in.readString();
         price = in.readInt();
+        salary = in.readInt();
         reach_height = in.readDouble();
         score = in.readInt();
         team_name = in.readString();
@@ -77,10 +77,6 @@ public class PlayerDetail implements Parcelable {
         return height;
     }
 
-    public String getImage_url() {
-        return image_url;
-    }
-
     public String getName() {
         return name;
     }
@@ -91,6 +87,10 @@ public class PlayerDetail implements Parcelable {
 
     public int getPrice() {
         return price;
+    }
+
+    public int getSalary() {
+        return salary;
     }
 
     public double getReach_height() {
@@ -126,10 +126,10 @@ public class PlayerDetail implements Parcelable {
         dest.writeString(country);
         dest.writeString(draft);
         dest.writeDouble(height);
-        dest.writeString(image_url);
         dest.writeString(name);
         dest.writeString(pos);
         dest.writeInt(price);
+        dest.writeInt(salary);
         dest.writeDouble(reach_height);
         dest.writeInt(score);
         dest.writeString(team_name);
@@ -146,10 +146,10 @@ public class PlayerDetail implements Parcelable {
                 ", country='" + country + '\'' +
                 ", draft='" + draft + '\'' +
                 ", height=" + height +
-                ", image_url='" + image_url + '\'' +
                 ", name='" + name + '\'' +
                 ", pos='" + pos + '\'' +
                 ", price=" + price +
+                ", salary=" + salary +
                 ", reach_height=" + reach_height +
                 ", score=" + score +
                 ", team_name='" + team_name + '\'' +

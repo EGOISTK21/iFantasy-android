@@ -44,8 +44,8 @@ public class PlayerFragment extends BaseFragment implements PlayerContract.View 
     @BindView(R.id.vp_player)
     NoScrollViewPager vpPlayer;
 
-    private int mPlayerId;
-    private int mBagPlayerId;
+    private int mId;
+    private int mBagId;
     private String[] mTitles = new String[]{"资料", "投篮热图", "数据",};
     private Fragment[] mFragments = new BaseFragment[mTitles.length];
     private PlayerContract.Presenter mPresenter;
@@ -78,16 +78,16 @@ public class PlayerFragment extends BaseFragment implements PlayerContract.View 
     protected void initData() {
         Bundle bundle = getArguments();
         if (bundle != null) {
-            mPlayerId = bundle.getInt("player_id");
-            mBagPlayerId = bundle.getInt("bag_player_id");
+            mId = bundle.getInt("id");
+            mBagId = bundle.getInt("bag_id");
         }
         mPresenter = new PlayerPresenter(this);
-        mPresenter.getPlayerDetail(mPlayerId, mBagPlayerId, this);
+        mPresenter.getPlayerDetail(mId, mBagId, this);
         mFragments[0] = DetailFragment.newInstance();
         mFragments[1] = HotMapFragment.newInstance();
         mFragments[2] = SeasonDataFragment.newInstance();
         mFragments[2].setArguments(bundle);
-        Log.d(TAG, "initData: " + mPlayerId + " " + mBagPlayerId);
+        Log.d(TAG, "initData: " + mId + " " + mBagId);
     }
 
     @Override
@@ -105,7 +105,7 @@ public class PlayerFragment extends BaseFragment implements PlayerContract.View 
         bundle0.putParcelable("detail_player", playerDetail);
         mFragments[0].setArguments(bundle0);
         Bundle bundle1 = new Bundle();
-        bundle1.putString("hot_map_player", playerDetail.getImage_url());
+        bundle1.putInt("hot_map_player", mId);
         mFragments[1].setArguments(bundle1);
         vpPlayer.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
             @Override
@@ -126,14 +126,15 @@ public class PlayerFragment extends BaseFragment implements PlayerContract.View 
         });
 
         Glide.with(getContext())
-                .load("file:///android_asset/" + playerDetail.getImage_url() + "/pic.webp")
+                .load("file:///android_asset/" + mId + "/pic.webp")
                 .into(ivAvatar);
         tvName.setText(playerDetail.getName());
         tvTeam.setText(String.format(getResources().getString(R.string.team_name), playerDetail.getTeam_name()));
         tvCloth.setText(String.format(getResources().getString(R.string.cloth_num), playerDetail.getCloth_num()));
         tvPos.setText(String.format(getResources().getString(R.string.pos), playerDetail.getPos()));
         tvScore.setText(String.format(getResources().getString(R.string.score), playerDetail.getScore()));
-        tvSalary.setText(String.format(getResources().getString(R.string.salary), playerDetail.getPrice()));
+        int price = playerDetail.getPrice();
+        tvSalary.setText(String.format(getResources().getString(R.string.salary), price == 0 ? playerDetail.getSalary() : price));
     }
 
     @Override

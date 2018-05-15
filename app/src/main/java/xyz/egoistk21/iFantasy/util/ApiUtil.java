@@ -102,6 +102,10 @@ public class ApiUtil {
         return sRetrofit.create(PlayerSeasonDataApi.class);
     }
 
+    public static TeamPlayerApi getTeamPlayerApi() {
+        return sRetrofit.create(TeamPlayerApi.class);
+    }
+
     public interface VerificationApi {
         @Headers("User-Agent:iFantasy-android")
         @POST("user/verification")
@@ -130,8 +134,9 @@ public class ApiUtil {
 
     public interface LogoutApi {
         @Headers("User-Agent:iFantasy-android")
-        @DELETE("user/query")
-        Observable<HttpResult<User>> logout(@Query("user_id") int userId);
+        @DELETE("user/logout")
+        Observable<HttpResult<User>> logout(@Header("Authorization") String logintoken,
+                                            @Query("user_id") int userId);
     }
 
     public interface QueryUserApi {
@@ -163,8 +168,9 @@ public class ApiUtil {
     public interface RecruitSimplePlayersApi {
         @Headers("User-Agent:iFantasy-android")
         @GET("recruit/show_all_payer")
-        Observable<HttpResult<List<SimplePlayer>>> showPlayer(@Query("pos") int position,
-                                                              @Query("type") int type);
+        Observable<HttpResult<List<SimplePlayer>>> showPlayer(@Query("user_id") int userId,
+                                                              @Query("pos") int pos,
+                                                              @Query("order") int order);
     }
 
     public interface DirectRecruitApi {
@@ -196,6 +202,14 @@ public class ApiUtil {
         Observable<HttpResult<List<PlayerSeasonData>>> query(@Query("player_id") int playerId,
                                                              @Query("bag_player_id") int bagPlayerId,
                                                              @Query("type") int type);
+    }
+
+    public interface TeamPlayerApi {
+        @Headers("User-Agent:iFantasy-android")
+        @GET("team/all/player")
+        Observable<HttpResult<List<SimplePlayer>>> showPlayer(@Query("user_id") int userId,
+                                                              @Query("pos") int pos,
+                                                              @Query("order") int order);
     }
 
 }

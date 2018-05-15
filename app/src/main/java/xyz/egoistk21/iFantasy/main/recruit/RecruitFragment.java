@@ -3,20 +3,13 @@ package xyz.egoistk21.iFantasy.main.recruit;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
-import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.baiiu.filter.DropDownMenu;
-import com.baiiu.filter.interfaces.OnFilterDoneListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -24,12 +17,15 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import xyz.egoistk21.iFantasy.R;
 import xyz.egoistk21.iFantasy.adapter.DropMenuAdapter;
+import xyz.egoistk21.iFantasy.adapter.OnFilterDoneListener;
 import xyz.egoistk21.iFantasy.base.BaseFragment;
 import xyz.egoistk21.iFantasy.bean.RecruitInfo;
 import xyz.egoistk21.iFantasy.bean.RecruitResult;
 import xyz.egoistk21.iFantasy.main.gallery.GalleryFragment;
 import xyz.egoistk21.iFantasy.util.DBUtil;
+import xyz.egoistk21.iFantasy.widget.DropDownMenu;
 import xyz.egoistk21.iFantasy.widget.LuckyDialog;
+import xyz.egoistk21.iFantasy.widget.MyFragmentPagerAdapter;
 import xyz.egoistk21.iFantasy.widget.NoScrollViewPager;
 
 public class RecruitFragment extends BaseFragment implements RecruitContract.View {
@@ -50,12 +46,12 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
     NoScrollViewPager vpRecruit;
 
     private boolean luckyFree;
+    private int mType;
     private TimeCounter timeCounter;
     private String[] mTitles = new String[]{"ALL", "C", "PF", "SF", "SG", "PG",};
-    private String[] mTypes = new String[]{"位置", "评分", "薪资",};
+    private List<String> mTypes = new ArrayList<>(Arrays.asList("默认", "评分", "薪资"));
     private BaseFragment[] mFragments = new GalleryFragment[mTitles.length];
     private MyFragmentPagerAdapter mPagerAdapter;
-    private int mType = 0;
     private RecruitContract.Presenter mPresenter;
 
     public static RecruitFragment newInstance() {
@@ -71,18 +67,18 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
     protected void initView() {
         for (int i = 0; i < mFragments.length; i++) {
             Bundle bundle = new Bundle();
+            bundle.putBoolean("isRecruit", true);
             bundle.putInt("pos", i);
-            bundle.putInt("type", mType);
             mFragments[i] = GalleryFragment.newInstance();
             mFragments[i].setArguments(bundle);
         }
-        vpRecruit.setAdapter(mPagerAdapter = new MyFragmentPagerAdapter(getChildFragmentManager()));
-
-        ddmRecruit.setMenuAdapter(new DropMenuAdapter(getContext(), new String[]{"位置"}, new OnFilterDoneListener() {
+        vpRecruit.setAdapter(mPagerAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), mTitles, mFragments));
+        ddmRecruit.setMenuAdapter(new DropMenuAdapter(getContext(), new String[]{"默认"}, mTypes, new OnFilterDoneListener() {
             @Override
             public void onFilterDone(int i, String s, String s1) {
-                Log.d(TAG, "onFilterDone: " + s1);
-                ddmRecruit.setCurrentIndicatorText(s);
+                mType = mTypes.indexOf(s1);
+                mPagerAdapter.getCurrentFragment().refreshSimplePlayers(mType);
+                ddmRecruit.setCurrentIndicatorText(s1);
                 ddmRecruit.close();
             }
         }));
@@ -106,10 +102,6 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
     @OnClick(R.id.btn_penta_lucky_recruit)
     void pentaLuckyRecruit() {
         mPresenter.pentaLuckyRecruit(DBUtil.getUser().getId(), this);
-    }
-
-    public int getType() {
-        return mType;
     }
 
     @Override
@@ -226,38 +218,4 @@ public class RecruitFragment extends BaseFragment implements RecruitContract.Vie
         }
     }
 
-    private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
-
-        private GalleryFragment mCurrentFragment;
-
-        MyFragmentPagerAdapter(FragmentManager fragmentManager) {
-            super(fragmentManager);
-        }
-
-        @Override
-        public void setPrimaryItem(ViewGroup container, int position, Object object) {
-            mCurrentFragment = (GalleryFragment) object;
-            super.setPrimaryItem(container, position, object);
-        }
-
-        public GalleryFragment getCurrentFragment() {
-            return mCurrentFragment;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragments[position];
-        }
-
-        @Override
-        public int getCount() {
-            return mFragments.length;
-        }
-
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mTitles[position];
-        }
-    }
 }

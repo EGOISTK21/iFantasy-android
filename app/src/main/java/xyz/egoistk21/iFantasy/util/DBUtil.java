@@ -3,9 +3,9 @@ package xyz.egoistk21.iFantasy.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -45,7 +45,10 @@ public class DBUtil {
         sSharedPreferences = context.getSharedPreferences("iFantasy-android", Context.MODE_PRIVATE);
         Realm.init(context);
         RealmConfiguration config = new RealmConfiguration.Builder()
-                .name("iFantasy-android")
+                .name("iFantasy-android.realm")
+                .schemaVersion(1)
+//                .migration(DBMigration.getInstance())
+//                .assetFile("default.realm")
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(config);
@@ -102,7 +105,7 @@ public class DBUtil {
         }
     }
 
-    public static boolean isRawPlayersNull() {
+    public static boolean isSimplePlayerNull() {
         return sRealm.where(SimplePlayer.class).count() == 0;
     }
 
@@ -110,16 +113,9 @@ public class DBUtil {
         RealmResults<SimplePlayer> simplePlayers = "ALL".equals(sPos[pos])
                 ? sRealm.where(SimplePlayer.class).findAllAsync()
                 : sRealm.where(SimplePlayer.class).equalTo("pos1", sPos[pos]).or().equalTo("pos2", sPos[pos]).findAllAsync();
-        if (type != 0) simplePlayers.sort(sType[type], Sort.DESCENDING);
+        if (type != 0) simplePlayers = simplePlayers.sort(sType[type], Sort.DESCENDING);
+        Log.d(TAG, "getSimplePlayers: " + simplePlayers);
         return (ArrayList<SimplePlayer>) sRealm.copyFromRealm(simplePlayers);
-    }
-
-    public static void setSimplePlayers(List<SimplePlayer> simplePlayers) {
-        if (simplePlayers != null) {
-            sRealm.beginTransaction();
-            sRealm.copyToRealmOrUpdate(simplePlayers);
-            sRealm.commitTransaction();
-        }
     }
 
     public static int refreshMoney(int refresh) {

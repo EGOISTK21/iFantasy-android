@@ -88,11 +88,32 @@ public class VerifyActivity extends BaseActivity implements VerifyContract.View 
         code = editable.toString();
     }
 
-    @OnClick(R.id.btn_get_code)
     void getCode() {
+//        SMSSDK.registerEventHandler(new EventHandler() {
+//            public void afterEvent(int event, int result, Object data) {
+//                if (result == SMSSDK.RESULT_COMPLETE) {
+//                    boolean smart = (Boolean) data;
+//                    if (smart) {
+//                        //通过Mob云验证
+//                    } else {
+//                        //依然走短信验证
+//                        // TODO 处理成功得到验证码的结果
+//                        // 请注意，此时只是完成了发送验证码的请求，验证码短信还需要几秒钟之后才送达
+//                    }
+//                } else {
+//                    // TODO 处理错误的结果
+//                }
+//
+//            }
+//        });
+//                SMSSDK.getVerificationCode("86", phone);
+    }
+
+    @OnClick(R.id.btn_get_code)
+    void send() {
         if (DBUtil.verifyPhone(phone)) {
             if (isPhoneChanged) {
-//                SMSSDK.getVerificationCode("86", phone);
+                getCode();
             }
             go2CodeView();
         } else {
@@ -111,7 +132,7 @@ public class VerifyActivity extends BaseActivity implements VerifyContract.View 
 
     @OnClick(R.id.tv_resend)
     void resend() {
-        // SMSSDK.getVerificationCode("86", phone);
+        getCode();
         timeCounter.start();
     }
 
@@ -160,6 +181,7 @@ public class VerifyActivity extends BaseActivity implements VerifyContract.View 
 
     @Override
     protected void onDetachP() {
+        timeCounter.cancel();
         mPresenter.detachMV();
     }
 
