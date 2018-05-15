@@ -11,6 +11,7 @@ import io.reactivex.disposables.Disposable;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
 import xyz.egoistk21.iFantasy.bean.User;
 import xyz.egoistk21.iFantasy.util.DBUtil;
+import xyz.egoistk21.iFantasy.util.StringUtil;
 import xyz.egoistk21.iFantasy.util.ToastUtil;
 
 /**
@@ -60,7 +61,7 @@ class WelcomePresenter implements WelcomeContract.Presenter {
                 if (200 == userHttpResult.getState()) {
                     User user = userHttpResult.getResult();
                     DBUtil.setUser(user);
-                    JMessageClient.register("iFantasy_android_" + user.getId(), "12345qwert", new BasicCallback() {
+                    JMessageClient.register(StringUtil.generateJGName(user.getId()), "12345qwert", new BasicCallback() {
                         @Override
                         public void gotResult(int i, String s) {
                             Log.d(TAG, "JMessageClient register: " + i + " " + s);
