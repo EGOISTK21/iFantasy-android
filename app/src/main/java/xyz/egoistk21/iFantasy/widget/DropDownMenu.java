@@ -64,11 +64,11 @@ public class DropDownMenu extends RelativeLayout implements View.OnClickListener
          * 1.顶部筛选条
          */
         fixedTabIndicator = new FixedTabIndicator(getContext());
-        fixedTabIndicator.setId(xyz.egoistk21.iFantasy.R.id.fixedTabIndicator);
+        fixedTabIndicator.setId(R.id.fixedTabIndicator);
         addView(fixedTabIndicator, -1, UIUtil.dip2px(getContext(), 48));
 
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.addRule(BELOW, xyz.egoistk21.iFantasy.R.id.fixedTabIndicator);
+        params.addRule(BELOW, R.id.fixedTabIndicator);
 
 
         /*

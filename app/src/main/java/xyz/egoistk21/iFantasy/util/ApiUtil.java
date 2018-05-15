@@ -135,7 +135,8 @@ public class ApiUtil {
     public interface LogoutApi {
         @Headers("User-Agent:iFantasy-android")
         @DELETE("user/logout")
-        Observable<HttpResult<User>> logout(@Query("user_id") int userId);
+        Observable<HttpResult<User>> logout(@Header("Authorization") String logintoken,
+                                            @Query("user_id") int userId);
     }
 
     public interface QueryUserApi {

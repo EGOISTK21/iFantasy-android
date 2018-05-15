@@ -10,13 +10,14 @@ import io.reactivex.schedulers.Schedulers;
 import xyz.egoistk21.iFantasy.bean.HttpResult;
 import xyz.egoistk21.iFantasy.bean.User;
 import xyz.egoistk21.iFantasy.util.ApiUtil;
+import xyz.egoistk21.iFantasy.util.DBUtil;
 
 import static xyz.egoistk21.iFantasy.util.ApiUtil.FILTER_TIMEOUT;
 
 class SettingsModel implements SettingsContract.Model {
     @Override
     public void logout(int userId, LifecycleProvider rxLifecycle, Observer<HttpResult<User>> observer) {
-        ApiUtil.getLogoutApi().logout(userId)
+        ApiUtil.getLogoutApi().logout(DBUtil.getLoginToken(), userId)
                 .debounce(FILTER_TIMEOUT, TimeUnit.SECONDS)
                 .compose(rxLifecycle.<HttpResult<User>>bindToLifecycle())
                 .subscribeOn(Schedulers.io())
