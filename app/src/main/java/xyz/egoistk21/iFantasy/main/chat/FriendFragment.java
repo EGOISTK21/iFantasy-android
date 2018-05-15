@@ -4,13 +4,16 @@ import cn.jpush.im.android.api.callback.GetUserInfoListCallback;
 import cn.jpush.im.android.api.model.UserInfo;
 import xyz.egoistk21.iFantasy.R;
 
+import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.trello.rxlifecycle2.LifecycleProvider;
 
@@ -44,10 +47,13 @@ public class FriendFragment extends BaseFragment implements FriendContract.View 
     private UserAdapter adapter1;
     private EditText FriendIDText;
     private List<Message> msgList = new ArrayList<>();
+    private List<Message> msgReadList = new ArrayList<>();
     private RecyclerView msgView;
     private List<UserInfo> userInfoList = new ArrayList<>();
     private ListView userView;
+    private UserInfo talker;
     private Button btn_addFriend;
+    private Conversation conv;
     private FriendContract.Presenter mPresenter;
 
     //收到好友邀请
@@ -118,7 +124,7 @@ public class FriendFragment extends BaseFragment implements FriendContract.View 
         //好友适配
         userView = rootView.findViewById(R.id.List1);
         adapter1 = new UserAdapter(getParentFragment().getContext(),R.layout.user,userInfoList);
-        userView.setAdapter(adapter1);
+
 
         btn_addFriend = rootView.findViewById(R.id.btn_addFriend);
         FriendIDText = rootView.findViewById(R.id.FriendIDText);
@@ -127,11 +133,7 @@ public class FriendFragment extends BaseFragment implements FriendContract.View 
 
     @Override
     protected void initEvent() {
-
-        Conversation conv = Conversation.createSingleConversation("iFantasy_android_28");
-        Log.d(TAG, "initEvent: " + "id: " + conv.getId() + " title: " + conv.getTitle() + " extra: " + conv.getExtra());
-        final Message msg = createSingleTextMessage("iFantasy_android_28", "Hello");
-        JMessageClient.sendMessage(msg);
+        conv = Conversation.createSingleConversation("iFantasy_28");
         //增加好友
         btn_addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,14 +147,17 @@ public class FriendFragment extends BaseFragment implements FriendContract.View 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String content = inputText.getText().toString();
-                if (!"".equals(content)) {
-                    Message msg = JMessageClient.createSingleTextMessage("iFantasy_android_28", content);
-                    JMessageClient.sendMessage(msg);
-                    msgList.add(msg);
-                    adapter.notifyItemInserted(msgList.size() - 1);
-                    msgView.scrollToPosition(msgList.size() - 1);
-                    inputText.setText("");
+                if(talker == null) Toast.makeText(getParentFragment().getContext(),"请选择好友开始talk！",Toast.LENGTH_SHORT);
+                else {
+                    String content = inputText.getText().toString();
+                    if (!"".equals(content)) {
+                        Message msg = JMessageClient.createSingleTextMessage(talker.getUserName(), content);
+                        JMessageClient.sendMessage(msg);
+                        msgList.add(msg);
+                        adapter.notifyItemInserted(msgList.size() - 1);
+                        msgView.scrollToPosition(msgList.size() - 1);
+                        inputText.setText("");
+                    }
                 }
             }
         });
@@ -164,11 +169,29 @@ public class FriendFragment extends BaseFragment implements FriendContract.View 
                 for(UserInfo userInfo: list){
                     userInfoList.add(userInfo);
                 }
+                userView.setAdapter(adapter1);
                 if (i == 0) Log.d(TAG, "gotFriendListOK: "+ s + list.toString());
                 else  Log.d(TAG, "gotFriendListERROR: "+ s +list.toString());
             }
         });
-
+        //单聊选中人物
+        userView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                adapter1.notifyDataSetChanged();
+                adapter1.setSelectPosition(position);
+                conv = Conversation.createSingleConversation(userInfoList.get(position).getUserName());
+                msgReadList = conv.getAllMessage();
+                for(Message msg:msgReadList) {
+                    msgList.add(msg);
+                    adapter.notifyItemInserted(msgList.size() - 1);
+                    msgView.scrollToPosition(msgList.size() - 1);
+                }
+                inputText.setText("");
+                talker = userInfoList.get(position);
+                Log.d(TAG, "onUserItemClick: " + userInfoList.get(position));
+            }
+        });
     }
 
     @Override
