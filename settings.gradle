@@ -1,1 +1,1 @@
-include ':app', ':filter-lib'
+include ':app'
