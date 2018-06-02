@@ -20,8 +20,8 @@ import static xyz.egoistk21.iFantasy.util.ApiUtil.FILTER_TIMEOUT;
 class VerifyModel implements VerifyContract.Model {
 
     @Override
-    public void login(String phone, String zone, String code, LifecycleProvider rxLifecycle, Observer<HttpResult<User>> observer) {
-        ApiUtil.getVerifyCodeAPI().verify(phone, zone, code)
+    public void performVerify(String phone, String zone, String code, LifecycleProvider rxLifecycle, Observer<HttpResult<User>> observer) {
+        ApiUtil.getVerifyAPI().verify(phone, zone, code)
                 .debounce(FILTER_TIMEOUT, TimeUnit.SECONDS)
                 .compose(rxLifecycle.<HttpResult<User>>bindToLifecycle())
                 .subscribeOn(Schedulers.io())

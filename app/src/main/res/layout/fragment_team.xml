@@ -95,8 +95,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/container_frame"
-        android:orientation="vertical">
+        android:background="@drawable/container_frame">
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tbl_team"

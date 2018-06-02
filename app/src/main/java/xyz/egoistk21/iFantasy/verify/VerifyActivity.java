@@ -124,7 +124,7 @@ public class VerifyActivity extends BaseActivity implements VerifyContract.View 
     @OnClick(R.id.btn_verify)
     void verify() {
         if (DBUtil.verifyCode(code)) {
-            mPresenter.login(phone, "86", code, VerifyActivity.this);
+            mPresenter.startVerify(phone, "86", code, VerifyActivity.this);
         } else {
             ToastUtil.show("请输入4位有效验证码");
         }

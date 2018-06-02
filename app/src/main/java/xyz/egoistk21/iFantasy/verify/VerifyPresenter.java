@@ -15,14 +15,14 @@ import xyz.egoistk21.iFantasy.util.ToastUtil;
  * Created by egoistk21 on 2018/3/22.
  */
 
-class VerifyPresenter implements VerifyContract.Presenter {
+public class VerifyPresenter implements VerifyContract.Presenter {
 
     private static final String TAG = VerifyPresenter.class.getName();
 
     private VerifyContract.Model mModel;
     private VerifyContract.View mView;
 
-    VerifyPresenter(VerifyContract.View view) {
+    public VerifyPresenter(VerifyContract.View view) {
         attachMV(view);
     }
 
@@ -39,8 +39,8 @@ class VerifyPresenter implements VerifyContract.Presenter {
     }
 
     @Override
-    public void login(String phone, String zone, String code, LifecycleProvider rxLifecycle) {
-        mModel.login(phone, zone, code, rxLifecycle, new Observer<HttpResult<User>>() {
+    public void startVerify(String phone, String zone, String code, LifecycleProvider rxLifecycle) {
+        mModel.performVerify(phone, zone, code, rxLifecycle, new Observer<HttpResult<User>>() {
             @Override
             public void onSubscribe(Disposable d) {
                 Log.d(TAG, "onSubscribe");
@@ -57,7 +57,6 @@ class VerifyPresenter implements VerifyContract.Presenter {
                     DBUtil.setUser(userHttpResult.getResult());
                     mView.go2Login();
                 } else {
-                    mView.dismissPB();
                     ToastUtil.show(userHttpResult.getError());
                 }
             }

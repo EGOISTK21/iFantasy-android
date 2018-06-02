@@ -50,8 +50,8 @@ public class ApiUtil {
     private ApiUtil() {
     }
 
-    public static VerificationApi getVerifyCodeAPI() {
-        return sRetrofit.create(VerificationApi.class);
+    public static VerifyApi getVerifyAPI() {
+        return sRetrofit.create(VerifyApi.class);
     }
 
     public static RegisterApi getRegisterApi() {
@@ -106,9 +106,9 @@ public class ApiUtil {
         return sRetrofit.create(TeamPlayerApi.class);
     }
 
-    public interface VerificationApi {
+    public interface VerifyApi {
         @Headers("User-Agent:iFantasy-android")
-        @POST("user/verification")
+        @POST("user/verify")
         @FormUrlEncoded
         Observable<HttpResult<User>> verify(@Field("phone") String phone,
                                             @Field("zone") String zone,

@@ -124,7 +124,7 @@ class WelcomePresenter implements WelcomeContract.Presenter {
                     JMessageClient.login("iFantasy_android_" + user.getId(), "12345qwert", new BasicCallback() {
                         @Override
                         public void gotResult(int i, String s) {
-                            Log.d(TAG, "JMessageClient login: " + i + " " + s);
+                            Log.d(TAG, "JMessageClient startVerify: " + i + " " + s);
                             switch (i) {
                                 case 801003:
                                     ToastUtil.show("用户名不存在");

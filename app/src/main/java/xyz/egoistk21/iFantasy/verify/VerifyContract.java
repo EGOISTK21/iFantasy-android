@@ -12,7 +12,7 @@ import xyz.egoistk21.iFantasy.bean.User;
 
 interface VerifyContract {
     interface Model {
-        void login(String phone, String zone, String code, LifecycleProvider rxLifecycle, Observer<HttpResult<User>> observer);
+        void performVerify(String phone, String zone, String code, LifecycleProvider rxLifecycle, Observer<HttpResult<User>> observer);
     }
 
     interface View {
@@ -34,6 +34,6 @@ interface VerifyContract {
 
         void detachMV();
 
-        void login(String phone, String zone, String code, LifecycleProvider rxLifecycle);
+        void startVerify(String phone, String zone, String code, LifecycleProvider rxLifecycle);
     }
 }

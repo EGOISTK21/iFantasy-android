@@ -173,8 +173,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="12dp"
             android:layout_weight="2"
-            android:background="@drawable/container_frame"
-            android:orientation="vertical">
+            android:background="@drawable/container_frame">
 
             <TextView
                 android:id="@+id/tv_direct_recruit_title"

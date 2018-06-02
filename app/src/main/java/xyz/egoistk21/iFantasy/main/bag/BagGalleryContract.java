@@ -1,7 +1,8 @@
 package xyz.egoistk21.iFantasy.main.bag;
 
-interface BagContract {
+public interface BagGalleryContract {
     interface Model {
+
     }
 
     interface View {
@@ -11,8 +12,8 @@ interface BagContract {
     }
 
     interface Presenter {
-        void attachMV(View view);
+        void attachMV(int pos, BagGalleryContract.View view);
 
-        void detachMV();
+        void detachMV(int pos);
     }
 }

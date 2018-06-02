@@ -38,7 +38,7 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return mFragments.length;
+        return mTitles.length;
     }
 
     @Nullable
