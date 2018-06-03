@@ -62,7 +62,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.11'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.13'
     implementation 'cn.jiguang.sdk:jmessage:2.5.0'
     implementation 'cn.jiguang.sdk:jpush:3.1.1'
     implementation 'cn.jiguang.sdk:jcore:1.1.9'

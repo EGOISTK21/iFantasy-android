@@ -22,7 +22,7 @@ public class VerifyPresenter implements VerifyContract.Presenter {
     private VerifyContract.Model mModel;
     private VerifyContract.View mView;
 
-    public VerifyPresenter(VerifyContract.View view) {
+    VerifyPresenter(VerifyContract.View view) {
         attachMV(view);
     }
 
